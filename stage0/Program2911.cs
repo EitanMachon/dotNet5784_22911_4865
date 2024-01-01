@@ -1,4 +1,5 @@
-﻿partial class Program
+﻿// Eitan Lattes && YISHAY TIRAM
+partial class Program
 {
     private static void Main(string[] args)
     {
