@@ -12,4 +12,12 @@
 	  <RootNamespace />
   </PropertyGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\User\source\repos\dotNet5784_22911_4865\DalFacade\DO\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\User\source\repos\dotNet5784_22911_4865\DalFacade\DO\.editorconfig" />
+  </ItemGroup>
+
 </Project>
