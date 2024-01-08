@@ -1,13 +1,12 @@
-﻿using System;
+﻿//using System;
+namespace DO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DO
-{
-    internal class Enums
-    {
 
-    }
+internal class Enums
+{
+
 }
