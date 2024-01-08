@@ -5,7 +5,7 @@ public record Engineer
     int Id,
     string Name,
     string Email,
-    double SalaryHour,
+    double SalaryHour
 // fix this method;
      EngineerExperience Level
 )
