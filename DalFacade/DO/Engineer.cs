@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace DO;
 
-public record Engineer;
+public record Engineer
 (
     int Id,
     string Name,
     string Email,
-    double SalaryHour,
+    double SalaryHour
 // fix this method;
-     DO.Enums 
+     //DO.Enums 
 
-)
+);
