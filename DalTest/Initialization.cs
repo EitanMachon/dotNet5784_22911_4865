@@ -41,12 +41,12 @@ public static class Initialization
 
     }
 
-    
+
 
     public static void createTask()
     {
-    string[] taskNames =
-    {"Change oil and filter",
+        string[] taskNames =
+        {"Change oil and filter",
     "Rotate tires and check pressure",
     "Replace brake pads",
     "Inspect and replace spark plugs",
@@ -127,9 +127,8 @@ public static class Initialization
     "Clean and condition the dashboard for a fresh look.",
     "Inspect and replace worn-out ball joints.",
     "Test and replace a faulty starter motor.",
-    "Inspect and replace a faulty thermostat for proper engine temperature control."
-}
-
+    "Inspect and replace a faulty thermostat for proper engine temperature control." };
+        
 
 
     }
