@@ -1,14 +1,27 @@
 ﻿namespace DalTest;
 using DalApi;
+using Dal;
 using DO;
+using System.Data.Common;
+using System.Reflection;
+using System.Security.Cryptography;
 
 public static class Initialization
 {
     private static IEngineer? s_dalEngineer;
     private static ITask? s_dalTask;
-    private static IDependency? s_dalDepeytikyndency;
+    private static IDependency? s_dalDependency;
 
     private static readonly Random s_rand = new(); // random number generator
+    static EngineerExperience[] experience = {
+    EngineerExperience.Beginner,
+    EngineerExperience.AdvancedBeginner,
+    EngineerExperience.Intermediate,
+    EngineerExperience.Advanced,
+    EngineerExperience.Expert
+};
+
+
 
 
     private static void createEngineer()
@@ -21,32 +34,34 @@ public static class Initialization
 
         foreach (var _name in engineerNames)
         {
-            int MIN_ID = 10000000;
-            int MAX_ID = 99999999;
-            int MIN_SALARY = 100;
-            int MAX_SALARY = 10000000;
+            int _min_id = 10000000;
+            int _max_id = 99999999;
+            int _min_salary = 100;
+            int _max_salary = 10000000;
             int _id;
             do
-                _id = s_rand.Next(MIN_ID, MAX_ID); // generate a random ID
+                _id = s_rand.Next(_min_id, _max_id); // generate a random ID
             while (s_dalEngineer!.Read(_id) != null); // check if the ID is already in use
 
             string _email = _name.Replace(' ', '.').ToLower() + "@gmail.com"; ///   generate a random email
 
-            double _salary = s_rand.NextDouble() * (MAX_SALARY - MIN_SALARY) + MIN_SALARY; // generate a random salary
+            double _salary = s_rand.NextDouble() * (_max_salary - _min_salary) + _min_salary; // generate a random salary
 
-            Engineer newEng = new(_id, _name, _email, _salary, EngineerExperience.Beginner); // create a new engineer
+            EngineerExperience _experience = experience[s_rand.Next(0, experience.Length)]; // generate a random experience level   
+
+            Engineer newEng = new(_id, _name, _email, _salary, _experience); // create a new engineer
 
             s_dalEngineer!.Create(newEng); // add the new engineer to the database
         }
 
     }
 
-    
+
 
     public static void createTask()
     {
-    string[] taskNames =
-    {"Change oil and filter",
+        string[] taskNames =
+        {"Change oil and filter",
     "Rotate tires and check pressure",
     "Replace brake pads",
     "Inspect and replace spark plugs",
@@ -128,11 +143,70 @@ public static class Initialization
     "Inspect and replace worn-out ball joints.",
     "Test and replace a faulty starter motor.",
     "Inspect and replace a faulty thermostat for proper engine temperature control."
-}
+};
+        for (int i = 0; i < taskNames.Length; i++)
+        {
+            int _min_id = 10000000;
+            int _max_id = 99999999;
+            int _id;
+            do
+                _id = s_rand.Next(_min_id, _max_id); // generate a random ID
+            while (s_dalEngineer!.Read(_id) != null); // check if the ID is already in use
 
+            string _alias = taskNames[i]; // generate a alias from the tasks array
+            string _description = taskDescription[i]; // generate a description from the tasks array
+            DateTime _createdAtDate = DateTime.Now.AddDays(-1); // generate a random creation date
+            TimeSpan _requiredEffort = TimeSpan.FromHours(s_rand.Next(1, 100)); // generate a random required effort
+            bool _isMilestone = false; // generate a random milestone
+            EngineerExperience _complexity = experience[s_rand.Next(0, experience.Length)]; // generate a random complexity
+            DateTime _startDate = DateTime.Now; // generate a random start date
+            DateTime? _ComplateTime =null; // generate a random start date
+            DateTime? _ScheduledTime = null; // generat the scheduled time as null
+            DateTime? _DeadLinetime = null; // generat the deadline time as null
 
+            string _Dekiverables = ""; // generate a empty deliverables
+            string _Remarks = ""; // generate a empty remarks
+            int _EngineerId = s_rand.Next(10000000, 99999999); // generate a random engineer id
+            EngineerExperience _Difficulty = experience[s_rand.Next(0, experience.Length)]; // generate a random difficulty
+            s_dalTask.Create(new Task(_id, _alias, _description, _createdAtDate, _requiredEffort, _isMilestone, _complexity, _startDate, _ScheduledTime, _DeadLinetime, _ComplateTime, _Dekiverables, _Remarks, _EngineerId, _Difficulty)); // create a new task
 
+        }
     }
+    public static void createDependency()
+    {
+        int _min_id = 10000000;
+        int _max_id = 99999999;
+        int _id;
+        do
+            _id = s_rand.Next(_min_id, _max_id); // generate a random ID
+        while (s_dalEngineer!.Read(_id) != null); // check if the ID is already in use
+
+        int _DependentTask = s_rand.Next(0, DataSource.Config.NextId); // generate a random dependent task
+        int _Depends = s_rand.Next(0, DataSource.Config.NextId); // generate a random depends task
+        int _DependencyType = s_rand.Next(0, 2); // generate a random dependency type
+
+        Dependency newDep = new(_id, _DependentTask, _Depends); // create a new dependency
+
+        s_dalDependency!.Create(newDep); // add the new dependency to the database      
+    }      
+    
+    public static void Do(Engineer _engineer, Dependency _dependency, Task _task) // initialize the database
+    {
+        s_dalEngineer = new EngineerImplementation(); // create a new engineer
+        s_dalTask = new TaskImplementaion();        // create a new task
+        s_dalDependency = new DependencyImplementation(); //    create a new dependency
+
+        createEngineer(); // create engineers
+        createTask(); // create tasks
+        createDependency(); // create dependencies
+    }
+    
+        
+    
+    
 }
+       
+
+
 
 
