@@ -8,7 +8,7 @@ internal static class DataSource
 
     internal static class Config 
     {
-        internal const int startId = 1000;
+        internal const int startId = 1;
         private static int nextId = startId;
         internal static int NextId { get => nextId++; }
     }
