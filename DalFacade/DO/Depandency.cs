@@ -9,4 +9,4 @@ public record Depandency
 )
 {
     public Depandency() : this(0, 0, 0) { }
-}
+};
