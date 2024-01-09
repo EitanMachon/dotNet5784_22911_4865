@@ -13,7 +13,7 @@ public class DepandencyImplementation : IDependency
             throw new InvalidOperationException("Cannot create Depandency with existing ID."); // throw an exception
         }
 
-        int newDepandencyId = DataSource.Config.NextId; // generate new ID for the Depandency
+        int newDepandencyId = DataSource.Config.NextId; // generate new ID for the Depandency and store it in a variable
         item.Id = newDepandencyId; // update the Depandency with the new ID
         DataSource.DepandencysAdd(item) // add the Depandency to the list of Depandencys
         return newDepandencyId; // return the new ID of the Depandency
