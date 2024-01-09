@@ -4,64 +4,74 @@ using DalApi;
 using DO;
 using System.Collections.Generic;
 
-public class TaskImplementation : ITask
+public class TaskImplementaion : ITask
 {
-    public int Create(System.Threading.Tasks.Task item) // create a new task
+    public int Create(Task item)
     {
         if (item.Id != 0) // if the task already has an ID, throw an exception
         {
             throw new InvalidOperationException("Cannot create task with existing ID."); // throw an exception
         }
-        int newTaskId = DataSource.Config.NextId; // generate new ID
-        item.Id = newTaskId; // update the ID of the task
-        DataSource.Tasks.Add(item); // add the task to the list
-        return newTaskId; // return the new ID
+
+        int newTaskId = DataSource.Config.NextId; // generate new ID for the task
+
+        var newTask = new Task(newTaskId, item.Alias, item.Description, item.CreatedAtDate, item.RequiredEffort, item.IsMilestone, item.Copmlexity, item.StartDate, item.ScheduledTime, item.DeadLinetime, item.ComplateTime, item.Dekiverables, item.Remarks, item.EngineerId, item.Difficulty); // Create a new Task object with the generated ID
+
+        DataSource.Tasks.Add(newTask); // Add the new task directly into the DataSource
+        return newTaskId; // return the new ID of the task
+
     }
 
 
-
-
-   public void Delete(int id) // delete a task
+    public void Delete(int id) // delete a Task by his ID
     {
-        var existingTask = DataSource.Tasks.FirstOrDefault(t => t.Id == id); // find the task with the given ID and store it in a variable
+       
+        var existingTask = DataSource.Tasks.FirstOrDefault(t => t.Id == id); // copy the Task with the given ID and store it in a variable
 
-        if (existingTask == null) // if the task does not exist, throw an exception
+        if (existingTask == null) // if the Task does not exist, throw an exception
         {
             throw new InvalidOperationException($"Task with ID {id} does not exist."); // throw an exception
         }
-
-        if (existingTask.IsActive) // if the task is active, remove it from the list
+        
+        if (existingTask.IsActive) // if the Task is active remove him from the list 
         {
-            DataSource.Tasks.Remove(existingTask); // remove the task from the list
+            DataSource.Tasks.Remove(existingTask); // remove the Task of the given object from the list
         }
         else
         {
-            DataSource.Tasks.Remove(existingTask) // remove the  unupdate task from the list
-            existingTask.IsActive = false; // if the task is not active, set its IsActive property to false
-            DataSource.Tasks.Add(existingTask); // add the update task to the list
+            existingTask.IsActive = false; // set the Task to inactive
+        }
+    }
+
+    public Task Read(int id)
+    {
+        return DataSource.Tasks.FirstOrDefault(d => d.Id == id) // copy the Task with the given ID and store it in a variable
+            ?? throw new InvalidOperationException($"Task with ID {id} does not exist."); // throw an exception
+              
+    }
+
+    public List<Task> ReadAll()
+    {
+        return DataSource.Tasks.ToList(); // return a list of all Tasks in the DataSource by making a copy of the list and returning it
+       
+    }
+
+    public void Update(Task item)
+    {
+        
+        var existingTask = DataSource.Tasks.FirstOrDefault(t => t.Id == item.Id); // copy the Task with the given ID and store it in a variable
+
+        if(existingTask == null) // if the Task does not exist, throw an exception
+        {
+            throw new InvalidOperationException($"Task with ID {item.Id} does not exist."); // throw an exception
         }
 
+        DataSource.Tasks.Remove(existingTask);
+        DataSource.Tasks.Add(item);
     }
 
+   
+    
 
-    public System.Threading.Tasks.Task? Read(int id) : return null; // read a task by ID and if it does not exist, return null
-    {
-        return DataSource.Tasks.FirstOrDefault(t => t.Id == id); // return the task with the given ID, its nean  read  the task
-    }
-
-
-public List<System.Threading.Tasks.Task> ReadAll() // read all tasks
-{
-    list1 = new List<System.Threading.Tasks.Task>(); // create a copy of the list
-    return list1; // return the copy of the list
+ 
 }
-
-
-public void Update(System.Threading.Tasks.Task item)
-{
-    Read(item.Id) // if the task does not exist, throw an exception
-    var existingTask = DataSource.Tasks.FirstOrDefault(t => t.Id == item.Id); // copy the task with the given ID and store it in a variable
-    DataSource.Tasks.Remove(existingTask); // remove the task of the given object from the list
-    DataSource.Tasks.Add(item); // add the given object to the list
-}
-

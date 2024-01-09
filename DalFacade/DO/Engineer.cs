@@ -6,10 +6,10 @@ public record Engineer
     string Name,
     string Email,
     double SalaryHour,
-// fix this method;
-     EngineerExperience Level
+    EngineerExperience Level
 )
-    
 {
-    public Engineer():this(0, "", "", 0, 0) { }
-    };
+    public Engineer(int _id) : this(0, "", "", 0, 0) { } // default ctor
+    public bool IsActive { get; set; } = false; // default value for new engineers
+    public int Id { get; init; } // 'init' allows setting during object initialization
+}

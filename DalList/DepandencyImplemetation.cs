@@ -1,66 +1,66 @@
-﻿
-namespace Dal;
-using DalApi;
-using DO ;
-using System.Collections.Generic;
+﻿using DalApi;
+using DO;
 
-public class DepandencyImplementation : IDependency
+namespace Dal
 {
-    public int Create(Depandency item)
+    public class DependencyImplementation : IDependency
     {
-        if (item.Id != 0) //if the Depandency already has an ID, throw an exception
+        public int Create(Dependency item) // create a Dependency and return its ID
         {
-            throw new InvalidOperationException("Cannot create Depandency with existing ID."); // throw an exception
+            if (item.Id != 0) // if the Dependency already has an ID, throw an exception
+            {
+                throw new InvalidOperationException("Cannot create Dependency with an existing ID.");
+            }
+
+            int newDependencyId = DataSource.Config.NextId; // generate new ID for the Dependency
+            var newDependency = new Dependency(newDependencyId, item.TaskId, item.DependencyType, item.DependencyId); // Create a new Dependency object with the generated ID
+            DataSource.Dependencies.Add(item); // Add the new Dependency directly into the DataSource
+            return newDependencyId; //  return the new Dependency 
         }
 
-        int newDepandencyId = DataSource.Config.NextId; // generate new ID for the Depandency and store it in a variable
-        item.Id = newDepandencyId; // update the Depandency with the new ID
-        DataSource.DepandencysAdd(item) // add the Depandency to the list of Depandencys
-        return newDepandencyId; // return the new ID of the Depandency
-
-
-        public void Delete(int id) // delete a Depandency
-
-        var existingDepandency = DataSource.Engineers.FirstOrDefault(t => t.Id == id); // find the Depandency with the given ID and store it in a variable
-
-        if (existingDepandency == null) // if the Depandency does not exist, throw an exception
+        public void Delete(int id)
         {
-            throw new InvalidOperationException($"Depandency with ID {id} does not exist."); // throw an exception
+            var existingDependency = DataSource.Dependencies.FirstOrDefault(t => t.Id == id); // copy the Dependency with the given ID and store it in a variable
+
+            if (existingDependency == null) // if the Dependency does not exist, throw an exception
+            {
+                throw new InvalidOperationException($"Dependency with ID {id} does not exist.");
+            }
+
+            if (existingDependency.IsActive) // if the Dependency is active remove him from the list
+            {
+                DataSource.Dependencies.Remove(existingDependency); // remove the Dependency of the given object from the list
+            }
+            else
+            {
+                existingDependency.IsActive = false; // set the Dependency to inactive
+            }
         }
 
-        if (existingDepandency.IsActive) // if the Depandency is active, remove it from the list
+        public Dependency Read(int id) // read a Dependency by his ID and return the Dependency
         {
-            DataSource.Depandencys.Remove(existingDepandency); // remove the Depandency from the list
-        }
-        else
+            return DataSource.Dependencies.FirstOrDefault(d => d.Id == id) // copy the Dependency with the given ID and store it in a variable
+                ?? throw new InvalidOperationException($"Dependency with ID {id} does not exist.");
+        } 
+
+        public List<Dependency> ReadAll() 
         {
-            DataSource.Depandencys.Remove(existingDepandency) // remove the  unupdate Depandency from the list
-            existingDepandency.IsActive = false; // if theDepandency is not active, set its IsActive property to false
-            DataSource.Depandencys.Add(existingDepandency); // add the update Depandency to the list
+            return DataSource.Dependencies.ToList(); // return a list of all Dependencies in the DataSource by making a copy of the list and returning it
         }
+
+        public void Update(Dependency item)
+        {
+            var existingDependency = DataSource.Dependencies.FirstOrDefault(t => t.Id == item.Id); // copy the Dependency with the given ID and store it in a variable
+
+            if (existingDependency == null) // if the Dependency does not exist, throw an exception
+            {
+                throw new InvalidOperationException($"Dependency with ID {item.Id} does not exist."); // throw an exception
+            }
+
+            DataSource.Dependencies.Remove(existingDependency); // remove the Dependency of the given object from the list
+            DataSource.Dependencies.Add(item); // Add the new Dependency directly into the DataSource
+        }
+
 
     }
-
-
-    public System.Threading.Depandencys.Depandency? Read(int id) : return null; // read a Depandency by ID and if it does not exist, return null
-    {
-         return DataSource.Depandencys.FirstOrDefault(t => t.Id == id); // return the Depandency with the given ID, its nean  read  the Depandency)
-    }
-
-
-public List<System.Threading.Depandencys.Depandency> ReadAll() // read all Depandencys 
-{
-    list1 = new List<System.Threading.Depandencys.Depandency>(); // create a copy of the list
-    return list1; // return the copy of the list
 }
-
-
-public void Update(System.Threading.Depandencys.Depandency item)
-{
-    Read(item.Id) // if the Depandency does not exist, throw an exception
-    var existingDepandency = DataSource.Depandencys.FirstOrDefault(t => t.Id == item.Id); // copy theDepandency with the given ID and store it in a variable
-    DataSource.Depandencys.Remove(existingEngineer); // remove the Depandency of the given object from the list
-    DataSource.Depandencys.Add(item); // add the given object to the list
-}
-}
-   
