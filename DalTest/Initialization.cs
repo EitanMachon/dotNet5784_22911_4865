@@ -190,7 +190,7 @@ public static class Initialization
         s_dalDependency!.Create(newDep); // add the new dependency to the database      
     }
 
-    public static void Do(Engineer _engineer, Dependency _dependency, Task _task) // initialize the database
+    public static void Do(IEngineer _engineer, IDependency _dependency, ITask _task) // initialize the database
     {
         s_dalEngineer = new EngineerImplementation(); // create a new engineer
         s_dalTask = new TaskImplementaion();        // create a new task

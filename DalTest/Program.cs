@@ -262,8 +262,7 @@ class Program
     /// ///////////////////////////////////////////////////////////////////////
     static void Main(string[] args)
     {
-
-        Initialization.Do(s_dalDependency, s_dalEngineer, s_dalTasks);
+        Initialization.Do(s_dalEngineer, s_dalDependency,  s_dalTasks);
         Console.WriteLine("We build a garage system, let's start!"); // print the first line to the user
         Console.WriteLine("Welcome to our garage system"); // print the first line to the user
         Console.WriteLine("Hello, what we can do for you today?");
