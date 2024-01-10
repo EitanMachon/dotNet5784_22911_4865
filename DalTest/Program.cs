@@ -267,15 +267,14 @@ class Program
         Console.WriteLine("Welcome to our garage system"); // print the first line to the user
         Console.WriteLine("Hello, what we can do for you today?");
         Console.WriteLine("choose a Item to check:0 for exit ,1 for Engineer, 2 for Task, 3 for Depandency");
-        int a = int.Parse(Console.ReadLine());
-        Console.WriteLine("Ok, let's start");
-
-        while (Console.ReadLine() != "0")// while he dont chooce 0 he will continue to run
+        int a= int.Parse(Console.ReadLine());
+        
+        while (a != 0)// while he dont chooce 0 he will continue to run
         {
-            
+            Console.WriteLine("Ok, let's start");
             try
             {
-                switch (a)
+                switch (a )
                 {
                     case 1:// Engineer class
                         EngineerRun();
