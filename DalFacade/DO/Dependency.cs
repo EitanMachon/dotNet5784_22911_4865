@@ -8,7 +8,7 @@ public record Dependency
      int Depends
 )
 {
-    public object TaskId;
+    
     public int DependencyType;
 
     public Dependency() : this(0, 0, 0) { }

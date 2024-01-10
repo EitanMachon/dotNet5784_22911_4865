@@ -34,7 +34,7 @@ public static class Initialization
 
         foreach (var _name in engineerNames)
         {
-            int _min_id = 10000000;
+            int _min_id = 1;
             int _max_id = 99999999;
             int _min_salary = 100;
             int _max_salary = 10000000;
@@ -146,7 +146,7 @@ public static class Initialization
 };
         for (int i = 0; i < taskNames.Length; i++)
         {
-            int _min_id = 10000000;
+            int _min_id = 1;
             int _max_id = 99999999;
             int _id;
             do
@@ -160,13 +160,13 @@ public static class Initialization
             bool _isMilestone = false; // generate a random milestone
             EngineerExperience _complexity = experience[s_rand.Next(0, experience.Length)]; // generate a random complexity
             DateTime _startDate = DateTime.Now; // generate a random start date
-            DateTime? _ComplateTime =null; // generate a random start date
+            DateTime? _ComplateTime = null; // generate a random start date
             DateTime? _ScheduledTime = null; // generat the scheduled time as null
             DateTime? _DeadLinetime = null; // generat the deadline time as null
 
             string _Dekiverables = ""; // generate a empty deliverables
             string _Remarks = ""; // generate a empty remarks
-            int _EngineerId = s_rand.Next(10000000, 99999999); // generate a random engineer id
+            int _EngineerId = s_rand.Next(1, 99999999); // generate a random engineer id
             EngineerExperience _Difficulty = experience[s_rand.Next(0, experience.Length)]; // generate a random difficulty
             s_dalTask.Create(new Task(_id, _alias, _description, _createdAtDate, _requiredEffort, _isMilestone, _complexity, _startDate, _ScheduledTime, _DeadLinetime, _ComplateTime, _Dekiverables, _Remarks, _EngineerId, _Difficulty)); // create a new task
 
@@ -174,7 +174,7 @@ public static class Initialization
     }
     public static void createDependency()
     {
-        int _min_id = 10000000;
+        int _min_id = 1;
         int _max_id = 99999999;
         int _id;
         do
@@ -188,8 +188,8 @@ public static class Initialization
         Dependency newDep = new(_id, _DependentTask, _Depends); // create a new dependency
 
         s_dalDependency!.Create(newDep); // add the new dependency to the database      
-    }      
-    
+    }
+
     public static void Do(Engineer _engineer, Dependency _dependency, Task _task) // initialize the database
     {
         s_dalEngineer = new EngineerImplementation(); // create a new engineer
@@ -200,12 +200,12 @@ public static class Initialization
         createTask(); // create tasks
         createDependency(); // create dependencies
     }
-    
-        
-    
-    
+
+
+
+
 }
-       
+
 
 
 
