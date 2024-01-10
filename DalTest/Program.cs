@@ -4,6 +4,7 @@ using DalApi;
 using DalTest;
 using DO;
 using System;
+using System.Diagnostics;
 using System.Reflection.Emit;
 using System.Xml.Linq;
 
@@ -27,8 +28,7 @@ class Program
     /// </summary>
     public static void EngineerRun()// the function run the engineer 
     {
-        Console.WriteLine("We build a garage system, let's start!"); // print the first line to the user
-        Console.WriteLine("Hello, what we can do for you today?");
+        
         Console.WriteLine("put an action: 1 for Creat, 2 for Read, 3 for ReadAll, 4 for Update, 5 for Delete "); // print the options to the user
       
         int _a = int.Parse(Console.ReadLine());
@@ -131,10 +131,24 @@ class Program
                     s_dalDependency.ReadAll();// send to readall
 
                     break;
+
                 case 4: // Update
+                    Console.WriteLine("put a id to update:");// get id for the depandency
+                    int _id3 = int.Parse(Console.ReadLine()); // get the id
+                    
+                    DO.Dependency Help = s_dalDependency.Read(_id3); // get the needed depandency
+                    Console.WriteLine(Help); // print depandency values
+                   
+                    Console.WriteLine("put a depandendent task:");// get id for the depandency
+                    int _dt = int.Parse(Console.ReadLine()); // get the depandendent task
 
+                    Console.WriteLine("put a depans task:"); // get id for the depandency
+                    int _dep = int.Parse(Console.ReadLine()); // get the depans task
 
+                    Dependency tempDep = new(_id3, _dt, _dep); // create a new depandency
+                    s_dalDependency.Update(tempDep); // update the depandency
                     break;
+
                 case 5: // Delete 
                     Console.WriteLine("put a id for read:");// get id for the depandency
                     int _id2 = int.Parse(Console.ReadLine());
@@ -161,19 +175,77 @@ class Program
             switch (a)
             {
                 case 1://Creat 
-
+                    DO.Task n3 = new DO.Task();
+                    s_dalTasks.Create(n3);// send to create 
                     break;
                 case 2:// Read 
+                 Console.WriteLine("put a id for read:");// get id for the task
+                 int _id1 = int.Parse(Console.ReadLine()); // get the id
+                 s_dalTasks.Read(_id1);// send to read
+                 break;
 
-                    break;
                 case 3: // ReadAll
-
+                    s_dalTasks.ReadAll();// send to readall
                     break;
+
                 case 4: // Update
+                Console.WriteLine("put a id to update:");// get id for the task
+                int _id3 = int.Parse(Console.ReadLine()); // get the id
 
-                    break;
+                DO.Task Help = s_dalTasks.Read(_id3); // get the needed task
+                Console.WriteLine(Help); // print task values
+
+                Console.WriteLine("put a alias:");// ask for the name
+                string _alias = Console.ReadLine(); // get the name
+                
+                Console.WriteLine("put a description:");// ask for the description
+                string _description = Console.ReadLine(); // get the description
+
+                Console.WriteLine("put a create date:");// ask for the create date
+                DateTime _createDate = DateTime.Parse(Console.ReadLine()); // get the create date
+
+                Console.WriteLine("put a required hours:");// ask for the required hours
+                TimeSpan _requiredHours = TimeSpan.Parse(Console.ReadLine()); // get the required hours
+
+                Console.WriteLine("is a milestone? true/false:");// ask for the milestone
+                bool _isMilestone = bool.Parse(Console.ReadLine()); // get the milestone
+
+                Console.WriteLine("put a complexity of the task:");// ask for the complexity
+                EngineerExperience _complexity = (EngineerExperience)int.Parse(Console.ReadLine()); // get the complexity
+
+                
+                
+
+
+                Console.WriteLine("enter a finish date:");// ask for the finish date
+                DateTime? _finishDate = DateTime.Parse(Console.ReadLine()); // get the finish date
+
+                Console.WriteLine("enter a deadline date:");// ask for the deadline date
+                DateTime? _deadlineDate = DateTime.Parse(Console.ReadLine()); // get the deadline date
+                                                                              // Assuming you have a Random object initialized somewhere in your code.
+                    Random random = new Random();
+
+                    // Set the range in days
+                    int rangeInDays = (int)_complexity;  // For example, a range of 30 days
+
+                    // Generate random start date within the range
+                    DateTime? _startDate = DateTime.Now.AddDays(-random.Next(rangeInDays));
+
+                    // Generate random finish date within the range
+                    DateTime? _actulyFinish = _startDate.Value.AddDays(random.Next(rangeInDays));
+                    //
+                    Console.WriteLine("enter what you did:");// ask for the what you did
+                string _whatYouDid = Console.ReadLine(); // get the what you did
+
+                Console.WriteLine("Do you have something to say?");// ask for the something to say
+                string _somethingToSay = Console.ReadLine(); // get the something to say
+
+
+                break;
                 case 5: // Delete 
-
+                    Console.WriteLine("put a id for read:");// get id for the task
+                    int _id2 = int.Parse(Console.ReadLine()); // get the id
+                    s_dalTasks.Delete(_id2);// send to Delete
                     break;
 
                 default:
@@ -191,14 +263,17 @@ class Program
     static void Main(string[] args)
     {
 
-        Initialization.Do(s_dalStudent, s_dalCourse, s_dalLinks);
-
+        Initialization.Do(s_dalDependency, s_dalEngineer, s_dalTasks);
+        Console.WriteLine("We build a garage system, let's start!"); // print the first line to the user
+        Console.WriteLine("Welcome to our garage system"); // print the first line to the user
+        Console.WriteLine("Hello, what we can do for you today?");
         Console.WriteLine("choose a Item to check:0 for exit ,1 for Engineer, 2 for Task, 3 for Depandency");
         int a = int.Parse(Console.ReadLine());
+        Console.WriteLine("Ok, let's start");
 
         while (Console.ReadLine() != "0")// while he dont chooce 0 he will continue to run
         {
-            Console.WriteLine("put an action: 1 for Creat, 2 for Read, 3 for ReadAll, 4 for Update, 5 for Delete ");
+            
             try
             {
                 switch (a)
