@@ -3,7 +3,7 @@ using DO;
 
 namespace Dal
 {
-    public class DependencyImplementation : IDependency
+    internal class DependencyImplementation : IDependency
     {
         public int Create(Dependency item) // create a Dependency and return its ID
         {
