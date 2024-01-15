@@ -11,7 +11,7 @@ using System.Xml.Linq;
 class Program
 {
     //stage 1
-    private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
+    internal static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
     private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
     private static ITask? s_dalTasks = new TaskImplementaion();//stage 1
 

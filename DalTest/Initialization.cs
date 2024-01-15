@@ -11,6 +11,7 @@ public static class Initialization
     private static IEngineer? s_dalEngineer;
     private static ITask? s_dalTask;
     private static IDependency? s_dalDependency;
+    private static IDal? s_dal; //stage 2
 
     private static readonly Random s_rand = new(); // random number generator
     static EngineerExperience[] experience = {
@@ -190,18 +191,23 @@ public static class Initialization
         s_dalDependency!.Create(newDep); // add the new dependency to the database      
     }
 
-    public static void Do(IEngineer _engineer, IDependency _dependency, ITask _task) // initialize the database
+    public static void Do(IDal dal) //stage 2
     {
-        s_dalEngineer = new EngineerImplementation(); // create a new engineer
-        s_dalTask = new TaskImplementaion();        // create a new task
-        s_dalDependency = new DependencyImplementation(); //    create a new dependency
+        s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+
+        //public static void Do(IEngineer _engineer, IDependency _dependency, ITask _task) // initialize the database
+        //{
+        //    s_dalEngineer = new EngineerImplementation(); // create a new engineer
+        //    s_dalTask = new TaskImplementaion();        // create a new task
+        //    s_dalDependency = new DependencyImplementation(); //    create a new dependency
 
         createEngineer(); // create engineers
         createTask(); // create tasks
         createDependency(); // create dependencies
-    }
+        //}
 
-  
+
+    }
 }
 
 
