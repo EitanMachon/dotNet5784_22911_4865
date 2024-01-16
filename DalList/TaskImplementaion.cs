@@ -45,15 +45,26 @@ internal class TaskImplementaion : ITask
 
     public Task Read(int id)
     {
-        return DataSource.Tasks.FirstOrDefault(d => d.Id == id) // copy the Task with the given ID and store it in a variable
+        return DataSource.Tasks.Where(d => d.Id == id).FirstOrDefault() // copy the Task with the given ID and store it in a variable
             ?? throw new InvalidOperationException($"Task with ID {id} does not exist."); // throw an exception
               
     }
 
-    public List<Task> ReadAll()
+    //public List<Task> ReadAll()
+    //{
+    //    return DataSource.Tasks.Select(x => x).ToList(); // return a list of all Dependencies in the DataSource by making a copy of the list and returning it
+
+    //}
+    public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null) //stage 2
     {
-        return DataSource.Tasks.ToList(); // return a list of all Tasks in the DataSource by making a copy of the list and returning it
-       
+        if (filter != null)
+        {
+            return from item in DataSource.Tasks
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Tasks
+               select item;
     }
 
     public void Update(Task item)
@@ -70,8 +81,11 @@ internal class TaskImplementaion : ITask
         DataSource.Tasks.Add(item);
     }
 
-   
-    
+    public Task? Read(Func<Task, bool> filter) // stage 2 // this func get a filter and return the first item that match the filter
+    {
+        return DataSource.Tasks.Where(filter).FirstOrDefault();
+    }
 
- 
+
+
 }

@@ -47,14 +47,25 @@ internal class EngineerImplementation : IEngineer
 
     public Engineer? Read(int id) // read a Engineer by his ID and return the Engineer
     {
-        var engineer = DataSource.Engineers.FirstOrDefault(e => e.Id == id); // copy the Engineer with the given ID and store it in a variable
-        return engineer; // return the Engineer with the given ID
+        return DataSource.Engineers.Where(d => d.Id == id).FirstOrDefault(); // copy the Dependency with the given ID and store it in a variable
     }
 
-    public List<Engineer> ReadAll() // read all Engineers and return a list of all Engineers
+    //public List<Engineer> ReadAll() // read all Engineers and return a list of all Engineers
+    //{
+    //    return DataSource.Engineers.Select(x => x).ToList(); // return a list of all Dependencies in the DataSource by making a copy of the list and returning it
+    //}
+    public IEnumerable<Engineer> ReadAll(Func<Engineer, bool>? filter = null) //stage 2
     {
-        return DataSource.Engineers.ToList(); // return a list of all Engineers in the DataSource by making a copy of the list and returning it
+        if (filter != null)
+        {
+            return from item in DataSource.Engineers
+                   where filter(item)
+                   select item;
+        }
+        return from item in DataSource.Engineers
+               select item;
     }
+
 
     public void Update(Engineer item) // update a Engineer
     {
@@ -67,6 +78,11 @@ internal class EngineerImplementation : IEngineer
 
         DataSource.Engineers.Remove(existingEngineer);  // remove the Engineer of the given object from the list
         DataSource.Engineers.Add(item); // add the updated Engineer to the list
+    }
+
+    public Engineer? Read(Func<Engineer, bool> filter) // stage 2 // this func get a filter and return the first item that match the filter
+    {
+        return DataSource.Engineers.Where(filter).FirstOrDefault();
     }
 }
 

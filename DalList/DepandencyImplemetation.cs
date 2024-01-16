@@ -39,14 +39,23 @@ namespace Dal
 
         public Dependency Read(int id) // read a Dependency by his ID and return the Dependency
         {
-            return DataSource.Dependencies.FirstOrDefault(d => d.Id == id) // copy the Dependency with the given ID and store it in a variable
+            return DataSource.Dependencies.Where(d => d.Id == id).FirstOrDefault() // copy the Dependency with the given ID and store it in a variable
                 ?? throw new InvalidOperationException($"Dependency with ID {id} does not exist.");
-        } 
-
-        public List<Dependency> ReadAll() 
-        {
-            return DataSource.Dependencies.ToList(); // return a list of all Dependencies in the DataSource by making a copy of the list and returning it
         }
+
+
+        public IEnumerable<Dependency> ReadAll(Func<Dependency, bool>? filter = null) //stage 2
+        {
+            if (filter != null)
+            {
+                return from item in DataSource.Dependencies
+                       where filter(item)
+                       select item;
+            }
+            return from item in DataSource.Dependencies
+                   select item;
+        }
+
 
         public void Update(Dependency item)
         {
@@ -61,6 +70,9 @@ namespace Dal
             DataSource.Dependencies.Add(item); // Add the new Dependency directly into the DataSource
         }
 
-
+        public Dependency? Read(Func<Dependency, bool> filter) // stage 2 // this func get a filter and return the first item that match the filter
+        {
+            return DataSource.Dependencies.Where(filter).FirstOrDefault();
+        }
     }
 }
