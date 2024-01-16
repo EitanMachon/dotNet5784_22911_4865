@@ -42,7 +42,7 @@ public static class Initialization
             int _id;
             do
                 _id = s_rand.Next(_min_id, _max_id); // generate a random ID
-            while (s_dalEngineer!.Read(_id) != null); // check if the ID is already in use
+            while (s_dal!.Engineer!.Read(_id) != null); // check if the ID is already in use
 
             string _email = _name.Replace(' ', '.').ToLower() + "@gmail.com"; ///   generate a random email
 
@@ -52,7 +52,7 @@ public static class Initialization
 
             Engineer newEng = new(_id, _name, _email, _salary, _experience); // create a new engineer
 
-            s_dalEngineer!.Create(newEng); // add the new engineer to the database
+            s_dal!.Engineer!.Create(newEng); // add the new engineer to the database
         }
 
     }
@@ -152,7 +152,7 @@ public static class Initialization
             int _id;
             do
                 _id = s_rand.Next(_min_id, _max_id); // generate a random ID
-            while (s_dalEngineer!.Read(_id) != null); // check if the ID is already in use
+            while (s_dal!.Engineer!.Read(_id) != null); // check if the ID is already in use
 
             string _alias = taskNames[i]; // generate a alias from the tasks array
             string _description = taskDescription[i]; // generate a description from the tasks array
@@ -169,7 +169,7 @@ public static class Initialization
             string _Remarks = ""; // generate a empty remarks
             int _EngineerId = s_rand.Next(1, 99999999); // generate a random engineer id
             EngineerExperience _Difficulty = experience[s_rand.Next(0, experience.Length)]; // generate a random difficulty
-            s_dalTask.Create(new Task(_id, _alias, _description, _createdAtDate, _requiredEffort, _isMilestone, _complexity, _startDate, _ScheduledTime, _DeadLinetime, _ComplateTime, _Dekiverables, _Remarks, _EngineerId, _Difficulty)); // create a new task
+            s_dal!.Task.Create(new Task(_id, _alias, _description, _createdAtDate, _requiredEffort, _isMilestone, _complexity, _startDate, _ScheduledTime, _DeadLinetime, _ComplateTime, _Dekiverables, _Remarks, _EngineerId, _Difficulty)); // create a new task
 
         }
     }
@@ -180,7 +180,7 @@ public static class Initialization
         int _id;
         do
             _id = s_rand.Next(_min_id, _max_id); // generate a random ID
-        while (s_dalEngineer!.Read(_id) != null); // check if the ID is already in use
+        while (s_dal!.Engineer!.Read(_id) != null); // check if the ID is already in use
 
         int _DependentTask = s_rand.Next(0, DataSource.Config.NextId); // generate a random dependent task
         int _Depends = s_rand.Next(0, DataSource.Config.NextId); // generate a random depends task
