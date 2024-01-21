@@ -16,7 +16,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{B51D8C6E-B6AA-4644-B4F3-0B11F8C37449}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{B51D8C6E-B6AA-4644-B4F3-0B11F8C37449}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{9F537721-D2B6-4F42-A309-78CC4E8D4348}"
+	ProjectSection(SolutionItems) = preProject
+		xml\.data-config.xml.txt = xml\.data-config.xml.txt
+		xml\depandencys.xml.txt = xml\depandencys.xml.txt
+		xml\engineers.xml.txt = xml\engineers.xml.txt
+		xml\enums.xml.txt = xml\enums.xml.txt
+		xml\exeptions.xml.txt = xml\exeptions.xml.txt
+		xml\tasks.xml.txt = xml\tasks.xml.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
