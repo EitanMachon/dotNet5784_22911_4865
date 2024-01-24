@@ -30,7 +30,7 @@ public static class Initialization
         string[] engineerNames =
         {
         "Dani Levi", "Eli Amar", "Yair Cohen",
-        "Ariela Levin", "Dina Klein", "Shira Israelof"
+        "Ariela Levin", "Dina Klein", "Shira Israelof", "Yael Cohen", "Miri Levi"
     };
 
         foreach (var _name in engineerNames)
@@ -174,7 +174,7 @@ public static class Initialization
             string _Remarks = ""; // generate a empty remarks
             int _EngineerId = s_rand.Next(1, 99999999); // generate a random engineer id
             EngineerExperience _Difficulty = experience[s_rand.Next(0, experience.Length)]; // generate a random difficulty
-            s_dal!.task.Create(new Task(_id, _alias, _description, _createdAtDate, _requiredEffort, _isMilestone, _complexity, _startDate, _ScheduledTime, _DeadLinetime, _ComplateTime, _Dekiverables, _Remarks, _EngineerId, _Difficulty)); // create a new task
+            s_dal!.itask.Create(new Task(_id, _alias, _description, _createdAtDate, _requiredEffort, _isMilestone, _complexity, _startDate, _ScheduledTime, _DeadLinetime, _ComplateTime, _Dekiverables, _Remarks, _EngineerId, _Difficulty)); // create a new task
        
         }
     }

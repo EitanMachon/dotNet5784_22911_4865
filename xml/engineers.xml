@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfEngineer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Engineer>
+    <Name />
+    <Email />
+    <SalaryHour>0</SalaryHour>
+    <Level>Beginner</Level>
+    <IsActive>false</IsActive>
+    <Id>0</Id>
+  </Engineer>
+</ArrayOfEngineer>

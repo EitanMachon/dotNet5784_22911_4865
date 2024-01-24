@@ -9,7 +9,8 @@ namespace Dal
     internal class Config
     {
         static string s_data_config_xml = "data-config";
-        internal static int NextId { get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "NextId"); }
-        internal static int NextId { get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "NextId"); }
+        internal static int DependencyId { get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "DependencyId"); }//START
+        internal static int TaskId { get => XMLTools.GetAndIncreaseNextId(s_data_config_xml, "TaskId"); }
+        
     }
 }

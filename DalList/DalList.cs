@@ -6,6 +6,6 @@ sealed public class DalList : IDal
 
     public IEngineer iengineer => new EngineerImplementation();
 
-    public ITask task => new TaskImplementaion();
+    public ITask itask => new TaskImplementaion();
 }
 
