@@ -15,6 +15,10 @@ namespace Dal;
 //stage 3
 sealed public class DalXml : IDal
 {
+    public static DalXml Instance { get; } = new DalXml(); // Singleton
+
+    private DalXml() { } // private constructor
+
     public ITask itask => new TaskImplementation();
 
     public IDependency idependancy => new DepandencyImplemantion();
