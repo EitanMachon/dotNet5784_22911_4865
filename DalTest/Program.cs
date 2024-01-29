@@ -20,7 +20,8 @@ class Program
     //private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1 
     //private static ITask? s_dalTasks = new TaskImplementaion();//stage 1`   
     // static readonly IDal s_dal = new DalList(); //stage 2
-    static readonly IDal s_dal = new DalXml(); //stage 3
+    //static readonly IDal s_dal = new DalXml(); //stage 3
+    static readonly IDal s_dal = Factory.Get; //stage 4
 
     static EngineerExperience[] experience = {
     EngineerExperience.Beginner,
@@ -373,7 +374,8 @@ class Program
         Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
         if (ans == "Y") //stage 3
-            Initialization.Do(s_dal); //stage 2
+            Initialization.Do(); //stage 4
+           
 
         Console.WriteLine("choose a Item to check:0 for exit ,1 for Engineer, 2 for Task, 3 for Depandency");
         int a = int.Parse(Console.ReadLine());

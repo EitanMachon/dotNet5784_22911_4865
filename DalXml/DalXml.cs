@@ -13,7 +13,7 @@ namespace Dal;
 
 
 //stage 3
-sealed public class DalXml : IDal
+sealed internal class DalXml : IDal
 {
     public static DalXml Instance { get; } = new DalXml(); // Singleton
 
