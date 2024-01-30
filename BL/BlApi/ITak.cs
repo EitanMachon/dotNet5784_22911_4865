@@ -10,7 +10,7 @@ namespace BlApi;
 /// </summary>
 public interface ITak
 {
-    public int createTask(BO.Task task); // this function get a task and create it in the database
+    public int create(BO.Task task); // this function get a task and create it in the database
 
     public BO.Task? read(int id); // this function get an id and return the task that match the id
 
