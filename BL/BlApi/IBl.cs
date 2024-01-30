@@ -8,5 +8,8 @@ namespace BlApi;
 
 public interface IBl
 {
-    public 
+    public ITak task { get; }
+    public IEngineer engineer { get; }
+    public IDependency dependency { get; }
+
 }
