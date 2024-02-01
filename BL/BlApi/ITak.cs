@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BO;
+namespace BLApi;
 /// <summary>
 ///  this is the interface of the BL layer that is used to implement the BL layer  functions of the Task
 /// </summary>
-public interface ITak
+public interface ITask
 {
     public int create(BO.Task task); // this function get a task and create it in the database
 

@@ -4,12 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlApi;
+namespace Bl;
+using DalApi;
+using BO;
+
+   
 
 public interface IBl
 {
-    public ITak task { get; }
-    public IEngineer engineer { get; }
-    public IDependency dependency { get; }
+    public ITask task { get; }  // this is the interface of the BL layer that is used to implement the BL layer  functions of the Task
+    public IEngineer engineer { get; } // this is the interface of the BL layer that is used to implement the BL layer  functions of the Engineer
+
+    // public BO.IDependency dependency { get; }
 
 }
