@@ -17,6 +17,18 @@ public class DalDeletionImpossible : Exception
     public DalDeletionImpossible(string? message) : base(message) { }
 }
 
+public class DalConfigException : Exception
+{
+    public DalConfigException(string? message) : base(message) { }
+}
+
+public class NotFoundId : Exception
+{
+    public NotFoundId(string? message) : base(message) { }
+    
+}
+
+
 
 
 public class DalXMLFileLoadCreateException : Exception
@@ -24,3 +36,7 @@ public class DalXMLFileLoadCreateException : Exception
        public DalXMLFileLoadCreateException(string? message) : base(message) { }
     }
 
+public class DalUpdateImpossible : Exception
+{
+       public DalUpdateImpossible(string? message) : base(message) { }
+}
