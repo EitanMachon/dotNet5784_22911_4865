@@ -8,4 +8,12 @@
     <IsActive>false</IsActive>
     <Id>0</Id>
   </Engineer>
+  <Engineer>
+    <Name>Eli Amar</Name>
+    <Email>e</Email>
+    <SalaryHour>1</SalaryHour>
+    <Level>Expert</Level>
+    <IsActive>false</IsActive>
+    <Id>0</Id>
+  </Engineer>
 </ArrayOfEngineer>

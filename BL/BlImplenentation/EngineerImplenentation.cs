@@ -3,19 +3,18 @@ using DalApi;
 using DO;
 internal class EngineerImplenentation : IEngineer
 {
-    private IDal dal = new DalApi.IDal();
+    private IDal dal = new IDal();
     //DalApi.IDal dal = new DalApi.DalApi();
     public int Create(Engineer item)
     {
         throw new NotImplementedException();
-
     }
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException();        
     }
-
+    
     public Engineer? Read(int id)
     {
         throw new NotImplementedException();
