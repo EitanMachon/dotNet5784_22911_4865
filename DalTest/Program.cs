@@ -106,7 +106,7 @@ class Program
     }
 
     
-        public static void EngineerRun()// the function run the engineer 
+ public static void EngineerRun()// the function run the engineer 
     {
 
         Console.WriteLine(@"put an action: 
@@ -121,6 +121,8 @@ class Program
         {
             string _name;
             string _email;
+            string hel;
+            double updateSalary=0;
             EngineerExperience level;
             string _givenLevelStr;
             switch (_a)
@@ -130,27 +132,30 @@ class Program
                     int _id1 = int.Parse(Console.ReadLine());
                     Console.WriteLine("put a name:");// get name for the engineer
                      _name = Console.ReadLine();
-                 //   n1.Name = _name;
+                   //  n1.Name = _name;
                     Console.WriteLine("put a email:");// get email for the engineer
                     _email = Console.ReadLine();                                
-                    //n1.Email = _email;
+                    // n1.Email = _email;
                     Console.WriteLine("put a salary:");// get salary for the engineer
                         double _salary = double.Parse(Console.ReadLine());
                     //n1.SalaryHour = _salary;
                     Console.WriteLine("put a level: (0-4) ");// get level for the engineer
                     _givenLevelStr = Console.ReadLine();
                     level = (EngineerExperience)int.Parse(_givenLevelStr);
-                    Engineer n1 = new Engineer(_id1, _name, _email, _salary, level);
+                    Engineer n1 = new Engineer {Id = _id1,Name= _name,Email = _email,SalaryHour= _salary, Level = level };
                     s_dal.iengineer.Create(n1);// send to creat
                     break;
+
                 case 2:// Read 
                     Console.WriteLine("put a id fr read:");// get id for the engineer
                     int _id2 = int.Parse(Console.ReadLine());
                     s_dal.iengineer.Read(_id2);// send to read
                     break;
+
                 case 3: // ReadAll
                     s_dal.iengineer.ReadAll();// send to readall function
                     break;
+
                 case 4: // Update
                     {
                         Console.WriteLine("Enter engineer id:");
@@ -171,23 +176,27 @@ class Program
                             _email = Help.Email;
 
                         Console.WriteLine("Enter engineer salary:");
-                        double updateSalary = double.Parse(Console.ReadLine());
-                        if (updateSalary == null)      /// if the input empty, use the previous cost
+                        hel = Console.ReadLine();
+                        if (hel != "")      /// if the input empty, use the previous cost
+                            updateSalary = double.Parse(Console.ReadLine());
+                        if (hel == "")      /// if the input empty, use the previous cost
                         {
                             updateSalary = Help.SalaryHour;
-
                         }
 
 
                         Console.WriteLine("Enter engineer level:");
-                        _givenLevelStr = Console.ReadLine();
-                        level = (EngineerExperience)int.Parse(_givenLevelStr);
-                        if (_givenLevelStr == "")
-                        {
+                        hel = Console.ReadLine();
+                        if (hel == "")
+                        {       
                             level = (EngineerExperience)(int)Help.Level;
                         }
+
+                       // level = (EngineerExperience)int.Parse(_givenLevelStr);
                         else
                         {
+                            _givenLevelStr = Console.ReadLine();
+
                             level = (EngineerExperience)int.Parse(_givenLevelStr);
                         }
 
@@ -235,29 +244,26 @@ class Program
                     //n3.Id = _id1; // put the id in the task
                     Console.WriteLine("put a alias:");// ask for the name
                     _alias = Console.ReadLine(); // get the name
-                    //n3.Alias = _alias; // put the name in the task
+
                     Console.WriteLine("put a description:");// ask for the description
                     _description = Console.ReadLine(); // get the description
-                    //n3.Description = _description; // put the description in the task
+
                     _createDate = DateTime.Now; // get the create date
-                    //n3.CreateDate = _createDate; // put the create date in the task
+
                     Console.WriteLine("put a required hours:");// ask for the required hours
                     _requiredHours = TimeSpan.Parse(Console.ReadLine()); // get the required hours
-                    //n3.RequiredHours = _requiredHours; // put the required hours in the task
+
                     Console.WriteLine("is a milestone? true/false:");// ask for the milestone
                     _isMilestone = bool.Parse(Console.ReadLine()); // get the milestone
-                    //n3.IsMilestone = _isMilestone; // put the milestone in the task
+
                     Console.WriteLine("put a complexity of the task:");// ask for the complexity
                     _complexity = (EngineerExperience)int.Parse(Console.ReadLine()); // get the complexity
-                    //n3.Complexity = _complexity; // put the complexity in the task
-                    //Console.WriteLine("enter a finish date:");// ask for the finish date
+                   
                     DateTime? _finishDate = _createDate+ _requiredHours; // get the finish date
                    // n3.FinishDate = _finishDate; // put the finish date in the task
                     Console.WriteLine("enter a deadline date:");// ask for the deadline date
                     DateTime? _deadlineDate = DateTime.Parse(Console.ReadLine()); // get the deadline date  
-                    //n3.DeadlineDate = _deadlineDate; // put the deadline date in the task
-                    // Assuming you have a Random object initialized somewhere in your code.
-                    //n3.ComplateTime = _finishDate - _createDate; // put the complate time in the task
+                   
                     Console.WriteLine("enter a Enginee Id:");// ask for the Enginee Id
                     int _engineerId = int.Parse(Console.ReadLine()); // get the Enginee Id
                     //n3.EngineerId = _engineerId; // put the Enginee Id in the task
@@ -266,14 +272,12 @@ class Program
                     //n3.Difficulty = _difficulty; // put the Difficulty of the task in the task
                     _whatYouDid = " "; // get the what you did
                     string _remark = " "; // get the remark
-                    //n3.WhatYouDid = _whatYouDid; // put the what you did in the task
-                    //n3.Delivered = _dekiverd; // put the Difficulty of the task in the task
 
-                    //?????
-                    DO.Task n3 = new DO.Task(_id1, _alias, _description, _createDate, _requiredHours, _isMilestone, _complexity, DateTime.Now,
-                        _finishDate, _deadlineDate, DateTime.Now, _whatYouDid, _remark, _engineerId, (EngineerExperience)_difficulty);
+
+                    DO.Task n3 =new Task(_id1, _alias, _description, _createDate, _requiredHours, _isMilestone, _complexity, _deadlineDate, _whatYouDid, _remark, _engineerId, _difficulty);
                     //s_dal!.itask.Create(n3);// send to create 
                     break;
+
                 case 2:// Read 
                     Console.WriteLine("put a id for read:");// get id for the task
                     _id1 = int.Parse(Console.ReadLine()); // get the id
@@ -310,11 +314,6 @@ class Program
                     _complexity = (EngineerExperience)int.Parse(Console.ReadLine()); // get the complexity
 
 
-
-
-
-                    //Console.WriteLine("enter a finish date:");// ask for the finish date
-                    //DateTime? _finishDate = DateTime.Parse(Console.ReadLine()); // get the finish date
                     Console.WriteLine(Console.ReadLine()); // put the finish date in the task
 
 
