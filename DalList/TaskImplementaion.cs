@@ -45,8 +45,16 @@ internal class TaskImplementaion : ITask
 
     public Task Read(int id)
     {
-        return DataSource.Tasks.Where(d => d.Id == id).FirstOrDefault() // copy the Task with the given ID and store it in a variable
-            ?? throw new InvalidOperationException($"Task with ID {id} does not exist."); // throw an exception
+        //return DataSource.Tasks.Where(d => d.Id == id).FirstOrDefault() // copy the Task with the given ID and store it in a variable
+        //    ?? throw new InvalidOperationException($"Task with ID {id} does not exist."); // throw an exception
+        if (DataSource.Tasks.Any(t => t.Id == id)) // if the Task with the given ID exists, return the Task
+        {
+            return DataSource.Tasks.Where(t => t.Id == id).FirstOrDefault(); // return the Task with the given ID
+        }
+        else
+        {
+            throw new InvalidOperationException($"Task with ID {id} does not exist."); // throw an exception
+        }
               
     }
 
@@ -57,7 +65,7 @@ internal class TaskImplementaion : ITask
     //}
     public IEnumerable<Task> ReadAll(Func<Task, bool>? filter = null) //stage 2
     {
-        if (filter != null)
+        if (filter != null) // if the filter is not null, return a list of Tasks that match the filter
         {
             return from item in DataSource.Tasks
                    where filter(item)

@@ -14,7 +14,7 @@ public class DalAlreadyExistsException : Exception
 
 public class DalDeletionImpossible : Exception
 {
-    public DalDeletionImpossible(string? message) : base(message) { }
+    public DalDeletionImpossible(string? message, DalDeletionImpossible e) : base(message) { }
 }
 
 public class DalConfigException : Exception
@@ -26,6 +26,11 @@ public class NotFoundId : Exception
 {
     public NotFoundId(string? message) : base(message) { }
     
+}
+
+public class NotExistException : Exception
+{
+    public NotExistException(string? message) : base(message) { }
 }
 
 

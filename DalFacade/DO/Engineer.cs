@@ -1,4 +1,5 @@
-﻿namespace DO;
+﻿
+namespace DO;
 
 public record Engineer
 (
@@ -14,4 +15,9 @@ public record Engineer
     public Engineer() : this(0, "", "", 0, 0) { } // empty ctor
     public bool IsActive { get; set; } = false; // default value for new engineers
     public int Id { get; init; } // 'init' allows setting during object initialization
+
+    public static implicit operator int(Engineer v)
+    {
+        throw new NotImplementedException();
+    }
 }

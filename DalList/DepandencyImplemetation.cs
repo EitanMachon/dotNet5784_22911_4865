@@ -39,8 +39,15 @@ namespace Dal
 
         public Dependency Read(int id) // read a Dependency by his ID and return the Dependency
         {
-            return DataSource.Dependencies.Where(d => d.Id == id).FirstOrDefault() // copy the Dependency with the given ID and store it in a variable
-                ?? throw new InvalidOperationException($"Dependency with ID {id} does not exist.");
+           
+            if (DataSource.Dependencies.Any(t => t.Id == id)) // if the Dependency with the given ID exists, return the Dependency
+            {
+                return DataSource.Dependencies.Where(t => t.Id == id).FirstOrDefault(); // return the Dependency with the given ID
+            }
+            else
+            {
+                throw new InvalidOperationException($"Dependency with ID {id} does not exist."); // throw an exception
+            }
         }
 
 

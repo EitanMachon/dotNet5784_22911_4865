@@ -47,7 +47,14 @@ internal class EngineerImplementation : IEngineer
 
     public Engineer? Read(int id) // read a Engineer by his ID and return the Engineer
     {
-        return DataSource.Engineers.Where(d => d.Id == id).FirstOrDefault(); // copy the Dependency with the given ID and store it in a variable
+        if (DataSource.Engineers.Any(t => t.Id == id)) // if the Engineer with the given ID exists, return the Engineer
+        {
+            return DataSource.Engineers.Where(t => t.Id == id).FirstOrDefault(); // return the Engineer with the given ID
+        }
+        else
+        {
+            throw new InvalidOperationException($"Engineer with ID {id} does not exist."); // throw an exception
+        }
     }
 
     //public List<Engineer> ReadAll() // read all Engineers and return a list of all Engineers

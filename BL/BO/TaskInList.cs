@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO;
 
-internal class TaskInList
+public class TaskInList
 {   
     public int Id { get ; init; } // this is the id of the task
     public string Description { get; set; } // this is the description of the task
