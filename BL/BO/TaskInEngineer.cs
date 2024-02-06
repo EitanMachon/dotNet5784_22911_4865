@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO;
 
-internal class TaskInEngineer
+public class TaskInEngineer
 {
     public int Id { get; init; } // this is the id of the task
     public string Alias { get; init; } // this is the alias of the task

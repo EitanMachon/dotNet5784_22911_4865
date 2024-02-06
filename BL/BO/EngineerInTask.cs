@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO;
 
-internal class EngineerInTask
+public class EngineerInTask
 {
     public int Id { get; init; } // this is the id of the task
     public string Name { get; init; } // this is the name of the engineer

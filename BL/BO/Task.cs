@@ -10,9 +10,8 @@ public class Task
     public string Description { get; set; } // this is the description of the task
     public string Alias { get; init; } // this is the alias of the task
     public DateTime CreatedAtDate { get; set; } // this is the date the task was created
-    // public BO.Status status { get; set; } // this is the status of the task
-    // public List<BO.TaskInList> Dependencys { get; set; } // this is the list of the tasks
-    public List<BO.TaskInList> Dependencys { get; set; } // this is the list of the tasks and its not working because of the namespace of the TaskInList th
+    public BO.Status status { get; set; } // this is the status of the task
+    public List<BO.TaskInList>? Dependencys { get; set; } // this is the list of dependencies of the task
     public TimeSpan RequiredEffort { get;  } // this is the required effort of the task
     // public bool IsMilestone { get; set; } // this is the milestone of the task
     public DateTime? StartDate { get; }  // this is the start date of the task
