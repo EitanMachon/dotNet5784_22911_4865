@@ -3,7 +3,7 @@
 
 namespace BO;
 
-internal class Engineer
+public class Engineer
 {
 public int Id { get; init;} // this is the id of the engineer
 public string Name { get; init; } // this is the name of the engineer

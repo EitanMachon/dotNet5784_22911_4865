@@ -1,16 +1,17 @@
 ﻿namespace BlImplenentation;
 
+using BLApi;
 using BO;
-using DalApi;
 using DO;
 using System.Reflection.Emit;
 using System.Runtime.ConstrainedExecution;
 
 using System.Xml.Linq;
+using Engineer = BO.Engineer;
 
 internal class EngineerImplenentation : IEngineer
 {
-    private IDal _dal = Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
+    private IDal _dal = DalApi.Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
     //DalApi.IDal dal = new DalApi.DalApi();
     public int Create(BO.Engineer boEngineer) // create a new Engineer by a given Engineer in the BO layer
     {
@@ -41,18 +42,13 @@ internal class EngineerImplenentation : IEngineer
             Name = boEngineer.Name,
             Email = boEngineer.Email,
             SalaryHour = boEngineer.SalaryHour,
-            Level = (EngineerExperience)boEngineer.Level,
+            Level = (global::EngineerExperience)(EngineerExperience)boEngineer.Level,
         };
 
         int engineerId = _dal.iengineer.Create(doEngineer); // create a new Engineer in the DAL layer and get his ID
         return engineerId; // after creating the Engineer and his Tasks, return the Engineer ID
 
     }
-
-
-
-
-
     public void Delete(int id) // delete an Engineer by his ID
     {
         if (id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
@@ -78,34 +74,82 @@ internal class EngineerImplenentation : IEngineer
             }
         }
     }
-
     public Engineer? Read(int id) // read an Engineer by his ID
     {
-              
-
-
-    }
-
-    public Engineer? Read(Func<Engineer, bool> filter)
-    {
-        if (filter == null) // if the filter is null, throw an exception because it is not possible to filter the list
+        if (id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
         {
-            throw new Exception("Filter is null");
+            var existingEngineer = _dal.iengineer.Read(t => t.Id == id); // read the Engineer by his ID in the DAL layer
+            if (existingEngineer == null) // if the Engineer does not exist, throw an exception because it is not possible to read an Engineer that does not exist
+            {
+                throw new BO.BlDoesNotExistException($"Engineer with ID={id} doesn't exist"); // throw an exception
+            }          
         }
-        return new Engineer(); // this is a temporary return value to avoid compilation errors
-    }
-
-    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
-    {
-        if (filter != null) // if the filter is not null, return a list of Engineers that match the filter
+        DO.Engineer doEngineer = _dal.iengineer.Read(t => t.Id == id); // read the Engineer by his ID in the DAL layer
+        object FindTheTask = _dal.itask.Read(t => t.EngineerId == id && t.DeadLinetime == null); // read the Task of the Engineer by his ID in the DAL layer and check if the Task is not finished 
+        
+             
+        
+        try
         {
-            return ReadAll(filter); // return a list of Engineers that match the filter
+            return new BO.Engineer // return the Engineer in the BO layer
+            {
+                Id = doEngineer.Id,
+                Name = doEngineer.Name,
+                Email = doEngineer.Email,
+                SalaryHour = doEngineer.SalaryHour,
+                Level = (BO.EngineerExperience)doEngineer.Level,
+                Task = FindTheTask != null ? new BO.TaskInEngineer(((DO.Task)FindTheTask).Id, ((DO.Task)FindTheTask).Name) : null // if the Task exists, return the Task in the BO layer, if the Task does not exist, return null
+            };
         }
-        return ReadAll(); // return a list of all Engineers 
-
+        catch ( DalReadException e) // if the Engineer cannot be read, throw an exception
+        {
+            throw new DalReadException($"Engineer with the ID {id} cannot be read", e); // throw an exception
+        }
+        
     }
-
-    public void Updaten(BO.Engineer boEngineer)
+    public IEnumerable<Engineer?> ReadAll(Func<BO.Engineer, bool>? filter = null)
+    {
+        object findTheTask = null; // create a new instance of the Task
+        findTheTask = _dal.itask.Read(t => t.EngineerId == 1 && t.DeadLinetime == null); // read the Task of the Engineer by his ID in the DAL layer and check if the Task is not finished
+        try
+        {
+            if(filter == null) // if the filter is null, read all the Engineers
+            {
+                return from engineer in _dal.iengineer.ReadAll() // read all the Engineers in the DAL layer
+                       select new BO.Engineer // return all the Engineers in the BO layer
+                       {
+                           Id = engineer.Id,
+                           Name = engineer.Name,
+                           Email = engineer.Email,
+                           SalaryHour = engineer.SalaryHour,
+                           Level = (BO.EngineerExperience)engineer.Level,
+                           Task = findTheTask != null ? new BO.TaskInEngineer(((DO.Task)findTheTask).Id, ((DO.Task)findTheTask).Name) : null // if the Task exists, return the Task in the BO layer, if the Task does not exist, return null
+                       };
+            }
+            else // if the filter is not null, read the Engineers by the filter
+            {
+                return from engineer in _dal.iengineer.ReadAll() // read the Engineers by the filter in the DAL layer
+                       let temp = new BO.Engineer // return the Engineers by the filter in the BO layer
+                       {
+                           Id = engineer.Id,
+                           Name = engineer.Name,
+                           Email = engineer.Email,
+                           SalaryHour = engineer.SalaryHour,
+                           Level = (BO.EngineerExperience)engineer.Level,
+                           Task = findTheTask != null ? new BO.TaskInEngineer(((DO.Task)findTheTask).Id, ((DO.Task)findTheTask).Name) : null // if the Task exists, return the Task in the BO layer, if the Task does not exist, return null
+                       }
+                       where filter(temp) // return the Engineers by the filter in the BO layer
+                       select temp;
+            }
+        }
+        catch (DalReadException e) // if the Engineers cannot be read, throw an exception
+        {
+            throw new DalReadException("Engineers cannot be read", e); // throw an exception
+        }
+        
+         
+    }
+    public void Update(BO.Engineer boEngineer)
     {
         Console.WriteLine("You can update:\r\nThe name of the engineer\r\nEmail\r\nEngineer level (upward only)\r\ncost per hour\r\nSelecting a task that the engineer performs"); // print the options that the user can update
         if (boEngineer.Id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
@@ -134,7 +178,7 @@ internal class EngineerImplenentation : IEngineer
             Name = boEngineer.Name,
             Email = boEngineer.Email,
             SalaryHour = boEngineer.SalaryHour,
-            Level = (EngineerExperience)boEngineer.Level,
+            Level = (global::EngineerExperience)(EngineerExperience)boEngineer.Level, //this global because the DO.Engineer has a field with the same name
         };
         try
         {
