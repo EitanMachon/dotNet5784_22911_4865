@@ -21,7 +21,7 @@ public class Program
 
    //
    //static readonly IDal s_dal = Factory.Get; //stage 4
-    static readonly BLApi.IBl s_bl = BlApi.Factory.Get();
+    static readonly Bl.IBl s_bl = BlApi.Factory.Get();
 
     static EngineerExperience[] experience = {
     EngineerExperience.Beginner,
@@ -31,74 +31,8 @@ public class Program
     EngineerExperience.Expert
 };// the array of the level of the engineer
 
-    public static void DepandencyRun()// the function run the task 
-    {
-        Console.WriteLine("choose a Item to check:0 for exit ,1 for Creat, 2 for Read, 3 for ReadAll, 4 for Update, 5 for Delete");
-        int a = int.Parse(Console.ReadLine());
-        try
-        {
-            int _id1;
-            int _dt, _dep;
-            switch (a)
-            {
-                case 1://Creat 
-                    //gets all params from user 
-                    Console.WriteLine("put a new id:");// get id for the depandency
-                    _id1 = int.Parse(Console.ReadLine()); // get the id
-                                                          //    n1.Id = _id1; // put the id in the depandency
-                    Console.WriteLine("put a depandendent task:");// get id for the depandency
-                    _dt = int.Parse(Console.ReadLine()); // get the depandendent task
-                                                         //    n1.DependentTask = _dt; // put the depandendent task in the depandency
-                    Console.WriteLine("put a depans task:");// get id for the depandency
-                    _dep = int.Parse(Console.ReadLine()); // get the depans task
-                                                          //    n1.DependensTask = _dep; // put the depans task in the depandency
-                    Dependency n1 = new Dependency(_id1, _dt, _dep); // create a new depandency
-                    s_dal.idependancy.Create(n1);// send to creat
-                    break;
+    
 
-                case 2:// Read 
-                    Console.WriteLine("put a id for read:");// get id for the depandency
-                    _id1 = int.Parse(Console.ReadLine());
-                    s_dal.idependancy.Read(_id1);// send to creat
-                    break;
-
-                case 3: // ReadAll
-                    s_dal.idependancy.ReadAll();// send to readall
-                    break;
-
-                case 4: // Update
-                    Console.WriteLine("put a id to update:");// get id for the depandency
-                    int _id3 = int.Parse(Console.ReadLine()); // get the id
-
-                    DO.Dependency Help = s_dal.idependancy.Read(_id3); // get the needed depandency
-                    Console.WriteLine(Help); // print depandency values
-
-                    Console.WriteLine("put a depandendent task:");// get id for the depandency
-                    _dt = int.Parse(Console.ReadLine()); // get the depandendent task
-
-                    Console.WriteLine("put a depans task:"); // get id for the depandency
-                    _dep = int.Parse(Console.ReadLine()); // get the depans task
-
-                    Dependency tempDep = new(_id3, _dt, _dep); // create a new depandency
-                    s_dal.idependancy.Update(tempDep); // update the depandency
-                    break;
-
-                case 5: // Delete 
-                    Console.WriteLine("put a id for read:");// get id for the depandency
-                    int _id2 = int.Parse(Console.ReadLine());
-                    s_dal.idependancy.Delete(_id2);// send to Delete
-                    break;
-
-                default:
-                    Console.WriteLine("there is no option like that");
-                    break;
-            }
-        }
-        catch (Exception e)// get if thier is exaption 
-        {
-            Console.WriteLine(e.Message);
-        }
-    }
 
     public static void EngineerRun()// the function run the engineer 
     {
@@ -137,17 +71,17 @@ public class Program
                     _givenLevelStr = Console.ReadLine();
                     level = (EngineerExperience)int.Parse(_givenLevelStr);
                     Engineer n1 = new Engineer { Id = _id1, Name = _name, Email = _email, SalaryHour = _salary, Level = level };
-                    s_dal.iengineer.Create(n1);// send to creat
+                    s_bl.Engineer.Create(n1);// send to creat function of BL
                     break;
 
                 case 2:// Read 
                     Console.WriteLine("put a id fr read:");// get id for the engineer
                     int _id2 = int.Parse(Console.ReadLine());
-                    s_dal.iengineer.Read(_id2);// send to read
+                    s_bl.Engineer.Read(_id2);// send to read
                     break;
 
                 case 3: // ReadAll
-                    s_dal.iengineer.ReadAll();// send to readall function
+                    s_bl.Engineer.ReadAll();// send to readall function
                     break;
 
                 case 4: // Update
@@ -155,7 +89,7 @@ public class Program
                         Console.WriteLine("Enter engineer id:");
                         int _id5 = int.Parse(Console.ReadLine());
 
-                        DO.Engineer Help = s_dal.iengineer.Read(_id5); // get the needed engineer
+                        BO.Engineer Help = s_bl.Engineer.Read(_id5); // get the needed engineer
                         Console.WriteLine(Help); // print engineer values
 
 
@@ -186,7 +120,7 @@ public class Program
                             level = (EngineerExperience)(int)Help.Level;
                         }
 
-                        // level = (EngineerExperience)int.Parse(_givenLevelStr);
+                        
                         else
                         {
                             _givenLevelStr = Console.ReadLine();
@@ -194,14 +128,14 @@ public class Program
                             level = (EngineerExperience)int.Parse(_givenLevelStr);
                         }
 
-                        Engineer tempEng = new(_id5, _name, _email, updateSalary, level); // create a new engineer
-                        s_dal.iengineer.Update(tempEng);
+                        BO.Engineer tempEng = new(_id5, _name, _email, updateSalary, level); // create a new engineer
+                        s_bl.Engineer.Update(tempEng);
                     }
                     break;
                 case 5: // Delete 
                     Console.WriteLine("put a id delete:");// get id for the engineer
                     int _id4 = int.Parse(Console.ReadLine());
-                    s_dal.iengineer.Delete(_id4);
+                    s_bl.Engineer.Delete(_id4);
                     break;
 
                 default:
@@ -211,7 +145,7 @@ public class Program
         }
         catch (Exception e)// get if thier is exaption 
         {
-            Console.WriteLine(e.Message);
+            Console.WriteLine("Error: " + e.Message);
         }
     }  
 
@@ -273,7 +207,7 @@ public class Program
                     string _remark = " "; // get the remark
 
 
-                    DO.Task n3 = new DO.Task
+                    BO.Task n3 = new BO.Task
                     (
                       Id: _id1,
                         Alias: _alias,
@@ -291,18 +225,17 @@ public class Program
                         EngineerId: _engineerId,
                         Difficulty: (EngineerExperience)_difficulty
                     );
-                    Console.WriteLine(s_dal.itask.Create(n3));// send to creat
-                                                              // Console.WriteLine("the id of the task:" + n3.Id); // ask for the Difficulty of the task
+                    Console.WriteLine(s_bl.Task.Create(n3));
                     break;
 
                 case 2:// Read 
                     Console.WriteLine("put a id for read:");// get id for the task
                     _id1 = int.Parse(Console.ReadLine()); // get the id
-                    s_dal!.itask.Read(_id1);// send to read
+                    s_bl!.Task.Read(_id1);// send to read
                     break;
 
                 case 3: // ReadAll
-                    s_dal!.itask.ReadAll();// send to readall
+                    s_bl!.Task.ReadAll();// send to readall
                     break;
 
                 case 4: // Update
@@ -310,7 +243,7 @@ public class Program
                     Console.WriteLine("put a id to update:");// get id for the task
                     int _id3 = int.Parse(Console.ReadLine()); // get the id
 
-                    DO.Task Help = s_dal!.itask.Read(_id3); // get the needed task
+                    BO.Task Help = s_bl!.Task.Read(_id3); // get the needed task
                     Console.WriteLine(Help); // print task values
 
                     Console.WriteLine("put a alias:");// ask for the name
@@ -350,15 +283,7 @@ public class Program
                                                                             // Assuming you have a Random object initialized somewhere in your code.
                     Random random = new Random();
 
-                    // Set the range in days
-
-                    //int rangeInDays = (int)_complexity;  
-                    // Generate random start date within the range
-                    // DateTime? _startDate = DateTime.Now.AddDays(-random.Next(rangeInDays));
-
-                    // Generate random finish date within the range
-                    // DateTime? _actulyFinish = _startDate.Value.AddDays(random.Next(rangeInDays));
-                    //
+                   
                     Console.WriteLine("enter what you did:");// ask for the what you did
                     vr = Console.ReadLine();
                     if (vr != "")
@@ -369,32 +294,13 @@ public class Program
                     if (vr != "")
                         _somethingToSay = Console.ReadLine();// get the something to say
 
-                    // DO.Task tempEng = new(_id3, _alias, _description, _createDate, _requiredHours,
-                    //    _isMilestone, _complexity, _deadlineDate, _whatYouDid, _somethingToSay,
-
-                    // create a new engineer
-                    //    s_dal.iengineer.Update(help);
-                    //  int Id,
-                    //string Alias,
-                    //string Description,
-                    //DateTime CreatedAtDate,
-                    //TimeSpan RequiredEffort,
-                    //bool IsMilestone,
-                    //EngineerExperience Copmlexity,
-                    //DateTime? StartDate,
-                    //DateTime? ScheduledTime,
-                    //DateTime? DeadLinetime,
-                    //DateTime? ComplateTime,
-                    //string? Dekiverables,
-                    //string? Remarks,
-                    //int EngineerId,
-                    //EngineerExperience Difficulty
+                    
 
                     break;
                 case 5: // Delete 
                     Console.WriteLine("put a id for read:");// get id for the task
                     int _id2 = int.Parse(Console.ReadLine()); // get the id
-                    s_dal!.itask.Delete(_id2);// send to Delete
+                    s_bl!.Task.Delete(_id2);// send to Delete
                     break;
 
                 default:
@@ -404,7 +310,7 @@ public class Program
         }
         catch (Exception e)// get if thier is exaption 
         {
-            Console.WriteLine(e.Message);
+            Console.WriteLine("Error: " + e.Message);
         }
     }
 
@@ -425,7 +331,7 @@ public class Program
             Initialization.Do(); //stage 4
 
 
-        Console.WriteLine("choose a Item to check:0 for exit ,1 for Engineer, 2 for Task, 3 for Depandency");
+        Console.WriteLine("choose a Item to check:0 for exit ,1 for Engineer, 2 for Task");
         int a = int.Parse(Console.ReadLine());
 
         while (a != 0)// while he dont chooce 0 he will continue to run
@@ -442,9 +348,9 @@ public class Program
                     case 2:// Task class
                         TaskRun();
                         break;
-                    case 3: // Depandency
-                        DepandencyRun();
-                        break;
+                    //case 3: // Depandency
+                    //    DepandencyRun();
+                    //    break;
                     default:
                         break;
 

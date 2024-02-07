@@ -9,6 +9,25 @@ public class Task
     internal DateTime? startDate;
     internal DateTime? complateTime;
 
+    public Task(int Id, string? Alias, string? Description, DateTime CreatedAtDate, TimeSpan RequiredEffort, bool IsMilestone, global::EngineerExperience Copmlexity, DateTime StartDate, DateTime? ScheduledTime, DateTime? DeadLinetime, DateTime ComplateTime, string Dekiverables, string Remarks, int EngineerId, global::EngineerExperience Difficulty)
+    {
+        this.Id = Id;
+        this.Alias = Alias;
+        this.Description = Description;
+        this.CreatedAtDate = CreatedAtDate;
+        this.RequiredEffort = RequiredEffort;
+        this.IsMilestone = IsMilestone;
+        Copmlexity1 = Copmlexity;
+        startDate = StartDate;
+        this.ScheduledTime = ScheduledTime;
+        this.DeadLinetime = DeadLinetime;
+        complateTime = ComplateTime;
+        this.Dekiverables = Dekiverables;
+        this.Remarks = Remarks;
+        this.EngineerId = EngineerId;
+        Difficulty1 = Difficulty;
+    }
+
     public int Id { get; init; } // this is the id of the task
     public string Description { get; set; } // this is the description of the task
     public string Alias { get; init; } // this is the alias of the task
@@ -31,5 +50,9 @@ public class Task
     public string Remarks { get; set; } // this is the remarks of the task
     public BO.EngineerInTask? Engineer { get; set; } // this is the engineer of the task
 public BO.EngineerExperience Difficulty { get; set; } // this is the difficulty of the task
-
+    public bool IsMilestone { get; }
+    public global::EngineerExperience Copmlexity1 { get; }
+    public DateTime? DeadLinetime { get; }
+    public int EngineerId { get; }
+    public global::EngineerExperience Difficulty1 { get; }
 }
