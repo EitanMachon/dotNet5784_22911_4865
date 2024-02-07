@@ -22,6 +22,8 @@ public record Task
 )
 
 {
+    public DateTime ForecastDate;
+
     public bool IsActive { get; set; } = false; // default value for new engineers
     public int Id { get; init; } // 'init' allows setting during object initialization
     public Task() : this(0, "", "", DateTime.Now, TimeSpan.Zero, false, EngineerExperience.Beginner, DateTime.Now, DateTime.Now, DateTime.Now, DateTime.Now, "", "", 0, EngineerExperience.Beginner) { } // default ctor

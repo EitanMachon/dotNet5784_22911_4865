@@ -10,15 +10,13 @@ namespace BLApi;
 /// </summary>
 public interface ITask
 {
-    public int create(BO.Task task); // this function get a task and create it in the database
+    public int Create(BO.Task task); // this function get a task and create it in the database
 
-    public BO.Task? read(int id); // this function get an id and return the task that match the id
+    public BO.Task? Read(int id); // this function get an id and return the task that match the id
 
-    public BO.Task? read(Func<BO.Task, bool> filter); // this func get a filter and return the first item that match the filter
+    public IEnumerable<BO.Task?> ReadAll(Func<BO.Task, bool>? filter = null); // this function return all the tasks in the database
 
-    public IEnumerable<BO.Task?> readAll(Func<BO.Task, bool>? filter = null); // this function return all the tasks in the database
+    public void Update(BO.Task task); // this function get a task and update it in the database
 
-    public void update(BO.Task task); // this function get a task and update it in the database
-
-    public void delete(BO.Task task); // this function get a task and delete it from the database 
+    public void Delete(int id); // this function get a task and delete it from the database 
 }

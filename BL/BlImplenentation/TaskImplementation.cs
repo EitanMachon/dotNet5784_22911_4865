@@ -1,14 +1,17 @@
 ﻿namespace BlImplenentation;
 
-using DalApi;
+using BO;
 using DO;
 using System;
 using System.Collections.Generic;
+using Engineer = BO.Engineer;
+using Task = BO.Task;
 
-internal class TaskImplementation : ITask
+internal class TaskImplementation : BLApi.ITask
 {
-    private IDal _dal = Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
-    
+    private IDal _dal = DalApi.Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
+    private Task? finalTask; // create a new Task in the BO layer to use it in the Read function
+
     public int Create(BO.Task boTask) // create a new Task by a given Task in the BO layer
     {
         if (boTask.Engineer.Id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
@@ -34,7 +37,7 @@ internal class TaskImplementation : ITask
             Dekiverables = boTask.Dekiverables,
             Remarks = boTask.Remarks,
             EngineerId = boTask.Engineer.Id,
-            Copmlexity = (EngineerExperience)boTask.Copmlexity,
+            Copmlexity = (global::EngineerExperience)(EngineerExperience)boTask.Copmlexity, // this is global because the EngineerExperience is in the BO layer and the EngineerExperience is in the DO layer
             RequiredEffort = boTask.RequiredEffort,
         }; 
 
@@ -77,7 +80,7 @@ internal class TaskImplementation : ITask
         }   
     }
 
-    public Engineer? Read(int id)
+    public Task? Read(int id)
     {
         if (id != 0) // if the Task ID is not 0, check if the Task exists in the database
         {
@@ -87,16 +90,71 @@ internal class TaskImplementation : ITask
                 throw new BO.BlDoesNotExistException($"Task with ID={id} doesn't exist"); // throw an exception
             }
         }
-        
+        DO.Task? doTask = _dal.itask.Read(t => t.Id == id); // read the Task by his ID in the DAL layer after checking if the Task exists in the database
+        object? engineer = _dal.iengineer.Read(t => t.Id == doTask.EngineerId && t.IsActive == true); // read the Engineer by his ID in the DAL layer
+        if (engineer == null) // if the Engineer does not exist, throw an exception because it is not possible to read a Task that does not have an Engineer
+        {
+            throw new BO.BLTaskHasNoEngineerException($"Task with ID={id} has no Engineer"); // throw an exception
+        }
+        engineer = (Engineer)engineer; // cast the Engineer to the BO layer
+        try // try to read the Task
+        {
+             BO.Task? finalTask = new BO.Task // return the Task in the BO layer
+            {
+                Id = doTask.Id,
+                Alias = doTask.Alias,
+                Description = doTask.Description,
+                CreatedAtDate = doTask.CreatedAtDate,
+                Dekiverables = doTask.Dekiverables,
+                Remarks = doTask.Remarks,
+                Engineer = (EngineerInTask)engineer,
+                Copmlexity = (EngineerExperience)doTask.Copmlexity,
+                RequiredEffort = doTask.RequiredEffort,
+            };
+        }
+        catch (DO.DalReadException e) // if the Task cannot be read, throw an exception
+        {
+            throw new DalReadException($"Task with the ID {id} cannot be read", e); // throw an exception
+        }
+        return finalTask; // return the Task in the BO layer
+     
     }
-
-    public Task? Read(Func<Task, bool> filter) // read a Task by a filter
-    {}
-        
-
-    public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null) // read all Tasks
-    {}
-
+    
+    public IEnumerable<BO.Task?> ReadAll(Func<BO.Task, bool>? filter = null) // read all Tasks
+    {
+        IEnumerable<DO.Task> doTasks = _dal.itask.ReadAll(); // read all Tasks in the DAL layer
+        List<BO.Task?> boTasks = new List<BO.Task?>(); // create a new list of Tasks in the BO layer
+        foreach (var task in doTasks) // for each Task in the DAL layer
+        {
+            object? engineer = _dal.iengineer.Read(t => t.Id == task.EngineerId && t.IsActive == true); // read the Engineer by his ID in the DAL layer
+            if (engineer == null) // if the Engineer does not exist, throw an exception because it is not possible to read a Task that does not have an Engineer
+            {
+                throw new BO.BLTaskHasNoEngineerException($"Task with ID={task.Id} has no Engineer"); // throw an exception
+            }
+            engineer = (Engineer)engineer; // cast the Engineer to the BO layer
+            try // try to read the Task
+            {
+                boTasks.Add(new BO.Task // add the Task to the list of Tasks in the BO layer
+                {
+                    Id = task.Id,
+                    Alias = task.Alias,
+                    Description = task.Description,
+                    CreatedAtDate = task.CreatedAtDate,
+                    Dekiverables = task.Dekiverables,
+                    Remarks = task.Remarks,
+                    Engineer = (EngineerInTask)engineer,
+                    Copmlexity = (EngineerExperience)task.Copmlexity,
+                    RequiredEffort = task.RequiredEffort,
+                });
+            }
+            catch (DO.DalReadException e) // if the Task cannot be read, throw an exception
+            {
+                throw new DalReadException($"Task with the ID {task.Id} cannot be read", e); // throw an exception
+            }
+        }
+        return boTasks; // return the list of Tasks in the BO layer    )
+    }
+   
     public void Update(BO.Task boTask) // update a Task by a given Task in the BO layer
     {
         if (boTask.Engineer.Id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
@@ -111,18 +169,20 @@ internal class TaskImplementation : ITask
                 throw new BO.BlInvalidAlias("Task with Alias=null is invalid"); // throw an exception
             }
         }
-        DO.Task doTask = new DO.Task // create a new Task in the DAL layer by the given Task in the BO layer after checking the Engineer and his qualification
-        {
-            Id = boTask.Id,
-            Alias = boTask.Alias,
-            Description = boTask.Description,
-            CreatedAtDate = boTask.CreatedAtDate,
-            Dekiverables = boTask.Dekiverables,
-            Remarks = boTask.Remarks,
-            EngineerId = boTask.Engineer.Id,
-            Copmlexity = (EngineerExperience)boTask.Copmlexity,
-            RequiredEffort = boTask.RequiredEffort,
-        };
-        _dal.itask.Update(doTask); // update the Task in the DAL layer
-    }
+    DO.Task doTask = new DO.Task // create a new Task in the DAL layer by the given Task in the BO layer after checking the Engineer and his qualification
+    {
+        Id = boTask.Id,
+        Alias = boTask.Alias,
+        Description = boTask.Description,
+        CreatedAtDate = boTask.CreatedAtDate,
+        Dekiverables = boTask.Dekiverables,
+        Remarks = boTask.Remarks,
+        EngineerId = boTask.Engineer.Id,
+        Copmlexity = (global::EngineerExperience)(EngineerExperience)boTask.Copmlexity,
+        RequiredEffort = boTask.RequiredEffort,
+    };
+    _dal.itask.Update(doTask); // update the Task in the DAL layer
+    
+}
+
 }
