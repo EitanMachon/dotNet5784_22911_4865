@@ -70,7 +70,7 @@ public class Program
                     Console.WriteLine("put a level: (0-4) ");// get level for the engineer
                     _givenLevelStr = Console.ReadLine();
                     level = (EngineerExperience)int.Parse(_givenLevelStr);
-                    Engineer n1 = new Engineer { Id = _id1, Name = _name, Email = _email, SalaryHour = _salary, Level = level };
+                    Engineer n1 = new Engineer { Id = _id1, Name = _name, Email = _email, SalaryHour = _salary, Level = (BO.EngineerExperience)level };
                     s_bl.Engineer.Create(n1);// send to creat function of BL
                     break;
 

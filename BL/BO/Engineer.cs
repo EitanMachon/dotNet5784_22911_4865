@@ -9,6 +9,10 @@ public class Engineer
     private double updateSalary;
     private global::EngineerExperience level;
 
+    public Engineer()
+    {
+    }
+
     public Engineer(int id5, string? name, string? email, double updateSalary, global::EngineerExperience level)
     {
         this.id5 = id5;
