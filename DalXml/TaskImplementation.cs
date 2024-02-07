@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,20 +9,19 @@ using DalXml;
 using Dal;
 using System.Xml.Linq;
 namespace DalXml;
+
 internal class TaskImplementation : ITask // this class implement ITask interface
 {
     readonly string tasks_xml = "tasks"; // the file name to save the tasks
 
-    public int Create(DO.Task item) // this func get a task and add it to the list
-    {
-        XElement tasksList = XMLTools.LoadListFromXMLElement(tasks_xml); // load the list from the file
-        int newID=Config.TaskId;
-        //get the new id into the item and only then add him USING CONFIG
-        DO.Task newItem = item with { Id = newID };
-        tasksList.Add(newItem); // add the task to the list
-        XMLTools.SaveListToXMLElement(tasksList, tasks_xml); // save the list to the file
-        return newID; // return the id of the task  
-    }
+        public int Create(DO.Task _item)       // this func get an engineer and add it to the list
+        {
+            var id = Config.TaskId;
+            List<DO.Task> _TaskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(tasks_xml); // load the list from the file
+            _TaskList.Add(_item with { Id=id}); // add the engineer to the list
+            XMLTools.SaveListToXMLSerializer(_TaskList, tasks_xml); // save the list to the file
+            return id; // return the id of the engineer
+        }
 
     public void Delete(int id)
     {

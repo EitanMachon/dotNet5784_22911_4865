@@ -42,7 +42,7 @@ static class XMLTools
     public static void SaveListToXMLElement(XElement rootElem, string entity)
     {
         string filePath = $"{s_xml_dir + entity}.xml";
-        try
+        try   
         {
             rootElem.Save(filePath);
         }

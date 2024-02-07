@@ -229,13 +229,13 @@ class Program
         {
             int _id1;
             DateTime _createDate;
-            string _description;
-            string _alias;
+            string _description="";
+            string _alias="";
             EngineerExperience _complexity;
             bool _isMilestone;
             TimeSpan _requiredHours;
             string _whatYouDid;
-
+            string _somethingToSay="";
             switch (a)
             {
                 case 1://Creat 
@@ -258,12 +258,12 @@ class Program
 
                     Console.WriteLine("put a complexity of the task:");// ask for the complexity
                     _complexity = (EngineerExperience)int.Parse(Console.ReadLine()); // get the complexity
-                   
-                    DateTime? _finishDate = _createDate+ _requiredHours; // get the finish date
-                   // n3.FinishDate = _finishDate; // put the finish date in the task
+
+                    DateTime? _finishDate = _createDate + _requiredHours; // get the finish date
+                                                                          // n3.FinishDate = _finishDate; // put the finish date in the task
                     Console.WriteLine("enter a deadline date:");// ask for the deadline date
                     DateTime? _deadlineDate = DateTime.Parse(Console.ReadLine()); // get the deadline date  
-                   
+
                     Console.WriteLine("enter a Enginee Id:");// ask for the Enginee Id
                     int _engineerId = int.Parse(Console.ReadLine()); // get the Enginee Id
                     //n3.EngineerId = _engineerId; // put the Enginee Id in the task
@@ -274,8 +274,26 @@ class Program
                     string _remark = " "; // get the remark
 
 
-                    DO.Task n3 =new Task(_id1, _alias, _description, _createDate, _requiredHours, _isMilestone, _complexity, _deadlineDate, _whatYouDid, _remark, _engineerId, _difficulty);
-                    //s_dal!.itask.Create(n3);// send to create 
+                    DO.Task n3 = new DO.Task
+                    (
+                      Id: _id1,
+                        Alias :_alias,
+                        Description : _description,
+                        CreatedAtDate : _createDate,
+                        RequiredEffort : _requiredHours,
+                        IsMilestone : _isMilestone,
+                        Copmlexity : _complexity,
+                        StartDate : DateTime.Now,
+                        ScheduledTime : _finishDate,
+                        DeadLinetime : _deadlineDate,
+                        ComplateTime : DateTime.Now,
+                        Dekiverables : _whatYouDid,
+                        Remarks : _remark,
+                        EngineerId : _engineerId,
+                        Difficulty : (EngineerExperience)_difficulty
+                    );
+                    Console.WriteLine( s_dal.itask.Create(n3));// send to creat
+                   // Console.WriteLine("the id of the task:" + n3.Id); // ask for the Difficulty of the task
                     break;
 
                 case 2:// Read 
@@ -289,6 +307,7 @@ class Program
                     break;
 
                 case 4: // Update
+                    string vr = "";
                     Console.WriteLine("put a id to update:");// get id for the task
                     int _id3 = int.Parse(Console.ReadLine()); // get the id
 
@@ -297,46 +316,80 @@ class Program
 
                     Console.WriteLine("put a alias:");// ask for the name
                     _alias = Console.ReadLine(); // get the name
+                    if (_alias == "")
+                        _alias =Help.Alias;
 
                     Console.WriteLine("put a description:");// ask for the description
                     _description = Console.ReadLine(); // get the description
+                    if (_description == "")
+                        _description = Help.Description;
 
                     Console.WriteLine("put a create date:");// ask for the create date
-                    _createDate = DateTime.Parse(Console.ReadLine()); // get the create date
-
+                    vr = Console.ReadLine();
+                    if(vr!="")
+                       _createDate = DateTime.Parse(Console.ReadLine()); // get the create date
+                    
                     Console.WriteLine("put a required hours:");// ask for the required hours
-                    _requiredHours = TimeSpan.Parse(Console.ReadLine()); // get the required hours
+                    vr = Console.ReadLine();
+                    if (vr != "")
+                         _requiredHours = TimeSpan.Parse(Console.ReadLine()); // get the required hours
 
                     Console.WriteLine("is a milestone? true/false:");// ask for the milestone
-                    _isMilestone = bool.Parse(Console.ReadLine()); // get the milestone
+                    vr = Console.ReadLine();
+                    if (vr != "")
+                       _isMilestone = bool.Parse(Console.ReadLine()); // get the milestone
 
                     Console.WriteLine("put a complexity of the task:");// ask for the complexity
-                    _complexity = (EngineerExperience)int.Parse(Console.ReadLine()); // get the complexity
-
-
-                    Console.WriteLine(Console.ReadLine()); // put the finish date in the task
-
+                    vr = Console.ReadLine();
+                    if (vr != "")
+                        _complexity = (EngineerExperience)int.Parse(Console.ReadLine()); // get the complexity
 
                     Console.WriteLine("enter a deadline date:");// ask for the deadline date
-                    _deadlineDate = DateTime.Parse(Console.ReadLine()); // get the deadline date
+                    vr = Console.ReadLine();
+                    if (vr != "")
+                         _deadlineDate = DateTime.Parse(Console.ReadLine()); // get the deadline date
                                                                                   // Assuming you have a Random object initialized somewhere in your code.
                     Random random = new Random();
 
                     // Set the range in days
-                    int rangeInDays = (int)_complexity;  // For example, a range of 30 days
 
+                   //int rangeInDays = (int)_complexity;  
                     // Generate random start date within the range
-                    DateTime? _startDate = DateTime.Now.AddDays(-random.Next(rangeInDays));
+                   // DateTime? _startDate = DateTime.Now.AddDays(-random.Next(rangeInDays));
 
                     // Generate random finish date within the range
-                    DateTime? _actulyFinish = _startDate.Value.AddDays(random.Next(rangeInDays));
+                  // DateTime? _actulyFinish = _startDate.Value.AddDays(random.Next(rangeInDays));
                     //
                     Console.WriteLine("enter what you did:");// ask for the what you did
-                    _whatYouDid = Console.ReadLine(); // get the what you did
+                    vr = Console.ReadLine();
+                    if (vr != "")
+                        _whatYouDid = Console.ReadLine(); // get the what you did
 
                     Console.WriteLine("Do you have something to say?");// ask for the something to say
-                    string _somethingToSay = Console.ReadLine(); // get the something to say
+                    vr = Console.ReadLine();
+                    if (vr != "")
+                        _somethingToSay = Console.ReadLine();// get the something to say
 
+                   // DO.Task tempEng = new(_id3, _alias, _description, _createDate, _requiredHours,
+                 //    _isMilestone, _complexity, _deadlineDate, _whatYouDid, _somethingToSay,
+
+                         // create a new engineer
+                //    s_dal.iengineer.Update(help);
+                  //  int Id,
+   //string Alias,
+   //string Description,
+   //DateTime CreatedAtDate,
+   //TimeSpan RequiredEffort,
+   //bool IsMilestone,
+   //EngineerExperience Copmlexity,
+   //DateTime? StartDate,
+   //DateTime? ScheduledTime,
+   //DateTime? DeadLinetime,
+   //DateTime? ComplateTime,
+   //string? Dekiverables,
+   //string? Remarks,
+   //int EngineerId,
+   //EngineerExperience Difficulty
 
                     break;
                 case 5: // Delete 
@@ -367,7 +420,7 @@ class Program
     
     {
         // Initialization.Do(s_dal);
-        Console.WriteLine("We build a garage system, let's start!"); // print the first line to the user
+        Console.WriteLine("We build a garage system"); // print the first line to the user
         Console.WriteLine("Welcome to our garage system"); // print the first line to the user
         Console.WriteLine("Hello, what we can do for you today?");
         Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
@@ -381,7 +434,7 @@ class Program
 
         while (a != 0)// while he dont chooce 0 he will continue to run
         {
-            Console.WriteLine("Ok, let's start");
+           // Console.WriteLine("Ok, let's start");
             try
             {
 
