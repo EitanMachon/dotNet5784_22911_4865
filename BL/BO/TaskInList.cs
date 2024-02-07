@@ -10,6 +10,6 @@ public class TaskInList
 {   
     public int Id { get ; init; } // this is the id of the task
     public string Description { get; set; } // this is the description of the task
-    public string Alias { get; init; } // this is the alias of the task
+    public string Alias { get; set; } // this is the alias of the task
     public BO.Status status { get; set; } // this is the status of the task
 }

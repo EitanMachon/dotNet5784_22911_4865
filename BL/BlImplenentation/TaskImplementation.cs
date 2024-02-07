@@ -24,8 +24,7 @@ internal class TaskImplementation : BLApi.ITask
             if (boTask.Alias == null) // if the Task Alias is null, throw an exception because it is not possible to create a Task with a null Alias
             {
                 throw new BO.BlInvalidAlias("Task with Alias=null is invalid"); // throw an exception
-            }
-                
+            }                
         }
 
         DO.Task doTask = new DO.Task // create a new Task in the DAL layer by the given Task in the BO layer after checking the Engineer and his qualification
@@ -126,15 +125,19 @@ internal class TaskImplementation : BLApi.ITask
         List<BO.Task?> boTasks = new List<BO.Task?>(); // create a new list of Tasks in the BO layer
         foreach (var task in doTasks) // for each Task in the DAL layer
         {
-            object? engineer = _dal.iengineer.Read(t => t.Id == task.EngineerId && t.IsActive == true); // read the Engineer by his ID in the DAL layer
+            DO.Engineer? engineer = _dal.iengineer.Read(t => t.Id == task.EngineerId && t.IsActive == true); // read the Engineer by his ID in the DAL layer
             if (engineer == null) // if the Engineer does not exist, throw an exception because it is not possible to read a Task that does not have an Engineer
             {
                 throw new BO.BLTaskHasNoEngineerException($"Task with ID={task.Id} has no Engineer"); // throw an exception
             }
-            engineer = (Engineer)engineer; // cast the Engineer to the BO layer
+            EngineerInTask engineerDO = new EngineerInTask
+            {
+                Id = task.EngineerId,
+                Name = engineer.Name,
+            };  // cast the Engineer to the BO layer
             try // try to read the Task
             {
-                boTasks.Add(new BO.Task // add the Task to the list of Tasks in the BO layer
+                boTasks.Add(new BO.Task() // add the Task to the list of Tasks in the BO layer
                 {
                     Id = task.Id,
                     Alias = task.Alias,
@@ -142,7 +145,7 @@ internal class TaskImplementation : BLApi.ITask
                     CreatedAtDate = task.CreatedAtDate,
                     Dekiverables = task.Dekiverables,
                     Remarks = task.Remarks,
-                    Engineer = (EngineerInTask)engineer,
+                    Engineer = engineerDO,
                     Copmlexity = (EngineerExperience)task.Copmlexity,
                     RequiredEffort = task.RequiredEffort,
                 });

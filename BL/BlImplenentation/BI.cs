@@ -1,12 +1,10 @@
-﻿using BlApi;
-using Bl;
-//using DalApi;
-using BlImplenentation;
+﻿namespace BlImplementation;
+using BlApi;
 using BLApi;
 
 
 
-namespace BlImplementation;
+
 internal class Bl : IBl
 {
     public ITask Task => new TaskImplementation();

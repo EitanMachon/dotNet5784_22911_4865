@@ -85,7 +85,7 @@ internal class EngineerImplenentation : IEngineer
             }          
         }
         DO.Engineer doEngineer = _dal.iengineer.Read(t => t.Id == id); // read the Engineer by his ID in the DAL layer
-        object FindTheTask = _dal.itask.Read(t => t.EngineerId == id && t.DeadLinetime == null); // read the Task of the Engineer by his ID in the DAL layer and check if the Task is not finished 
+        DO.Task FindTheTask = _dal.itask.Read(t => t.EngineerId == id && t.DeadLinetime == null); // read the Task of the Engineer by his ID in the DAL layer and check if the Task is not finished 
         
              
         
@@ -98,7 +98,7 @@ internal class EngineerImplenentation : IEngineer
                 Email = doEngineer.Email,
                 SalaryHour = doEngineer.SalaryHour,
                 Level = (BO.EngineerExperience)doEngineer.Level,
-                Task = FindTheTask != null ? new BO.TaskInEngineer(((DO.Task)FindTheTask).Id, ((DO.Task)FindTheTask).Name) : null // if the Task exists, return the Task in the BO layer, if the Task does not exist, return null
+                Task = FindTheTask != null ? new BO.TaskInEngineer {Id = ((DO.Task)FindTheTask).Id, Alias = (FindTheTask).Alias } : null // if the Task exists, return the Task in the BO layer, if the Task does not exist, return null
             };
         }
         catch ( DalReadException e) // if the Engineer cannot be read, throw an exception
@@ -123,7 +123,7 @@ internal class EngineerImplenentation : IEngineer
                            Email = engineer.Email,
                            SalaryHour = engineer.SalaryHour,
                            Level = (BO.EngineerExperience)engineer.Level,
-                           Task = findTheTask != null ? new BO.TaskInEngineer(((DO.Task)findTheTask).Id, ((DO.Task)findTheTask).Name) : null // if the Task exists, return the Task in the BO layer, if the Task does not exist, return null
+                           Task = findTheTask != null ? new BO.TaskInEngineer { Id =((DO.Task)findTheTask).Id,Alias = ((DO.Task)findTheTask).Alias } : null // if the Task exists, return the Task in the BO layer, if the Task does not exist, return null
                        };
             }
             else // if the filter is not null, read the Engineers by the filter
@@ -136,7 +136,7 @@ internal class EngineerImplenentation : IEngineer
                            Email = engineer.Email,
                            SalaryHour = engineer.SalaryHour,
                            Level = (BO.EngineerExperience)engineer.Level,
-                           Task = findTheTask != null ? new BO.TaskInEngineer(((DO.Task)findTheTask).Id, ((DO.Task)findTheTask).Name) : null // if the Task exists, return the Task in the BO layer, if the Task does not exist, return null
+                           Task = findTheTask != null ? new BO.TaskInEngineer { Id = ((DO.Task)findTheTask).Id, Alias = ((DO.Task)findTheTask).Alias } : null // if the Task exists, return the Task in the BO layer, if the Task does not exist, return null
                        }
                        where filter(temp) // return the Engineers by the filter in the BO layer
                        select temp;
