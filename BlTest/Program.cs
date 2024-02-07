@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using BO;
 using BLApi;
+using BlApi;
+using BL;
 using DalTest;
 using DalApi;
 using DalXml;
@@ -19,9 +21,9 @@ public class Program
     // static readonly IDal s_dal = new DalList(); //stage 2
     //static readonly IDal s_dal = new DalXml(); //stage 3
 
-   //
-   //static readonly IDal s_dal = Factory.Get; //stage 4
-    static readonly Bl.IBl s_bl = BlApi.Factory.Get();
+    //
+    //static readonly IDal s_dal = Factory.Get; //stage 4
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
     static EngineerExperience[] experience = {
     EngineerExperience.Beginner,
