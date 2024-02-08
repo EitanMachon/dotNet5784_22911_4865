@@ -1,6 +1,6 @@
 ﻿namespace BlImplenentation;
 
-using BLApi;
+using BlApi;
 using BO;
 using DO;
 using System.Reflection.Emit;
@@ -77,13 +77,12 @@ internal class EngineerImplenentation : IEngineer
     public Engineer? Read(int id) // read an Engineer by his ID
     {
         if (id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
-        {
-            var existingEngineer = _dal.iengineer.Read(t => t.Id == id); // read the Engineer by his ID in the DAL layer
-            if (existingEngineer == null) // if the Engineer does not exist, throw an exception because it is not possible to read an Engineer that does not exist
-            {
-                throw new BO.BlDoesNotExistException($"Engineer with ID={id} doesn't exist"); // throw an exception
-            }          
-        }
+            return null;
+
+        var existingEngineer = _dal.iengineer.Read(t => t.Id == id);// read the Engineer by his ID in the DAL layer
+        if(existingEngineer == null)
+            return null;
+        
         DO.Engineer doEngineer = _dal.iengineer.Read(t => t.Id == id); // read the Engineer by his ID in the DAL layer
         DO.Task FindTheTask = _dal.itask.Read(t => t.EngineerId == id && t.DeadLinetime == null); // read the Task of the Engineer by his ID in the DAL layer and check if the Task is not finished 
         

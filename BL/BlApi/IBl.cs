@@ -1,6 +1,4 @@
-﻿using BLApi;
-
-namespace BlApi
+﻿namespace BlApi
 {
     public interface IBl
     {

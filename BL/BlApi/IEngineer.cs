@@ -3,7 +3,7 @@
 ///  this is the interface of the BL layer that is used to implement the BL layer  functions of the Engineer
 /// </summary>
 
-namespace BLApi
+namespace BlApi
 {
 
     public interface IEngineer
