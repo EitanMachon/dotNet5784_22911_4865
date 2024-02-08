@@ -32,9 +32,6 @@ public class Program
     EngineerExperience.Expert
 };// the array of the level of the engineer
 
-    
-
-
     public static void EngineerRun()// the function run the engineer 
     {
 
@@ -113,7 +110,6 @@ public class Program
                             updateSalary = Help.SalaryHour;
                         }
 
-
                         Console.WriteLine("Enter engineer level:");
                         hel = Console.ReadLine();
                         if (hel == "")
@@ -187,8 +183,8 @@ public class Program
                     Console.WriteLine("put a required hours:");// ask for the required hours
                     _requiredHours = TimeSpan.Parse(Console.ReadLine()); // get the required hours
 
-                    Console.WriteLine("is a milestone? true/false:");// ask for the milestone
-                    _isMilestone = bool.Parse(Console.ReadLine()); // get the milestone
+                   // Console.WriteLine("is a milestone? true/false:");// ask for the milestone
+                    //_isMilestone = bool.Parse(Console.ReadLine()); // get the milestone
 
                     Console.WriteLine("put a complexity of the task:");// ask for the complexity
                     _complexity = (BO.EngineerExperience)int.Parse(Console.ReadLine()); // get the complexity

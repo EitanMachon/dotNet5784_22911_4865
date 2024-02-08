@@ -26,19 +26,20 @@ internal class TaskImplementation : BlApi.ITask
                 throw new BO.BlInvalidAlias("Task with Alias=null is invalid"); // throw an exception
             }                
         }
-
+        object? engineerId = _dal.iengineer.Read(t => t.Id == boTask.Engineer.Id); // read the Engineer by his ID in the DAL layer
         DO.Task doTask = new DO.Task // create a new Task in the DAL layer by the given Task in the BO layer after checking the Engineer and his qualification
-        {
-            Id = 0, 
-            Alias = boTask.Alias,
-            Description = boTask.Description,
-            CreatedAtDate = boTask.CreatedAtDate,
-            Dekiverables = boTask.Dekiverables,
-            Remarks = boTask.Remarks,
-            EngineerId = boTask.Engineer.Id,
-            Copmlexity = (global::EngineerExperience)(EngineerExperience)boTask.Copmlexity, // this is global because the EngineerExperience is in the BO layer and the EngineerExperience is in the DO layer
-            RequiredEffort = boTask.RequiredEffort,
-        }; 
+            {
+                Id = 0,
+                Alias = boTask.Alias,
+                Description = boTask.Description,
+                CreatedAtDate = boTask.CreatedAtDate,
+                Dekiverables = boTask.Dekiverables,
+                Remarks = boTask.Remarks,
+                EngineerId = boTask.Engineer.Id,
+                Copmlexity = (global::EngineerExperience)(EngineerExperience)boTask.Copmlexity, // this is global because the EngineerExperience is in the BO layer and the EngineerExperience is in the DO layer
+                RequiredEffort = boTask.RequiredEffort,
+            };
+        
 
         int taskId = _dal.itask.Create(doTask); // create a new Task in the DAL layer and get his ID 
 
