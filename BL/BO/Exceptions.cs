@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace BO
 {
+/// <summary>
+///  this clases are for exceptions in the BL layer and the BL implementation layer 
+/// </summary>
 public class BlInvalidId : Exception // in case of invalid id
 {
     public BlInvalidId()
@@ -161,4 +164,22 @@ public class BlEngineerHasTask : Exception // in case of engineer has task
     {
     }
 }
+public class BlEngineerNotQualifiedForTask : Exception // in case of engineer not qualified for task
+    {
+        public BlEngineerNotQualifiedForTask()
+        {
+        }
+
+        public BlEngineerNotQualifiedForTask(string? message) : base(message)
+        {
+        }
+
+        public BlEngineerNotQualifiedForTask(string? message, Exception? innerException) : base(message, innerException)
+        {
+        }
+
+        protected BlEngineerNotQualifiedForTask(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+    }
 }

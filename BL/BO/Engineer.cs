@@ -2,7 +2,9 @@
 
 
 namespace BO;
-
+/// <summary>
+/// this class represent the engineer in the BL layer
+/// </summary>
 public class Engineer
 {
     //private int id5;

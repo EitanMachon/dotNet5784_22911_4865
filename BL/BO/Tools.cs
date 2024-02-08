@@ -10,6 +10,9 @@ namespace BO;
 
 internal static class Tools
 {
+    /// <summary>
+    /// this function gets any object and returns a string with all its properties and values
+    /// </summary>
     public static string ToStringProperty<T>(this T obj) // this func gets any object and returns a string with all its properties and values
     {
         if (obj != null) // check if the object is not null

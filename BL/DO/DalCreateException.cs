@@ -1,5 +1,7 @@
 ﻿using System.Runtime.Serialization;
-
+/// <summary>
+/// this class represents an exception that is thrown when trying to create a new object in the data source
+/// </summary>
 namespace DO
 {
     [Serializable]

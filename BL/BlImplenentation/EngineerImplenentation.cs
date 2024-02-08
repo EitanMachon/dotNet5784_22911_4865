@@ -7,12 +7,17 @@ using System.Reflection.Emit;
 using System.Runtime.ConstrainedExecution;
 
 using System.Xml.Linq;
-using Engineer = BO.Engineer;
-
+using Engineer = BO.Engineer; // using the Engineer class from the BO layer
+/// <summary>
+/// class to implement the IEngineer interface in the BL layer  
+/// </summary>
 internal class EngineerImplenentation : IEngineer
 {
     private IDal _dal = DalApi.Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
     //DalApi.IDal dal = new DalApi.DalApi();
+    /// <summary>
+    /// Create a new Engineer by a given Engineer in the BO layer and return the Engineer ID in the BO layer
+    /// </summary>
     public int Create(BO.Engineer boEngineer) // create a new Engineer by a given Engineer in the BO layer
     {
         if (boEngineer.Id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
@@ -38,7 +43,7 @@ internal class EngineerImplenentation : IEngineer
 
         DO.Engineer doEngineer = new DO.Engineer // create a new Engineer in the DAL layer by the given Engineer in the BO layer after checking the Engineer and his qualification
         {
-            Id = boEngineer.Id,
+            Id = boEngineer.Id, 
             Name = boEngineer.Name,
             Email = boEngineer.Email,
             SalaryHour = boEngineer.SalaryHour,
@@ -49,6 +54,9 @@ internal class EngineerImplenentation : IEngineer
         return engineerId; // after creating the Engineer and his Tasks, return the Engineer ID
 
     }
+    /// <summary>
+    /// Delete an Engineer by his ID in the BO layer and return the Engineer in the BO layer
+    /// </summary>
     public void Delete(int id) // delete an Engineer by his ID
     {
         if (id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
@@ -74,6 +82,9 @@ internal class EngineerImplenentation : IEngineer
             }
         }
     }
+    /// <summary>
+    /// Read an Engineer by his ID in the BO layer and return the Engineer in the BO layer
+    /// </summary>
     public Engineer? Read(int id) // read an Engineer by his ID
     {
         if (id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
@@ -107,6 +118,9 @@ internal class EngineerImplenentation : IEngineer
         }
         
     }
+    /// <summary>
+    /// read all the Engineers in the BO layer by a given filter and return the Engineers in the BO layer
+    /// </summary> 
     public IEnumerable<Engineer?> ReadAll(Func<BO.Engineer, bool>? filter = null)
     {
         object findTheTask = null; // create a new instance of the Task
@@ -149,6 +163,9 @@ internal class EngineerImplenentation : IEngineer
         
          
     }
+    /// <summary>
+    /// update an Engineer by a given Engineer in the BO layer
+    /// </summary>
     public void Update(BO.Engineer boEngineer)
     {
         Console.WriteLine("You can update:\r\nThe name of the engineer\r\nEmail\r\nEngineer level (upward only)\r\ncost per hour\r\nSelecting a task that the engineer performs"); // print the options that the user can update
