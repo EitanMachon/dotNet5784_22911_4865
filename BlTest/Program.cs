@@ -1,6 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using BO;
-using BLApi;
 using BlApi;
 using BL;
 using DalTest;
@@ -53,7 +52,7 @@ public class Program
             string _email;
             string hel;
             double updateSalary = 0;
-            EngineerExperience level;
+            BO.EngineerExperience level;
             string _givenLevelStr;
             switch (_a)
             {
@@ -71,7 +70,7 @@ public class Program
                     //n1.SalaryHour = _salary;
                     Console.WriteLine("put a level: (0-4) ");// get level for the engineer
                     _givenLevelStr = Console.ReadLine();
-                    level = (EngineerExperience)int.Parse(_givenLevelStr);
+                    level = (BO.EngineerExperience)int.Parse(_givenLevelStr);
                     BO.Engineer n1 = new Engineer { Id = _id1, Name = _name, Email = _email, SalaryHour = _salary, Level = (BO.EngineerExperience)level };
                     s_bl.Engineer.Create(n1);// send to creat function of BL
                     break;
@@ -83,7 +82,8 @@ public class Program
                     break;
 
                 case 3: // ReadAll
-                    s_bl.Engineer.ReadAll();// send to readall function
+                    Console.WriteLine("Read all");
+                   Console.WriteLine( Tools.ToStringProperty( s_bl.Engineer.ReadAll()));// send to readall function
                     break;
 
                 case 4: // Update
@@ -93,7 +93,6 @@ public class Program
 
                         BO.Engineer Help = s_bl.Engineer.Read(_id5); // get the needed engineer
                         Console.WriteLine(Help); // print engineer values
-
 
                         Console.WriteLine("Enter engineer name:");
                         _name = Console.ReadLine();
@@ -119,16 +118,16 @@ public class Program
                         hel = Console.ReadLine();
                         if (hel == "")
                         {
-                            level = (EngineerExperience)(int)Help.Level;
+                            level = (BO.EngineerExperience)(int)Help.Level;
                         }
                         else
                         {
                             _givenLevelStr = Console.ReadLine();
 
-                            level = (EngineerExperience)int.Parse(_givenLevelStr);
+                            level = (BO.EngineerExperience)int.Parse(_givenLevelStr);
                         }
 
-                        BO.Engineer tempEng = new(_id5, _name, _email, updateSalary, level); // create a new engineer
+                        BO.Engineer tempEng = new BO.Engineer { Id = _id5,Name = _name,Email = _email,SalaryHour = updateSalary,Level = level }; // create a new engineer
                         s_bl.Engineer.Update(tempEng);
                     }
                     break;
@@ -160,13 +159,14 @@ public class Program
         int a = int.Parse(Console.ReadLine());
         int _id1;
         DateTime _createDate;
-        string _description = "";
-        string _alias = "";
+        string? _description = "";
+        string? _alias = "";
         BO.EngineerExperience _complexity;
         bool _isMilestone;
         TimeSpan _requiredHours;
         string _whatYouDid;
         string _somethingToSay = "";
+        DateTime? _scheduledTime;
         try
         {
 
@@ -205,17 +205,16 @@ public class Program
                     int _difficulty = int.Parse(Console.ReadLine()); // get the Difficulty of the task
                     //n3.Difficulty = _difficulty; // put the Difficulty of the task in the task
                     _whatYouDid = " "; // get the what you did
-                    string _remark = " "; // get the remark
-
+                    string? _remark = " "; // get the remark
 
                     BO.Task n3 = new BO.Task
                     {
-                      Id = _id1,
+                        Id = _id1,
                         Alias = _alias,
                         Description = _description,
-                        CreatedAtDate =  _createDate,
+                        CreatedAtDate = _createDate,
                         RequiredEffort = _requiredHours,
-                        Copmlexity =  _complexity,
+                        Copmlexity = _complexity,
                         StartDate = DateTime.Now,
                         ScheduledTime = _finishDate,
                         DeadLinetime = _deadlineDate,
@@ -223,7 +222,6 @@ public class Program
                         Dekiverables = _whatYouDid,
                         Remarks = _remark,
                         EngineerId = _engineerId,
-                        Difficulty = (EngineerExperience)_difficulty
                     };
                     Console.WriteLine(s_bl.Task.Create(n3));
                     break;
@@ -250,74 +248,78 @@ public class Program
                     _alias = Console.ReadLine(); // get the name
                     if (_alias == "")
                         _alias = Help.Alias;
+                    
 
                     Console.WriteLine("put a description:");// ask for the description
                     _description = Console.ReadLine(); // get the description
                     if (_description == "")
                         _description = Help.Description;
 
-                   
+
                     TimeSpan.TryParse(Console.ReadLine(), out TimeSpan parsedTime);
                     Console.WriteLine("put a required hours:");// ask for the required hours
                     vr = Console.ReadLine();
                     if (vr != "")
-                        _requiredHours= TimeSpan.Parse(Console.ReadLine());
-
+                        _requiredHours = TimeSpan.Parse(Console.ReadLine());
+                    else { _requiredHours = Help.RequiredEffort; } // if vr==""
                     //_requiredHours = TimeSpan.Parse(Console.ReadLine()); // get the required hours
-
-                    Console.WriteLine("is a milestone? true/false:");// ask for the milestone
-                    vr = Console.ReadLine();
-                    if (vr != "")
-                        _isMilestone = bool.Parse(Console.ReadLine()); // get the milestone
-
+                    
                     Console.WriteLine("put a complexity of the task:");// ask for the complexity
                     vr = Console.ReadLine();
                     if (vr != "")
-                        _complexity = (EngineerExperience)int.Parse(Console.ReadLine()); // get the complexity
+                        _complexity = (BO.EngineerExperience)int.Parse(Console.ReadLine()); // get the complexity
+                    else { _complexity = Help.Copmlexity; }
 
                     Console.WriteLine("enter a deadline date:");// ask for the deadline date
                     vr = Console.ReadLine();
                     if (vr != "")
                         _deadlineDate = DateTime.Parse(Console.ReadLine()); // get the deadline date
-                                                                            // Assuming you have a Random object initialized somewhere in your code.
+                    else { _deadlineDate= Help.DeadLinetime;}                                                 // Assuming you have a Random object initialized somewhere in your code.
+
+
+                    Console.WriteLine("enter a ScheduledTime date:");// ask for the deadline date
+                    vr = Console.ReadLine();
+                    if (vr != "")
+                        _scheduledTime = DateTime.Parse(Console.ReadLine()); // get the deadline date
+                    else { _scheduledTime = Help.ScheduledTime; }                                                 // Assuming you have a Random object initialized somewhere in your code.
+
                     Random random = new Random();
 
-                   
                     Console.WriteLine("enter what you did:");// ask for the what you did
                     vr = Console.ReadLine();
                     if (vr != "")
                         _whatYouDid = Console.ReadLine(); // get the what you did
+                    else { _whatYouDid=Help.Dekiverables; }
 
                     Console.WriteLine("Do you have something to add?");// ask for the something to say
                     vr = Console.ReadLine();
                     if (vr != "")
                         _somethingToSay = Console.ReadLine();// get the something to say
+                    else { _somethingToSay = Help.Remarks; }
 
                     Console.WriteLine("new Enginee id:");// ask for the something to say
                     vr = Console.ReadLine();
                     int id = 0;
                     if (vr != "")
-                       id = int.Parse(Console.ReadLine()); // get the id
-                    
+                        _engineerId = int.Parse(Console.ReadLine()); // get the id
+                    else { _engineerId = Help.EngineerId; }
 
                     BO.Task nt = new BO.Task
-                    (
-                      Id: _id3,
-                        Alias: _alias,
-                        Description: _description,
-                        CreatedAtDate: DateTime.Now,
-                        RequiredEffort: TimeSpan.Zero,
-                        IsMilestone: true,
-                        Copmlexity: help.Complexity,
-                        StartDate: DateTime.Now,
-                        ScheduledTime: null,
-                        DeadLinetime: null,
-                        ComplateTime: DateTime.Now,
-                        Dekiverables: _somethingToSay,
-                        Remarks: _remark,
-                        EngineerId: _engineerId,
-                        Difficulty: (EngineerExperience)_difficulty
-                        );
+                    {
+                        Id = _id3,
+                        Alias= _alias,
+                        Description= _description,
+                        CreatedAtDate= DateTime.Now,
+                        RequiredEffort= _requiredHours,
+                        Copmlexity= _complexity,
+                        StartDate= DateTime.Now,
+                        ScheduledTime= null,
+                        DeadLinetime= _deadlineDate,
+                        ComplateTime= DateTime.Now,
+                        Dekiverables= _whatYouDid,
+                        Remarks= _somethingToSay,
+                        EngineerId= _engineerId,
+                        };
                   //  BO.Task tempEng = new(_id3, _alias, _description, DateTime.Now, DateTime.Now,false, _complexity,); // create a new engineer
                     s_bl.Task.Update(nt);
 

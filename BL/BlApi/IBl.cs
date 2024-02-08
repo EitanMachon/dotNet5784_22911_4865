@@ -1,6 +1,4 @@
-﻿using BLApi;
-
-namespace BlApi
+﻿namespace BlApi
 {
     /// <summary>
     /// this static class is used to create the BlApi layer that is used to implement the BL layer functions of the task

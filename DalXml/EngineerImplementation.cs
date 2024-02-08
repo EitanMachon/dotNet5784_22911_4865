@@ -40,8 +40,7 @@ internal class EngineerImplementation : IEngineer
         DO.Engineer engineer = engineersList.Find(e => e.Id == id); // find the engineer with the given id
         if (engineer != null) // if the engineer exist
             return engineer; // return the engineer
-        else // if the engineer does not exist throw an exception
-            throw new InvalidOperationException($"Engineer with ID {id} does not exist."); // if the engineer does not exist throw an exception
+        return null;
     }
 
     public DO.Engineer? Read(Func<DO.Engineer, bool> filter) // this func get a filter and return the first _item that match the filter
@@ -50,8 +49,8 @@ internal class EngineerImplementation : IEngineer
         DO.Engineer engineer = engineersList.Find(e => filter(e)); // find the engineer that match the filter
         if (engineer != null) // if the engineer exist
             return engineer; // return the engineer
-        else // if the engineer does not exist throw an exception
-            throw new InvalidOperationException($"Engineer with ID {engineer.Id} does not exist."); // if the engineer does not exist throw an exception
+        return null;
+        // if the engineer does not exist throw an exception
     }
 
     public IEnumerable<DO.Engineer?> ReadAll(Func<DO.Engineer, bool>? filter = null) // this func return all the engineers

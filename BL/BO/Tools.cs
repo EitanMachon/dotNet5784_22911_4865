@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BO; 
 
-internal static class Tools
+public static class Tools
 {
     /// <summary>
     /// this function gets any object and returns a string with all its properties and values

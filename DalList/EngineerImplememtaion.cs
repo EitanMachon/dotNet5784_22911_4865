@@ -8,20 +8,17 @@ internal class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item) // create a Engineer and return its ID
     {
-        if (item.Id != 0) // if the engineer already has an ID, throw an exception
+        if (item.Id == 0) // if the engineer already has an ID, throw an exception
         {
             throw new InvalidOperationException("Cannot create engineer with existing ID.");
         }
 
-        int newEngineerId = DataSource.Config.NextId; // generate new ID for the engineer
 
-        // Create a new Engineer object with the generated ID
-        var newEngineer = new Engineer(newEngineerId, item.Name, item.Email, item.SalaryHour, item.Level);
-
+       
         // Add the new engineer directly into the DataSource
-        DataSource.Engineers.Add(newEngineer);
+        DataSource.Engineers.Add(item);
 
-        return newEngineerId; // return the new ID of the engineer
+        return item.Id; // return the new ID of the engineer
     }
 
     public void Delete(int id) // delete a Engineer by his ID
@@ -47,14 +44,10 @@ internal class EngineerImplementation : IEngineer
 
     public Engineer? Read(int id) // read a Engineer by his ID and return the Engineer
     {
-        if (DataSource.Engineers.Any(t => t.Id == id)) // if the Engineer with the given ID exists, return the Engineer
-        {
+      
             return DataSource.Engineers.Where(t => t.Id == id).FirstOrDefault(); // return the Engineer with the given ID
-        }
-        else
-        {
-            throw new InvalidOperationException($"Engineer with ID {id} does not exist."); // throw an exception
-        }
+        
+       
     }
 
     //public List<Engineer> ReadAll() // read all Engineers and return a list of all Engineers
