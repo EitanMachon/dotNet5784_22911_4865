@@ -4,6 +4,9 @@ using System;
 using DO;
 using DalApi;
 
+/// <summary>
+/// this class represents the task in the BL layer
+/// </summary>
 public class Task 
 {
     internal DateTime? startDate;
@@ -35,7 +38,6 @@ public class Task
     public BO.Status status { get; set; } // this is the status of the task
     public List<BO.TaskInList>? Dependencys { get; set; } // this is the list of dependencies of the task
     public TimeSpan RequiredEffort { get; set; } // this is the required effort of the task
-    // public bool IsMilestone { get; set; } // this is the milestone of the task
     public DateTime? StartDate { get; set; }  // this is the start date of the task
     public DateTime? ScheduledTime { get; set; } // this is the scheduled time of the task
     public BO.EngineerExperience Copmlexity { get; set; } // this is the complexity of the task   
@@ -45,6 +47,12 @@ public class Task
     public string? Dekiverables { get; set; } // this is the deliverables of the task
     public string? Remarks { get; set; } // this is the remarks of the task
     public BO.EngineerInTask? Engineer { get; set; } // this is the engineer of the task
+    public DateTime? DeadLinetime { get; set; } // this is the deadline time of the task
+    public int EngineerId { get; set; } // this is the id of the engineer of the task
+
+    public DateTime? DeadLinetime { get; set; }
+    public int EngineerId { get; set; }
+
     public DateTime? DeadLinetime { get; set; }
     public int EngineerId { get; set; }
   

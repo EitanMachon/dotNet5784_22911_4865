@@ -6,12 +6,18 @@ using System;
 using System.Collections.Generic;
 using Engineer = BO.Engineer;
 using Task = BO.Task;
-
-internal class TaskImplementation : BlApi.ITask
+/// <summary>
+/// this class is the implementation of ITask interface and contains the implementation of the Task functions in the BL layer
+/// </summary>
+internal class TaskImplementation : BLApi.ITask
 {
     private IDal _dal = DalApi.Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
     private Task? finalTask; // create a new Task in the BO layer to use it in the Read function
 
+    /// <summary>
+    /// this function is used to create a new Task by a given Task in the BO layer
+    /// </summary>
+    
     public int Create(BO.Task boTask) // create a new Task by a given Task in the BO layer
     {
         if (boTask?.Engineer?.Id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
@@ -55,6 +61,9 @@ internal class TaskImplementation : BlApi.ITask
         return taskId; // after creating the Task and his Dependencies, return the Task ID
 
     }
+    /// <summary>
+    /// this function is used to delete a Task by his ID in the BO layer by using his ID in the DAL layer
+    /// </summary>
     public void Delete(int id) // delete a Task by his ID
     {
         if(id != 0) // if the Task ID is not 0, check if the Task exists in the database
@@ -79,7 +88,9 @@ internal class TaskImplementation : BlApi.ITask
             throw new DalDeletionImpossible($"Task with the ID {id} cannot be deleted", e); // throw an exception
         }   
     }
-
+    /// <summary>
+    /// this function is used to read a Task by his ID in the BO layer by using his ID in the DAL layer
+    /// </summary>
     public Task? Read(int id)
     {
         if (id != 0) // if the Task ID is not 0, check if the Task exists in the database
@@ -118,7 +129,9 @@ internal class TaskImplementation : BlApi.ITask
         return finalTask; // return the Task in the BO layer
      
     }
-    
+    /// <summary>
+    /// this function is used to read all Tasks in the BO layer by using the filter in the DAL layer
+    /// </summary>
     public IEnumerable<BO.Task?> ReadAll(Func<BO.Task, bool>? filter = null) // read all Tasks
     {
         IEnumerable<DO.Task> doTasks = _dal.itask.ReadAll(); // read all Tasks in the DAL layer
@@ -157,7 +170,9 @@ internal class TaskImplementation : BlApi.ITask
         }
         return boTasks; // return the list of Tasks in the BO layer    )
     }
-   
+    /// <summary>
+    /// this function is used to update a Task by a given Task in the BO layer
+    /// </summary>
     public void Update(BO.Task boTask) // update a Task by a given Task in the BO layer
     {
         if (boTask.Engineer.Id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database

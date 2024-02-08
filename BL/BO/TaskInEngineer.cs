@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BO;
-
+/// <summary>
+/// this class is used to represent a task in the list of tasks of an engineer in the BL layer
+/// </summary>
 public class TaskInEngineer
 {
     private object name;
