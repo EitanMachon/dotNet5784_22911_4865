@@ -37,7 +37,7 @@ public static class Initialization
         {
             int _min_id = 1;
             int _max_id = 99999999;
-            int _min_salary = 100;
+            int _min_salary = 1;
             int _max_salary = 10000000;
             int _id;
             do

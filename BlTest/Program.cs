@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using BO;
 using BlApi;
-using BL;
+
 using DalTest;
 using DalApi;
 using DalXml;
