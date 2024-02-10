@@ -13,7 +13,7 @@ internal class TaskImplementaion : ITask
             throw new InvalidOperationException("Cannot create task with existing ID."); // throw an exception
         }
 
-        int newTaskId = DataSource.Config.NextId; // generate new ID for the task
+        int newTaskId = DataSource.Config.GetNextTaskId(); // generate new ID for the task
 
         var newTask = new Task(newTaskId, item.Alias, item.Description, item.CreatedAtDate, item.RequiredEffort, item.IsMilestone, item.Copmlexity, item.StartDate, item.ScheduledTime, item.DeadLinetime, item.ComplateTime, item.Dekiverables, item.Remarks, item.EngineerId, item.Difficulty); // Create a new Task object with the generated ID
 
