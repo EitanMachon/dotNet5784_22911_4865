@@ -1,6 +1,7 @@
 ﻿namespace BlImplenentation;
 
 using BlApi;
+using BLApi;
 using BO;
 using DO;
 using System.Reflection.Emit;
@@ -47,7 +48,7 @@ internal class EngineerImplenentation : IEngineer
             Name = boEngineer.Name,
             Email = boEngineer.Email,
             SalaryHour = boEngineer.SalaryHour,
-            Level = (global::EngineerExperience)(EngineerExperience)boEngineer.Level,
+            Level = (global::EngineerExperience)(EngineerExperience)boEngineer.Level,//this is global func 
         };
 
         int engineerId = _dal.iengineer.Create(doEngineer); // create a new Engineer in the DAL layer and get his ID
@@ -91,7 +92,7 @@ internal class EngineerImplenentation : IEngineer
             return null;
 
         var existingEngineer = _dal.iengineer.Read(t => t.Id == id);// read the Engineer by his ID in the DAL layer
-        if(existingEngineer == null)
+        if(existingEngineer == null) // if 
             return null;
         
         DO.Engineer doEngineer = _dal.iengineer.Read(t => t.Id == id); // read the Engineer by his ID in the DAL layer
