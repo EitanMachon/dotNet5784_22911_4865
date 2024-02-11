@@ -75,7 +75,10 @@ public class Program
                         Console.WriteLine("Enter engineer id:");
                         int _id5 = int.Parse(Console.ReadLine());
 
-                        BO.Engineer Help = s_bl.Engineer.Read(_id5); // get the needed engineer
+                        BO.Engineer? Help = s_bl.Engineer.Read(_id5); // get the needed engineer
+                        if (Help == null)
+                            throw new BO.BlDoesNotExistException($"Engineer with ID={_id5} does not exists");
+
                         Console.WriteLine(Help); // print engineer values
 
                         Console.WriteLine("Enter engineer name:");
@@ -91,8 +94,8 @@ public class Program
                         Console.WriteLine("Enter engineer salary:");
                         hel = Console.ReadLine();
                         if (hel != "")      /// if the input empty, use the previous cost
-                            updateSalary = double.Parse(Console.ReadLine());
-                        if (hel == "")      /// if the input empty, use the previous cost
+                            updateSalary = double.Parse(hel);
+                        else      /// if the input empty, use the previous cost
                         {
                             updateSalary = Help.SalaryHour;
                         }
@@ -105,9 +108,7 @@ public class Program
                         }
                         else
                         {
-                            _givenLevelStr = Console.ReadLine();
-
-                            level = (BO.EngineerExperience)int.Parse(_givenLevelStr);
+                            level = (BO.EngineerExperience)int.Parse(hel);
                         }
 
                         BO.Engineer tempEng = new BO.Engineer { Id = _id5, Name = _name, Email = _email, SalaryHour = updateSalary, Level = level }; // create a new engineer
@@ -140,7 +141,6 @@ public class Program
         string? _description = "";
         string? _alias = "";
         BO.EngineerExperience _complexity;
-        bool _isMilestone;
         TimeSpan _requiredHours;
         string _whatYouDid;
         string _somethingToSay = "";
@@ -211,7 +211,7 @@ public class Program
 
                 case 3: // ReadAll
                     //s_bl!.Task.ReadAll();// send to readall
-                    foreach(var t in s_bl!.Task.ReadAll())
+                    foreach (var t in s_bl!.Task.ReadAll())
                     {
                         Console.WriteLine(t);
                     }
@@ -222,7 +222,11 @@ public class Program
                     Console.WriteLine("put a id to update:");// get id for the task
                     int _id3 = int.Parse(Console.ReadLine()); // get the id
 
-                    BO.Task Help = s_bl!.Task.Read(_id3); // get the needed task
+                    BO.Task? Help = s_bl!.Task.Read(_id3); // get the needed task
+
+                    if (Help == null)
+                        throw new BlDoesNotExistException($"Task with ID={_id3} does not exists");
+
                     Console.WriteLine(Help); // print task values
 
                     Console.WriteLine("put a alias:");// ask for the name
@@ -230,59 +234,54 @@ public class Program
                     if (_alias == "")
                         _alias = Help.Alias;
 
-
                     Console.WriteLine("put a description:");// ask for the description
                     _description = Console.ReadLine(); // get the description
                     if (_description == "")
                         _description = Help.Description;
 
-
-                    TimeSpan.TryParse(Console.ReadLine(), out TimeSpan parsedTime);
                     Console.WriteLine("put a required hours:");// ask for the required hours
                     vr = Console.ReadLine();
                     if (vr != "")
-                        _requiredHours = TimeSpan.Parse(Console.ReadLine());
+                        _requiredHours = TimeSpan.Parse(vr);
                     else { _requiredHours = Help.RequiredEffort; } // if vr==""
                                                                    //_requiredHours = TimeSpan.Parse(Console.ReadLine()); // get the required hours
 
                     Console.WriteLine("put a complexity of the task:");// ask for the complexity
                     vr = Console.ReadLine();
                     if (vr != "")
-                        _complexity = (BO.EngineerExperience)int.Parse(Console.ReadLine()); // get the complexity
+                        _complexity = (BO.EngineerExperience)int.Parse(vr); // get the complexity
                     else { _complexity = Help.Copmlexity; }
 
                     Console.WriteLine("enter a deadline date:");// ask for the deadline date
                     vr = Console.ReadLine();
                     if (vr != "")
-                        _deadlineDate = DateTime.Parse(Console.ReadLine()); // get the deadline date
+                        _deadlineDate = DateTime.Parse(vr); // get the deadline date
                     else { _deadlineDate = Help.DeadLinetime; } // Assuming you have a Random object initialized somewhere in your code.
 
 
                     Console.WriteLine("enter a ScheduledTime date:");// ask for the deadline date
                     vr = Console.ReadLine();
                     if (vr != "")
-                        _scheduledTime = DateTime.Parse(Console.ReadLine()); // get the deadline date
+                        _scheduledTime = DateTime.Parse(vr); // get the deadline date
                     else { _scheduledTime = Help.ScheduledTime; } // Assuming you have a Random object initialized somewhere in your code.
-
-                    Random random = new Random();
 
                     Console.WriteLine("enter what you did:");// ask for the what you did
                     vr = Console.ReadLine();
                     if (vr != "")
-                        _whatYouDid = Console.ReadLine(); // get the what you did
+                        _whatYouDid = vr; // get the what you did
                     else { _whatYouDid = Help.Dekiverables; }
 
                     Console.WriteLine("Do you have something to add?");// ask for the something to say
                     vr = Console.ReadLine();
                     if (vr != "")
-                        _somethingToSay = Console.ReadLine();// get the something to say
+                        _somethingToSay = vr;// get the something to say
                     else { _somethingToSay = Help.Remarks; }
 
                     Console.WriteLine("new Enginee id:");// ask for the something to say
                     vr = Console.ReadLine();
                     int id = 0;
                     if (vr != "")
-                        _engineerId = int.Parse(Console.ReadLine()); // get the id
+                        _engineerId = int.Parse(vr); // get the id
                     else { _engineerId = Help.EngineerId; }
 
                     BO.Task nt = new BO.Task
@@ -348,7 +347,7 @@ public class Program
         Console.WriteLine("Hello, what we can do for you today?");
         Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
         string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
-        if (ans == "Y") //stage 3
+        if (ans == "Y" || ans == "y") //stage 3
             Initialization.Do(); //stage 4
 
 

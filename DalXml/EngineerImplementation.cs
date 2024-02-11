@@ -64,7 +64,7 @@ internal class EngineerImplementation : IEngineer
     public void Update(DO.Engineer item) // this func get an engineer and update it
     {
         List<DO.Engineer> engineersList = XMLTools.LoadListFromXMLSerializer<Engineer>(engineers_xml); // load the list from the file
-        DO.Engineer engineer = engineersList.Find(e => e.Id == item.Id); // find the engineer with the given id
+        DO.Engineer? engineer = engineersList.Find(e => e.Id == item.Id); // find the engineer with the given id
         if (engineer != null) // if the engineer exist
         {
             engineersList.Remove(engineer); // remove the engineer from the list

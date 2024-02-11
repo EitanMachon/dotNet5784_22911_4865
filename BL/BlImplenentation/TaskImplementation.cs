@@ -180,9 +180,9 @@ internal class TaskImplementation : ITask
     /// </summary>
     public void Update(BO.Task boTask) // update a Task by a given Task in the BO layer
     {
-        if (boTask.Engineer.Id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
+        if (boTask.EngineerId != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
         {
-            var existingEngineer = _dal.iengineer.Read(t => t.Id == boTask.Engineer.Id); // read the Engineer by his ID in the DAL layer
+            var existingEngineer = _dal.iengineer.Read(t => t.Id == boTask.EngineerId); // read the Engineer by his ID in the DAL layer
             if (boTask.Id < 0) // if the Task ID is less than 0, throw an exception because it is not possible to update a Task with an ID that is less than 0
             {
                 throw new BO.BlInvalidId($"Task with ID={boTask.Id} is invalid"); // throw an exception
@@ -200,8 +200,8 @@ internal class TaskImplementation : ITask
             CreatedAtDate = boTask.CreatedAtDate,
             Dekiverables = boTask.Dekiverables,
             Remarks = boTask.Remarks,
-            EngineerId = boTask.Engineer.Id,
-            Copmlexity = (global::EngineerExperience)(EngineerExperience)boTask.Copmlexity,
+            EngineerId = boTask.EngineerId,
+            Copmlexity = (global::EngineerExperience)boTask.Copmlexity,
             RequiredEffort = boTask.RequiredEffort,
         };
         _dal.itask.Update(doTask); // update the Task in the DAL layer

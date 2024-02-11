@@ -13,4 +13,6 @@ public class Engineer
     public double SalaryHour { get; set; } // this is the salary per hour of the engineer
     public EngineerExperience Level { get; set; } // this is the level of the engineer
     public BO.TaskInEngineer? Task { get; set; } // this is the task of the engineer
+
+    public override string ToString() => this.ToStringProperty();
 }

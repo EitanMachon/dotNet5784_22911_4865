@@ -89,16 +89,30 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
     public void Update(DO.Task item)
     {
         XElement taskList = XMLTools.LoadListFromXMLElement(tasks_xml); // load the list from the file
-        XElement task = taskList.Elements().Where(e => int.Parse(e.Element("Id").Value) == item.Id).FirstOrDefault(); // find the task with the given id
+        XElement? task = taskList.Elements().Where(e => e.ToIntNullable("Id") == item.Id).FirstOrDefault(); // find the task with the given id
         if (task != null) // if the task exist
         {
-            task.Remove(); // remove the task from the list
-            taskList.Add(item); // add the new task to the list
+            //task.Remove(); // remove the task from the list
+            //taskList.Add(item); // add the new task to the list
+
+            // update the task by the given task
+            task.Element("Alias")!.Value = item.Alias;
+            task.Element("Description")!.Value = item.Description;
+            task.Element("CreatedAtDate")!.Value = item.CreatedAtDate.ToString();
+            task.Element("RequiredEffort")!.Value = item.RequiredEffort.ToString();
+            task.Element("Copmlexity")!.Value = item.Copmlexity != null ? item.Copmlexity!.ToString() : null;
+            task.Element("StartDate")!.Value = item.StartDate != null ? item.StartDate.ToString() : null;
+            task.Element("ScheduledTime")!.Value = item.ScheduledTime != null ? item.ScheduledTime.ToString() : null;
+            task.Element("DeadLinetime")!.Value = item.DeadLinetime != null ? item.DeadLinetime.ToString() : null;
+            task.Element("ComplateTime")!.Value = item.ComplateTime != null ? item.ComplateTime.ToString() : null;
+            task.Element("Dekiverables")!.Value = item.Dekiverables != null ? item.Dekiverables : null;
+            task.Element("Remarks")!.Value = item.Remarks != null ? item.Remarks : null;
+            task.Element("EngineerId")!.Value = item.EngineerId.ToString();
+
             XMLTools.SaveListToXMLElement(taskList, tasks_xml); // save the list to the file
         }
         else // if the task does not exist throw an exception
             throw new InvalidOperationException($"Task with ID {item.Id} does not exist."); // if the task does not exist throw an exception
-
     }
 }
 

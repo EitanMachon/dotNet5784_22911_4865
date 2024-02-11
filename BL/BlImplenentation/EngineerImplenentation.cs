@@ -177,15 +177,15 @@ internal class EngineerImplenentation : IEngineer
     /// </summary>
     public void Update(BO.Engineer boEngineer)
     {
-        Console.WriteLine("You can update:\r\nThe name of the engineer\r\nEmail\r\nEngineer level (upward only)\r\ncost per hour\r\nSelecting a task that the engineer performs"); // print the options that the user can update
+//        Console.WriteLine("You can update:\r\nThe name of the engineer\r\nEmail\r\nEngineer level (upward only)\r\ncost per hour\r\nSelecting a task that the engineer performs"); // print the options that the user can update
         if (boEngineer.Id != 0) // if the Engineer ID is not 0, check if the Engineer exists in the database
         {
             var existingEngineer = _dal.iengineer.Read(t => t.Id == boEngineer.Id); // read the Engineer by his ID in the DAL layer
-            if (existingEngineer != null) // if the Engineer exists, throw an exception because it is not possible to create an Engineer that already exists
+            if (existingEngineer == null) // if the Engineer exists, throw an exception because it is not possible to create an Engineer that already exists
             {
-                throw new BO.BlEngineerAlreadyExists($"Engineer with ID={boEngineer.Id} already exists"); // throw an exception
+                throw new BO.BlDoesNotExistException($"Engineer with ID={boEngineer.Id} does not exists"); // throw an exception
             }
-            if (!((int)boEngineer.Id > 0)) // if the Engineer ID is not greater than 0, throw an exception because it is not possible to create an Engineer with an ID that is not greater than 0
+            if (boEngineer.Id <= 0) // if the Engineer ID is not greater than 0, throw an exception because it is not possible to create an Engineer with an ID that is not greater than 0
             {
                 throw new BO.BlInvalidId($"Engineer with ID={boEngineer.Id} is invalid"); // throw an exception
             }
@@ -204,7 +204,7 @@ internal class EngineerImplenentation : IEngineer
             Name = boEngineer.Name,
             Email = boEngineer.Email,
             SalaryHour = boEngineer.SalaryHour,
-            Level = (global::EngineerExperience)(EngineerExperience)boEngineer.Level, //this global because the DO.Engineer has a field with the same name
+            Level = (global::EngineerExperience)boEngineer.Level, //this global because the DO.Engineer has a field with the same name
         };
         try
         {
