@@ -14,14 +14,14 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
 {
     readonly string tasks_xml = "tasks"; // the file name to save the tasks
 
-        public int Create(DO.Task _item)       // this func get an engineer and add it to the list
-        {
-            var id = Config.TaskId;
-            List<DO.Task> _TaskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(tasks_xml); // load the list from the file
-            _TaskList.Add(_item with { Id=id}); // add the engineer to the list
-            XMLTools.SaveListToXMLSerializer(_TaskList, tasks_xml); // save the list to the file
-            return id; // return the id of the engineer
-        }
+    public int Create(DO.Task _item)       // this func get an engineer and add it to the list
+    {
+        var _id = Config.TaskId;
+        List<DO.Task> _TaskList = XMLTools.LoadListFromXMLSerializer<DO.Task>(tasks_xml); // load the list from the file
+        _TaskList.Add(_item with { Id = _id }); // add the engineer to the list
+        XMLTools.SaveListToXMLSerializer(_TaskList, tasks_xml); // save the list to the file
+        return _id; // return the id of the engineer
+    }
 
     public void Delete(int id)
     {
@@ -34,13 +34,33 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
         }
         else // if the task does not exist throw an exception
             throw new InvalidOperationException($"Task with ID {id} does not exist."); // if the task does not exist throw an exception
-    }   
+    }
+
+    static DO.Task xmlToTask(XElement xml)
+    {
+        return new DO.Task(
+            (int)(xml.ToIntNullable("Id")!),
+            xml.Element("Alias")!.Value,
+            xml.Element("Description")!.Value,
+            (DateTime)(xml.ToDateTimeNullable("CreatedAtDate")!),
+            TimeSpan.Parse(xml.Element("RequiredEffort")!.Value),
+            xml.ToEnumNullable<EngineerExperience>("Copmlexity"),
+            xml.ToDateTimeNullable("StartDate"),
+            xml.ToDateTimeNullable("ScheduledTime"),
+            xml.ToDateTimeNullable("DeadLinetime"),
+            xml.ToDateTimeNullable("ComplateTime"),
+            xml.Element("Dekiverables")!.Value,
+            xml.Element("Remarks")!.Value,
+            (int)(xml.ToIntNullable("EngineerId")!)
+            );
+    }
+
     public DO.Task? Read(int id) // this func get an id and return the task with this id
     {
         XElement xElement = XMLTools.LoadListFromXMLElement(tasks_xml); // load the list from the file
         XElement task = xElement.Elements().Where(e => int.Parse(e.Element("Id").Value) == id).FirstOrDefault(); // find the task with the given id
         if (task != null) // if the task exist
-            return (DO.Task)task; // return the task
+            return xmlToTask(task); // return the task
         else // if the task does not exist throw an exception
             throw new InvalidOperationException($"Task with ID {id} does not exist."); // if the task does not exist throw an exception
     }
@@ -48,9 +68,9 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
     public DO.Task? Read(Func<DO.Task, bool> filter)
     {
         XElement xElement = XMLTools.LoadListFromXMLElement(tasks_xml); // load the list from the file
-        XElement task = xElement.Elements().Where(e => filter((DO.Task)e)).FirstOrDefault(); // find the task with the given id
+        XElement task = xElement.Elements().Where(e => filter(xmlToTask(e))).FirstOrDefault(); // find the task with the given id
         if (task != null) // if the task exist
-            return (DO.Task)task; // return the task
+            return xmlToTask(task); // return the task
         else // if the task does not exist throw an exception
             throw new Exception($"Task with ID {task.Element("Id").Value} does not exist."); // if the task does not exist throw an exception
     }
@@ -76,8 +96,7 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
         }
         else // if the task does not exist throw an exception
             throw new InvalidOperationException($"Task with ID {item.Id} does not exist."); // if the task does not exist throw an exception
-        
+
     }
 }
 
-   

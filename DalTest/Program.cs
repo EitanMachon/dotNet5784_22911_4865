@@ -232,7 +232,6 @@ class Program
             string _description="";
             string _alias="";
             EngineerExperience _complexity;
-            bool _isMilestone;
             TimeSpan _requiredHours;
             string _whatYouDid;
             string _somethingToSay="";
@@ -253,9 +252,6 @@ class Program
                     Console.WriteLine("put a required hours:");// ask for the required hours
                     _requiredHours = TimeSpan.Parse(Console.ReadLine()); // get the required hours
 
-                    Console.WriteLine("is a milestone? true/false:");// ask for the milestone
-                    _isMilestone = bool.Parse(Console.ReadLine()); // get the milestone
-
                     Console.WriteLine("put a complexity of the task:");// ask for the complexity
                     _complexity = (EngineerExperience)int.Parse(Console.ReadLine()); // get the complexity
 
@@ -267,9 +263,7 @@ class Program
                     Console.WriteLine("enter a Enginee Id:");// ask for the Enginee Id
                     int _engineerId = int.Parse(Console.ReadLine()); // get the Enginee Id
                     //n3.EngineerId = _engineerId; // put the Enginee Id in the task
-                    Console.WriteLine("enter a Difficulty:");// ask for the Difficulty of the task
-                    int _difficulty = int.Parse(Console.ReadLine()); // get the Difficulty of the task
-                    //n3.Difficulty = _difficulty; // put the Difficulty of the task in the task
+                    
                     _whatYouDid = " "; // get the what you did
                     string _remark = " "; // get the remark
 
@@ -281,7 +275,6 @@ class Program
                         Description : _description,
                         CreatedAtDate : _createDate,
                         RequiredEffort : _requiredHours,
-                        IsMilestone : _isMilestone,
                         Copmlexity : _complexity,
                         StartDate : DateTime.Now,
                         ScheduledTime : _finishDate,
@@ -289,8 +282,7 @@ class Program
                         ComplateTime : DateTime.Now,
                         Dekiverables : _whatYouDid,
                         Remarks : _remark,
-                        EngineerId : _engineerId,
-                        Difficulty : (EngineerExperience)_difficulty
+                        EngineerId : _engineerId
                     );
                     Console.WriteLine( s_dal.itask.Create(n3));// send to creat
                    // Console.WriteLine("the id of the task:" + n3.Id); // ask for the Difficulty of the task
@@ -333,11 +325,6 @@ class Program
                     vr = Console.ReadLine();
                     if (vr != "")
                          _requiredHours = TimeSpan.Parse(Console.ReadLine()); // get the required hours
-
-                    Console.WriteLine("is a milestone? true/false:");// ask for the milestone
-                    vr = Console.ReadLine();
-                    if (vr != "")
-                       _isMilestone = bool.Parse(Console.ReadLine()); // get the milestone
 
                     Console.WriteLine("put a complexity of the task:");// ask for the complexity
                     vr = Console.ReadLine();

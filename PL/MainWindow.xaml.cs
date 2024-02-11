@@ -23,19 +23,17 @@ namespace PL
         /// <summary>
         /// this func gonna show the EngineerListWindow
         /// </summary>
-        private void EngineerButton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Engineer.EngineerListWindow engineerListWindow = new Engineer.EngineerListWindow(); // Create a new instance of EngineerListWindow
             engineerListWindow.Show(); // Show the window of EngineerListWindow
         }
         /// <summary>
-        /// this func gonna Initialize the database 
+        /// this func gonna Initialize the database after the user confirm it
         /// </summary>
-        
-       
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             // Ask the user for confirmation
             // its gonna show a message box with the question "Are you sure you want to initialize the database?"
             MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize the database?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -48,5 +46,7 @@ namespace PL
                 MessageBox.Show("Database initialized successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
+       
     }
 }

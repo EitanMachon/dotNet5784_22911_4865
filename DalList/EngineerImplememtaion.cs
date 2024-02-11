@@ -12,9 +12,6 @@ internal class EngineerImplementation : IEngineer
         {
             throw new InvalidOperationException("Cannot create engineer with existing ID.");
         }
-
-
-       
         // Add the new engineer directly into the DataSource
         DataSource.Engineers.Add(item);
 
@@ -85,17 +82,3 @@ internal class EngineerImplementation : IEngineer
         return DataSource.Engineers.Where(filter).FirstOrDefault();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

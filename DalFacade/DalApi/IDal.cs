@@ -10,5 +10,5 @@ public interface IDal
     IEngineer iengineer { get; } // property to access the engineer DAL object
     ITask itask { get; } // property to access the task DAL object
 
-    ISchedule Schedule { get; }
+    ISchedule ischedule { get; }
 }

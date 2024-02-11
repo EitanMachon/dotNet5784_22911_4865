@@ -19,14 +19,15 @@ namespace PL.Engineer
     /// </summary>
     public partial class EngineerListWindow : Window
     {
+        static readonly BlApi.IBl s_bl = BlApi.Factory.Get(); // Create a new instance of the BlApi class and store it in a static readonly variable 
+        /// <summary>
+        /// this func gonna show the EngineerListWindow
+        /// </summary>
         public EngineerListWindow()
         {
             InitializeComponent();
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+      
     }
 }

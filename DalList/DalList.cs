@@ -11,5 +11,7 @@ sealed internal class DalList : IDal
     public IEngineer iengineer => new EngineerImplementation();
 
     public ITask itask => new TaskImplementaion();
+
+    public ISchedule ischedule => new ScheduleImplementation();
 }
 
