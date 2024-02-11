@@ -339,7 +339,6 @@ public class Program
 
     //////////////////////////////////////////////////////////////////////////
     static void Main(string[] args)
-
     {
         // Initialization.Do(s_dal);
         Console.WriteLine("We build a garage system"); // print the first line to the user
@@ -350,7 +349,6 @@ public class Program
         if (ans == "Y" || ans == "y") //stage 3
             Initialization.Do(); //stage 4
 
-
         Console.WriteLine("choose a Item to check:0 for exit ,1 for Engineer, 2 for Task");
         int a = int.Parse(Console.ReadLine());
 
@@ -359,7 +357,6 @@ public class Program
             // Console.WriteLine("Ok, let's start");
             try
             {
-
                 switch (a)
                 {
                     case 1:// Engineer class
@@ -368,13 +365,8 @@ public class Program
                     case 2:// Task class
                         TaskRun();
                         break;
-                    //case 3: // Depandency
-                    //    DepandencyRun();
-                    //    break;
                     default:
                         break;
-
-
                 }
             }
             catch (Exception e)// get if thier is exaption 
@@ -382,10 +374,14 @@ public class Program
                 Console.WriteLine(e.Message);
             }
 
+            // read the next choise
             Console.WriteLine("choose a Item to check:0 for exit ,1 for Engineer, 2 for Task, 3 for Depandency");
             a = int.Parse(Console.ReadLine());
-
         }
+
+        // save the schedule to the file
+        Console.WriteLine("save the schedule to the file...");
+        s_bl.Schedule.SaveSchedule();
     }
 }
 

@@ -15,8 +15,6 @@ internal class Bl : IBl
     /// return new instance of IEngineer
     /// </summary>
     public IEngineer Engineer =>  new EngineerImplenentation();
+
+    public ISchedule Schedule => new ScheduleImplementation();
 }
-
-
-
-

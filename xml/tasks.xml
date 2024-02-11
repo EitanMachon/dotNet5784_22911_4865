@@ -624,20 +624,4 @@
     <EngineerId>32043794</EngineerId>
     <IsActive>false</IsActive>
   </Task>
-  <Task>
-    <Id>39</Id>
-    <Alias>fff ggg</Alias>
-    <Description>Inspect and replace a faulty thermostat for proper engine temperature control.</Description>
-    <CreatedAtDate>11/02/2024 21:13:40</CreatedAtDate>
-    <RequiredEffort>00:00:00</RequiredEffort>
-    <Copmlexity>Expert</Copmlexity>
-    <StartDate>11/02/2024 21:13:41</StartDate>
-    <ScheduledTime xsi:nil="true">11/02/2024 21:13:41</ScheduledTime>
-    <DeadLinetime xsi:nil="true">11/02/2024 21:13:41</DeadLinetime>
-    <ComplateTime xsi:nil="true">11/02/2024 21:13:41</ComplateTime>
-    <Dekiverables></Dekiverables>
-    <Remarks></Remarks>
-    <EngineerId>0</EngineerId>
-    <IsActive>false</IsActive>
-  </Task>
 </ArrayOfTask>

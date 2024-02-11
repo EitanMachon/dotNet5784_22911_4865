@@ -1,45 +1,28 @@
 ﻿namespace Dal;
 using DalApi;
+using System.Linq;
 using System.Xml.Linq;
 
 public class ScheduleImplementation : ISchedule
 {
-    public DateTime? GetEndDate()
+    static readonly string tasks_xml = "tasks"; // the file name to save the tasks
+    static readonly string s_data_config_xml = "data-config"; // the file name to save the configuration
+
+    public void SaveSchedule()
     {
-        XElement root = XMLTools.LoadListFromXMLElement("data-config");
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(tasks_xml);
 
-        return (DateTime)root.Element("ProjectEndDate")!;
+        if (tasks.Count > 0) // save only if there are tasks
+        {
+            DateTime? startDate = tasks.First().StartDate; // read the first task start date
+            DateTime? endDate = tasks.Last().DeadLinetime; // read the first task end date
 
+            XElement config = XMLTools.LoadListFromXMLElement(s_data_config_xml); // load the configuration from the file 
+
+            config.Element("ProjectStartDateTime").Value = startDate == null ? "" : startDate.ToString(); // update the start date
+            config.Element("ProjectEndDateTime").Value = endDate == null ? "" : endDate.ToString(); // update the end date
+
+            XMLTools.SaveListToXMLElement(config, s_data_config_xml); // save the configuration to the file
+        }
     }
-
-    public DateTime? GetStartDate()
-    {
-        XElement root = XMLTools.LoadListFromXMLElement("data-config");
-
-        if (root.Element("ProjectStartDate") == null)
-            return null;
-
-        return (DateTime)root.Element("ProjectStartDate")!;
-    }
-
-
-    public void SetEndDate(DateTime? endDate)
-    {
-        XElement root = XMLTools.LoadListFromXMLElement("data-config");
-
-        root.Element("ProjectEndDate")!.Value = endDate.ToString();
-
-        XMLTools.SaveListToXMLElement(root, "data-config");
-    }
-
-    public void SetStartDate(DateTime? endDate)
-    {
-        XElement root = XMLTools.LoadListFromXMLElement("data-config");
-
-        root.Element("ProjectStartDate")!.Value = endDate.ToString();
-
-        XMLTools.SaveListToXMLElement(root, "data-config");
-    }
-
 }
-

@@ -2,26 +2,8 @@
 
 internal class ScheduleImplementation : DalApi.ISchedule
 {
-    public DateTime? GetEndDate()
+    public void SaveSchedule()
     {
-        return DataSource.Config.ProjectEndDate;
+        // we do not have something to save here...
     }
-
-    public DateTime? GetStartDate()
-    {
-        return DataSource.Config.ProjectStartDate;
-    }
-
-    public void SetEndDate(DateTime? date)
-    {
-
-        DataSource.Config.ProjectEndDate = date;
-    }
-
-    public void SetStartDate(DateTime? date)
-    {
-        DataSource.Config.ProjectStartDate = date;
-    }
-
-   
 }

@@ -8,32 +8,12 @@ using System;
 internal class ScheduleImplementation : ISchedule
 {
     private IDal _dal = DalApi.Factory.Get; // this is a private field of type IDal that is initialized with the DalApi.Factory.Get
+
     /// <summary>
-    /// // this is a method that returns the end date of the schedule
+    /// this is a method that saves the dates in the dal
     /// </summary>
-    public DateTime? GetEndDate()
+    public void SaveSchedule()
     {
-        return _dal.ischedule.GetEndDate();
-    }
-    /// <summary>
-    /// this is a method that returns the start date of the schedule
-    /// </summary>
-    public DateTime? GetStartDate()
-    {
-        return _dal.ischedule.GetStartDate();
-    }
-    /// <summary>
-    /// this is a method that sets the end date of the schedule
-    /// </summary>
-    public void SetEndDate(DateTime? endDate)
-    {
-        _dal.ischedule.SetEndDate(endDate);
-    }
-    /// <summary>
-    /// this is a method that sets the start date of the schedule
-    /// </summary>
-    public void SetStartDate(DateTime? time)
-    {
-        _dal.ischedule.SetStartDate(time);
+        _dal.ischedule.SaveSchedule(); // this is a call to the SaveSchedule method of the dal
     }
 }
