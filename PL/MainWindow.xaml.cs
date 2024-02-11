@@ -32,11 +32,13 @@ namespace PL
         /// this func gonna Initialize the database 
         /// </summary>
         
-        private void InitializeDatabase_Click(object sender, RoutedEventArgs e)
+       
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             // Ask the user for confirmation
             // its gonna show a message box with the question "Are you sure you want to initialize the database?"
-            MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize the database?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question); 
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize the database?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             // If the user confirms, initialize the database
             if (result == MessageBoxResult.Yes)
@@ -46,7 +48,5 @@ namespace PL
                 MessageBox.Show("Database initialized successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
-
     }
 }
