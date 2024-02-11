@@ -8,5 +8,9 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
 
+        <Button Content="Handle Engineer" HorizontalAlignment="Left" Margin="70,0,0,0" VerticalAlignment="Center"/>
+        <Button Content="Initialization" HorizontalAlignment="Left" Margin="680,0,0,0" VerticalAlignment="Center"/>
+
+
     </Grid>
 </Window>
