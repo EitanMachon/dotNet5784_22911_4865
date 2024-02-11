@@ -2,7 +2,7 @@
 using DalApi;
 using System.Xml.Linq;
 
-internal class ScheduleImplementation
+public class ScheduleImplementation : ISchedule
 {
     public DateTime? GetEndDate()
     {

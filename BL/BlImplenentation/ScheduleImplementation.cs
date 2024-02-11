@@ -1,6 +1,5 @@
 ﻿namespace BlImplementation;
 using BlApi;
-using DalApi;
 using System;
 /// <summary>
 /// this is a class that implements the ISchedule interface that is used to get and set the start and end date of the schedule
@@ -14,27 +13,27 @@ internal class ScheduleImplementation : ISchedule
     /// </summary>
     public DateTime? GetEndDate()
     {
-        return _dal.Schedule.GetEndDate();
+        return _dal.ischedule.GetEndDate();
     }
     /// <summary>
     /// this is a method that returns the start date of the schedule
     /// </summary>
     public DateTime? GetStartDate()
     {
-        return _dal.Schedule.GetStartDate();
+        return _dal.ischedule.GetStartDate();
     }
     /// <summary>
     /// this is a method that sets the end date of the schedule
     /// </summary>
     public void SetEndDate(DateTime? endDate)
     {
-        _dal.Schedule.SetEndDate(endDate);
+        _dal.ischedule.SetEndDate(endDate);
     }
     /// <summary>
     /// this is a method that sets the start date of the schedule
     /// </summary>
-    public void SetStartDate(DateTime time)
+    public void SetStartDate(DateTime? time)
     {
-        _dal.Schedule.SetStartDate(time);
+        _dal.ischedule.SetStartDate(time);
     }
 }

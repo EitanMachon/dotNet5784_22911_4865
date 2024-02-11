@@ -13,24 +13,7 @@ using System.Xml.Linq;
 namespace BlTest;
 public class Program
 {
-    //stage 1
-    //private static IDependency? s_dalDependency = new DependencyImplementation(); //stage 1
-    //private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1 
-    //private static ITask? s_dalTasks = new TaskImplementaion();//stage 1`   
-    // static readonly IDal s_dal = new DalList(); //stage 2
-    //static readonly IDal s_dal = new DalXml(); //stage 3
-
-    //
-    //static readonly IDal s_dal = Factory.Get; //stage 4
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
-
-    static EngineerExperience[] experience = {
-    EngineerExperience.Beginner,
-    EngineerExperience.AdvancedBeginner,
-    EngineerExperience.Intermediate,
-    EngineerExperience.Advanced,
-    EngineerExperience.Expert
-};// the array of the level of the engineer
 
     public static void EngineerRun()// the function run the engineer 
     {
@@ -80,7 +63,7 @@ public class Program
 
                 case 3: // ReadAll
                     Console.WriteLine("Read all");
-                   Console.WriteLine( Tools.ToStringProperty( s_bl.Engineer.ReadAll()));// send to readall function
+                    Console.WriteLine(Tools.ToStringProperty(s_bl.Engineer.ReadAll()));// send to readall function
                     break;
 
                 case 4: // Update
@@ -123,7 +106,7 @@ public class Program
                             level = (BO.EngineerExperience)int.Parse(_givenLevelStr);
                         }
 
-                        BO.Engineer tempEng = new BO.Engineer { Id = _id5,Name = _name,Email = _email,SalaryHour = updateSalary,Level = level }; // create a new engineer
+                        BO.Engineer tempEng = new BO.Engineer { Id = _id5, Name = _name, Email = _email, SalaryHour = updateSalary, Level = level }; // create a new engineer
                         s_bl.Engineer.Update(tempEng);
                     }
                     break;
@@ -142,15 +125,10 @@ public class Program
         {
             Console.WriteLine("Error: " + e.Message);
         }
-    }  
+    }
 
     public static void TaskRun()// the function run the depandency 
     {
-        Console.Write("Would you like to create Initial data? (Y/N)");
-        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input");
-        if (ans == "Y")
-            DalTest.Initialization.Do();
-
         Console.WriteLine("choose a Item to check:0 for exit ,1 for Creat, 2 for Read, 3 for ReadAll, 4 for Update, 5 for Delete");
         int a = int.Parse(Console.ReadLine());
         int _id1;
@@ -183,7 +161,7 @@ public class Program
                     Console.WriteLine("put a required hours:");// ask for the required hours
                     _requiredHours = TimeSpan.Parse(Console.ReadLine()); // get the required hours
 
-                   // Console.WriteLine("is a milestone? true/false:");// ask for the milestone
+                    // Console.WriteLine("is a milestone? true/false:");// ask for the milestone
                     //_isMilestone = bool.Parse(Console.ReadLine()); // get the milestone
 
                     Console.WriteLine("put a complexity of the task:");// ask for the complexity
@@ -244,7 +222,7 @@ public class Program
                     _alias = Console.ReadLine(); // get the name
                     if (_alias == "")
                         _alias = Help.Alias;
-                    
+
 
                     Console.WriteLine("put a description:");// ask for the description
                     _description = Console.ReadLine(); // get the description
@@ -258,8 +236,8 @@ public class Program
                     if (vr != "")
                         _requiredHours = TimeSpan.Parse(Console.ReadLine());
                     else { _requiredHours = Help.RequiredEffort; } // if vr==""
-                    //_requiredHours = TimeSpan.Parse(Console.ReadLine()); // get the required hours
-                    
+                                                                   //_requiredHours = TimeSpan.Parse(Console.ReadLine()); // get the required hours
+
                     Console.WriteLine("put a complexity of the task:");// ask for the complexity
                     vr = Console.ReadLine();
                     if (vr != "")
@@ -270,14 +248,14 @@ public class Program
                     vr = Console.ReadLine();
                     if (vr != "")
                         _deadlineDate = DateTime.Parse(Console.ReadLine()); // get the deadline date
-                    else { _deadlineDate= Help.DeadLinetime;}                                                 // Assuming you have a Random object initialized somewhere in your code.
+                    else { _deadlineDate = Help.DeadLinetime; } // Assuming you have a Random object initialized somewhere in your code.
 
 
                     Console.WriteLine("enter a ScheduledTime date:");// ask for the deadline date
                     vr = Console.ReadLine();
                     if (vr != "")
                         _scheduledTime = DateTime.Parse(Console.ReadLine()); // get the deadline date
-                    else { _scheduledTime = Help.ScheduledTime; }                                                 // Assuming you have a Random object initialized somewhere in your code.
+                    else { _scheduledTime = Help.ScheduledTime; } // Assuming you have a Random object initialized somewhere in your code.
 
                     Random random = new Random();
 
@@ -285,7 +263,7 @@ public class Program
                     vr = Console.ReadLine();
                     if (vr != "")
                         _whatYouDid = Console.ReadLine(); // get the what you did
-                    else { _whatYouDid=Help.Dekiverables; }
+                    else { _whatYouDid = Help.Dekiverables; }
 
                     Console.WriteLine("Do you have something to add?");// ask for the something to say
                     vr = Console.ReadLine();
@@ -303,20 +281,20 @@ public class Program
                     BO.Task nt = new BO.Task
                     {
                         Id = _id3,
-                        Alias= _alias,
-                        Description= _description,
-                        CreatedAtDate= DateTime.Now,
-                        RequiredEffort= _requiredHours,
-                        Copmlexity= _complexity,
-                        StartDate= DateTime.Now,
-                        ScheduledTime= null,
-                        DeadLinetime= _deadlineDate,
-                        ComplateTime= DateTime.Now,
-                        Dekiverables= _whatYouDid,
-                        Remarks= _somethingToSay,
-                        EngineerId= _engineerId,
-                        };
-                  //  BO.Task tempEng = new(_id3, _alias, _description, DateTime.Now, DateTime.Now,false, _complexity,); // create a new engineer
+                        Alias = _alias,
+                        Description = _description,
+                        CreatedAtDate = DateTime.Now,
+                        RequiredEffort = _requiredHours,
+                        Copmlexity = _complexity,
+                        StartDate = DateTime.Now,
+                        ScheduledTime = null,
+                        DeadLinetime = _deadlineDate,
+                        ComplateTime = DateTime.Now,
+                        Dekiverables = _whatYouDid,
+                        Remarks = _somethingToSay,
+                        EngineerId = _engineerId,
+                    };
+                    //  BO.Task tempEng = new(_id3, _alias, _description, DateTime.Now, DateTime.Now,false, _complexity,); // create a new engineer
                     s_bl.Task.Update(nt);
 
                     //_id1;

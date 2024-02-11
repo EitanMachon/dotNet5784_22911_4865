@@ -15,23 +15,20 @@ public static class Initialization
 
     private static readonly Random s_rand = new(); // random number generator
     static EngineerExperience[] experience = {
-    EngineerExperience.Beginner,
-    EngineerExperience.AdvancedBeginner,
-    EngineerExperience.Intermediate,
-    EngineerExperience.Advanced,
-    EngineerExperience.Expert
-};
-
-
-
+        EngineerExperience.Beginner,
+        EngineerExperience.AdvancedBeginner,
+        EngineerExperience.Intermediate,
+        EngineerExperience.Advanced,
+        EngineerExperience.Expert
+    };
 
     private static void createEngineer()
     {
         string[] engineerNames =
         {
-        "Dani Levi", "Eli Amar", "Yair Cohen",
-        "Ariela Levin", "Dina Klein", "Shira Israelof", "Yael Cohen", "Miri Levi"
-    };
+            "Dani Levi", "Eli Amar", "Yair Cohen",
+            "Ariela Levin", "Dina Klein", "Shira Israelof", "Yael Cohen", "Miri Levi"
+        };
 
         foreach (var _name in engineerNames)
         {
@@ -57,14 +54,7 @@ public static class Initialization
 
     }
 
-    
-
-        
-    
-
-
-
-        public static void createTask()
+    public static void createTask()
     {
         string[] taskNames =
         {"Change oil and filter",
@@ -163,7 +153,6 @@ public static class Initialization
             string _description = taskDescription[i]; // generate a description from the tasks array
             DateTime _createdAtDate = DateTime.Now.AddDays(-1); // generate a random creation date
             TimeSpan _requiredEffort = TimeSpan.FromHours(s_rand.Next(1, 100)); // generate a random required effort
-            bool _isMilestone = false; // generate a random milestone
             EngineerExperience _complexity = experience[s_rand.Next(0, experience.Length)]; // generate a random complexity
             DateTime _startDate = DateTime.Now; // generate a random start date
             DateTime? _ComplateTime = null; // generate a random start date
@@ -173,30 +162,21 @@ public static class Initialization
             string _Dekiverables = ""; // generate a empty deliverables
             string _Remarks = ""; // generate a empty remarks
             int _EngineerId = s_rand.Next(1, 99999999); // generate a random engineer id
-            EngineerExperience _Difficulty = experience[s_rand.Next(0, experience.Length)]; // generate a random difficulty
-            s_dal!.itask.Create(new Task(_id, _alias, _description, _createdAtDate, _requiredEffort, _isMilestone, _complexity, _startDate, _ScheduledTime, _DeadLinetime, _ComplateTime, _Dekiverables, _Remarks, _EngineerId, _Difficulty)); // create a new task
-       
+            s_dal!.itask.Create(new Task(_id, _alias, _description, _createdAtDate, _requiredEffort, _complexity, _startDate, _ScheduledTime, _DeadLinetime, _ComplateTime, _Dekiverables, _Remarks, _EngineerId)); // create a new task
+
         }
     }
     public static void createDependency()
     {
-        int _min_id = 1;
-        int _max_id = 99999999;
-        int _id;
-        do
-            _id = s_rand.Next(_min_id, _max_id); // generate a random ID
-        while (s_dal!.iengineer!.Read(_id) != null); // check if the ID is already in use
+        int _DependentTask = s_rand.Next(0, DataSource.Config.GetNextTaskId()); // generate a random dependent task
+        int _Depends = s_rand.Next(0, DataSource.Config.GetNextTaskId()); // generate a random depends task
 
-        int _DependentTask = s_rand.Next(0, DataSource.Config.NextId); // generate a random dependent task
-        int _Depends = s_rand.Next(0, DataSource.Config.NextId); // generate a random depends task
-        int _DependencyType = s_rand.Next(0, 2); // generate a random dependency type
-
-        Dependency newDep = new(_id, _DependentTask, _Depends); // create a new dependency
+        Dependency newDep = new(DataSource.Config.GetNextDependency(), _DependentTask, _Depends); // create a new dependency
 
         s_dal!.idependancy!.Create(newDep); // add the new dependency to the database      
     }
 
-  // public static void Do(IDal dal) //stage 2
+    // public static void Do(IDal dal) //stage 2
     public static void Do() //stage 4 
     {
         //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
@@ -208,8 +188,3 @@ public static class Initialization
 
     }
 }
-
-
-
-
-

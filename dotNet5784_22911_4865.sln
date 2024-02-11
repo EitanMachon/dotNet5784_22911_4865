@@ -24,8 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{9F537721-D2B
 		xml\data-config.xml = xml\data-config.xml
 		xml\depandencys.xml = xml\depandencys.xml
 		xml\engineers.xml = xml\engineers.xml
-		xml\enums.xml = xml\enums.xml
-		xml\exeptions.xml = xml\exeptions.xml
 		xml\tasks.xml = xml\tasks.xml
 	EndProjectSection
 EndProject
@@ -33,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{6759
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csproj", "{4FD81B95-9FFF-4445-9DAD-F26865D82DAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{04DB032B-CC09-4BC6-9C4A-91BB3EA0BDA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{04DB032B-CC09-4BC6-9C4A-91BB3EA0BDA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

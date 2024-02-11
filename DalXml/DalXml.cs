@@ -25,4 +25,5 @@ sealed internal class DalXml : IDal
 
     public IEngineer iengineer => new EngineerImplementation();
 
+    public ISchedule ischedule => new ScheduleImplementation();
 }

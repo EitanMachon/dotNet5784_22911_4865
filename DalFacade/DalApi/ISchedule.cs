@@ -1,6 +1,6 @@
 ﻿namespace DalApi;
 
-internal interface ISchedule
+public interface ISchedule
 {
     DateTime? GetStartDate();
 

@@ -13,7 +13,7 @@ namespace Dal
             }
 
             int newDependencyId = DataSource.Config.GetNextDependency(); // generate new ID for the Dependency
-            var newDependency = new Dependency(newDependencyId, item.DependencyType, item.DependencyId); // Create a new Dependency object with the generated ID
+            var newDependency = new Dependency(newDependencyId, item.DependentTask, item.Depends); // Create a new Dependency object with the generated ID
             DataSource.Dependencies.Add(item); // Add the new Dependency directly into the DataSource
             return newDependencyId; //  return the new Dependency 
         }

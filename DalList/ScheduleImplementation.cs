@@ -1,6 +1,6 @@
 ﻿namespace Dal;
 
-internal class ScheduleImplementation
+internal class ScheduleImplementation : DalApi.ISchedule
 {
     public DateTime? GetEndDate()
     {
