@@ -3,6 +3,7 @@
 using System;
 using DO;
 using DalApi;
+using System.Security.Cryptography.X509Certificates;
 
 /// <summary>
 /// this class represents the task in the BL layer
@@ -30,6 +31,6 @@ public class Task
     public DateTime? DeadLinetime { get; set; } // this is the deadline time of the task
     public int EngineerId { get; set; } // this is the id of the engineer of the task
 
-    
 
+    public override string ToString() => this.ToStringProperty();
 }

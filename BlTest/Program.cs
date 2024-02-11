@@ -62,7 +62,7 @@ public class Program
                 case 2:// Read 
                     Console.WriteLine("put a id fr read:");// get id for the engineer
                     int _id2 = int.Parse(Console.ReadLine());
-                    s_bl.Engineer.Read(_id2);// send to read
+                    Console.WriteLine(s_bl.Engineer.Read(_id2)); // send to read
                     break;
 
                 case 3: // ReadAll
@@ -147,7 +147,6 @@ public class Program
         DateTime? _scheduledTime;
         try
         {
-
             switch (a)
             {
                 case 1://Creat 
@@ -207,11 +206,15 @@ public class Program
                 case 2:// Read 
                     Console.WriteLine("put a id for read:");// get id for the task
                     _id1 = int.Parse(Console.ReadLine()); // get the id
-                    s_bl!.Task.Read(_id1);// send to read
+                    Console.WriteLine(s_bl!.Task.Read(_id1));// send to read
                     break;
 
                 case 3: // ReadAll
-                    s_bl!.Task.ReadAll();// send to readall
+                    //s_bl!.Task.ReadAll();// send to readall
+                    foreach(var t in s_bl!.Task.ReadAll())
+                    {
+                        Console.WriteLine(t);
+                    }
                     break;
 
                 case 4: // Update
@@ -335,10 +338,7 @@ public class Program
         }
     }
 
-
-
-
-    /// ///////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
     static void Main(string[] args)
 
     {

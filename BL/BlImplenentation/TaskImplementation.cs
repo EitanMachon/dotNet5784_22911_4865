@@ -97,7 +97,7 @@ internal class TaskImplementation : ITask
     /// </summary>
     public Task? Read(int id)
     {
-        if (id != 0) // if the Task ID is not 0, check if the Task exists in the database
+        if (id == 0) // if the Task ID is not 0, check if the Task exists in the database
             return null;
         var existingTask = _dal.itask.Read(t => t.Id == id); // read the Task by his ID in the DAL layer
         if (existingTask == null) // if the Task does not exist, throw an exception because it is not possible to read a Task that does not exist
@@ -138,11 +138,12 @@ internal class TaskImplementation : ITask
     /// </summary>
     public IEnumerable<BO.Task?> ReadAll(Func<BO.Task, bool>? filter = null) // read all Tasks
     {
-        IEnumerable<DO.Task> doTasks = _dal.itask.ReadAll(); // read all Tasks in the DAL layer
+        IEnumerable<DO.Task> doTasks = _dal.itask.ReadAll().Where(t => t != null); // read all Tasks in the DAL layer
         List<BO.Task?> boTasks = new List<BO.Task?>(); // create a new list of Tasks in the BO layer
         foreach (var task in doTasks) // for each Task in the DAL layer
         {
-            DO.Engineer? engineer = _dal.iengineer.Read(t => t.Id == task.EngineerId && t.IsActive == true); // read the Engineer by his ID in the DAL layer
+            //DO.Engineer? engineer = _dal.iengineer.Read(e => e.Id == task.EngineerId && e.IsActive == true); // read the Engineer by his ID in the DAL layer
+            DO.Engineer? engineer = _dal.iengineer.Read(task.EngineerId); // read the Engineer by his ID in the DAL layer
             if (engineer == null) // if the Engineer does not exist, throw an exception because it is not possible to read a Task that does not have an Engineer
             {
                 throw new BO.BLTaskHasNoEngineerException($"Task with ID={task.Id} has no Engineer"); // throw an exception

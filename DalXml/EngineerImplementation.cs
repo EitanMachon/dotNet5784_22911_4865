@@ -46,7 +46,7 @@ internal class EngineerImplementation : IEngineer
     public DO.Engineer? Read(Func<DO.Engineer, bool> filter) // this func get a filter and return the first _item that match the filter
     {
         List<DO.Engineer> engineersList = XMLTools.LoadListFromXMLSerializer<Engineer>(engineers_xml); // load the list from the file
-        DO.Engineer engineer = engineersList.Find(e => filter(e)); // find the engineer that match the filter
+        DO.Engineer? engineer = engineersList.Where(e => filter(e)).FirstOrDefault(); // find the engineer that match the filter
         if (engineer != null) // if the engineer exist
             return engineer; // return the engineer
         return null;

@@ -38,12 +38,14 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
 
     static DO.Task xmlToTask(XElement xml)
     {
+        TimeSpan? timeSpan = TimeSpan.TryParse((string?)xml.Element("RequiredEffort"), out var result) ? (TimeSpan?)result : null;
+
         return new DO.Task(
             (int)(xml.ToIntNullable("Id")!),
             xml.Element("Alias")!.Value,
             xml.Element("Description")!.Value,
             (DateTime)(xml.ToDateTimeNullable("CreatedAtDate")!),
-            TimeSpan.Parse(xml.Element("RequiredEffort")!.Value),
+            timeSpan == null ? new TimeSpan() : (TimeSpan)(timeSpan!),
             xml.ToEnumNullable<EngineerExperience>("Copmlexity"),
             xml.ToDateTimeNullable("StartDate"),
             xml.ToDateTimeNullable("ScheduledTime"),
@@ -68,11 +70,11 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
     public DO.Task? Read(Func<DO.Task, bool> filter)
     {
         XElement xElement = XMLTools.LoadListFromXMLElement(tasks_xml); // load the list from the file
-        XElement task = xElement.Elements().Where(e => filter(xmlToTask(e))).FirstOrDefault(); // find the task with the given id
+        XElement? task = xElement.Elements().Where(e => filter(xmlToTask(e))).FirstOrDefault(); // find the task with the given id
         if (task != null) // if the task exist
             return xmlToTask(task); // return the task
         else // if the task does not exist throw an exception
-            throw new Exception($"Task with ID {task.Element("Id").Value} does not exist."); // if the task does not exist throw an exception
+            return null;
     }
 
     public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null) // this func return all the tasks

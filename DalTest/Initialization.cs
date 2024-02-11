@@ -161,9 +161,11 @@ public static class Initialization
 
             string _Dekiverables = ""; // generate a empty deliverables
             string _Remarks = ""; // generate a empty remarks
-            int _EngineerId = s_rand.Next(1, 99999999); // generate a random engineer id
+            
+            // generate a random engineer id
+            var allEngs = s_dal.iengineer.ReadAll().Where(e => e != null).Select(e => e!.Id);
+            int _EngineerId = allEngs.ElementAt(s_rand.Next(0, allEngs.Count()));
             s_dal!.itask.Create(new Task(_id, _alias, _description, _createdAtDate, _requiredEffort, _complexity, _startDate, _ScheduledTime, _DeadLinetime, _ComplateTime, _Dekiverables, _Remarks, _EngineerId)); // create a new task
-
         }
     }
     public static void createDependency()
