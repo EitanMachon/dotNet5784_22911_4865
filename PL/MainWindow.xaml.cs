@@ -23,15 +23,16 @@ namespace PL
         /// <summary>
         /// this func gonna show the EngineerListWindow
         /// </summary>
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Engineer_List(object sender, RoutedEventArgs e)
         {
             Engineer.EngineerListWindow engineerListWindow = new Engineer.EngineerListWindow(); // Create a new instance of EngineerListWindow
             engineerListWindow.Show(); // Show the window of EngineerListWindow
         }
+
         /// <summary>
         /// this func gonna Initialize the database after the user confirm it
         /// </summary>
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void intilization_buttom(object sender, RoutedEventArgs e)
         {
 
             // Ask the user for confirmation

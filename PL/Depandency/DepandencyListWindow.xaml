@@ -7,6 +7,31 @@
         mc:Ignorable="d"
         Title="DepandencyListWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="500*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Label" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Center" Grid.Column="0"/>
+            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="74"/>
+
+
+
+        </Grid>
+        <ListView Grid.Row="1" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+
+
     </Grid>
 </Window>
