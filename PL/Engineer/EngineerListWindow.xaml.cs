@@ -12,22 +12,32 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL.Engineer
-{
-    /// <summary>
-    /// Interaction logic for EngineerListWindow.xaml
-    /// </summary>
-    public partial class EngineerListWindow : Window
-    {
-        static readonly BlApi.IBl s_bl = BlApi.Factory.Get(); // Create a new instance of the BlApi class and store it in a static readonly variable 
-        /// <summary>
-        /// this func gonna show the EngineerListWindow
-        /// </summary>
-        public EngineerListWindow()
-        {
-            InitializeComponent();
-        }
+namespace PL.Engineer;
 
-      
+/// <summary>
+/// Interaction logic for EngineerListWindow.xaml
+/// </summary>
+public partial class EngineerListWindow : Window
+{
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get(); // Create a new instance of the BlApi class and store it in a static readonly variable 
+
+    public IEnumerable<BO.Engineer> EngineerList
+    {
+        get { return (IEnumerable<BO.>)GetValue(CourseListProperty); }
+        set { SetValue(CourseListProperty, value); }
     }
+
+    public static readonly DependencyProperty CourseListProperty =
+        DependencyProperty.Register("CourseList", typeof(IEnumerable<BO.CourseInList>), typeof(CourseListWindow), new PropertyMetadata(null));
+
+
+    /// <summary>
+    /// this func gonna show the EngineerListWindow
+    /// </summary>
+    public EngineerListWindow()
+    {
+        InitializeComponent();
+    }
+    
+  
 }
