@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
         Title="EngineerListWindow" Height="640" Width="800">
-        
-       
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Label" HorizontalAlignment="Left" Margin="80,0,0,0" VerticalAlignment="Center" Grid.Column="0"/>
-            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="74"/> 
+            <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="74"/>
 
 
 
@@ -39,6 +39,6 @@
 
 
     </Grid>
-  
+
 
 </Window>
