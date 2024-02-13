@@ -27,7 +27,7 @@
             <Label Content="Label" HorizontalAlignment="Left" Margin="308,16,0,0" VerticalAlignment="Top" Grid.Column="0" />
             <!--<ComboBox Grid.Column="1" SelectedValue="{Binding Path=Semester, Mode=TwoWay}"
                 ItemsSource="{Binding Source={StaticResource SemestersCollectionKey}}"/>-->
-            <ComboBox Grid.Column="1" SelectedValue ="{Binding Path =Level, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource LevelsCollectionKey}}" SelectionChanged="ComboBox_SelectionChanged"/>
+            <ComboBox Grid.Column="1" SelectedValue ="{Binding Path = Level, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectionChanged="ComboBox_SelectionChanged"/>
 
 
         </Grid>

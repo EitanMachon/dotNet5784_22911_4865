@@ -32,7 +32,7 @@ public partial class EngineerListWindow : Window
     ///  the list of the engineers that we gonna show in the window by using the DependencyProperty that is a static member of the EngineerListWindow class
     /// </summary>
     public static readonly DependencyProperty EngineerListProperty =
-        DependencyProperty.Register("CourseList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerWindow), new PropertyMetadata(null)); // Using DependencyProperty as the backing store for EngineerList.  This enables animation, styling, binding, etc...
+        DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerWindow), new PropertyMetadata(null)); // Using DependencyProperty as the backing store for EngineerList.  This enables animation, styling, binding, etc...
 
 
     /// <summary>
@@ -43,11 +43,14 @@ public partial class EngineerListWindow : Window
         InitializeComponent(); // Initialize the EngineerListWindow
         EngineerList = s_bl?.Engineer.ReadAll()!; // Using the BlApi to get all the engineers and store them in the EngineerList
     }
-    public BO.EngineerExperience Level { get; set; } = BO.EngineerExperience.Beginner; // Create a new instance of the BO.EngineerExperience class and store it in a property and give it a diffult value of BO.EngineerExperience.Beginner
+    public BO.EngineerExperience Level { get; set; } = BO.EngineerExperience.All; // Create a new instance of the BO.EngineerExperience class and store it in a property and give it a diffult value of BO.EngineerExperience.Beginner
 
     private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        EngineerList = s_bl?.Engineer.ReadAll()!.Where(x => x.Level == Level); // Using the BlApi to get all the engineers and store them in the EngineerList and filter them by the Level
+        if(Level == BO.EngineerExperience.All) // if the Level is equal to BO.EngineerExperience.All
+            EngineerList = s_bl?.Engineer.ReadAll()!; // Using the BlApi to get all the engineers and store them in the EngineerList
+        else
+        EngineerList = s_bl?.Engineer.ReadAll(x => x != null && x.Level == Level)!; // Using the BlApi to get all the engineers and store them in the EngineerList and filter them by the Level
     }
     
 }
