@@ -151,7 +151,7 @@ internal class EngineerImplenentation : IEngineer
             }
             else // if the filter is not null, read the Engineers by the filter
             {
-                return from engineer in _dal.iengineer.ReadAll() // read the Engineers by the filter in the DAL layer
+                var engineers =from engineer in _dal.iengineer.ReadAll() // read the Engineers by the filter in the DAL layer
                        let temp = new BO.Engineer // return the Engineers by the filter in the BO layer
                        {
                            Id = engineer.Id,
@@ -161,8 +161,12 @@ internal class EngineerImplenentation : IEngineer
                            Level = (BO.EngineerExperience)engineer.Level,
                            Task = findTheTask != null ? new BO.TaskInEngineer { Id = ((DO.Task)findTheTask).Id, Alias = ((DO.Task)findTheTask).Alias } : null // if the Task exists, return the Task in the BO layer, if the Task does not exist, return null
                        }
-                       where filter(temp) // return the Engineers by the filter in the BO layer
                        select temp;
+                engineers = from item in engineers
+                            where (filter(item))
+                            select (item);
+                return engineers;
+
             }
         }
         catch (DalReadException e) // if the Engineers cannot be read, throw an exception

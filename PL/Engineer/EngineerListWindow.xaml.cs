@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
 namespace PL.Engineer;
 
 /// <summary>
@@ -47,10 +46,13 @@ public partial class EngineerListWindow : Window
 
     private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if(Level == BO.EngineerExperience.All) // if the Level is equal to BO.EngineerExperience.All
-            EngineerList = s_bl?.Engineer.ReadAll()!; // Using the BlApi to get all the engineers and store them in the EngineerList
-        else
-        EngineerList = s_bl?.Engineer.ReadAll(x => x != null && x.Level == Level)!; // Using the BlApi to get all the engineers and store them in the EngineerList and filter them by the Level
+        //if(Level == BO.EngineerExperience.All) // if the Level is equal to BO.EngineerExperience.All
+        //    EngineerList = s_bl?.Engineer.ReadAll()!; // Using the BlApi to get all the engineers and store them in the EngineerList
+        //else
+        //    EngineerList = s_bl?.Engineer.ReadAll(x => x.Level == Level)!; // Using the BlApi to get all the engineers and store them in the EngineerList and filter them by the Level
+        EngineerList = (Level == BO.EngineerExperience.All) ?
+       s_bl?.Engineer.ReadAll()! : s_bl?.Engineer.ReadAll(item => item.Level == Level);
+
     }
-    
+
 }

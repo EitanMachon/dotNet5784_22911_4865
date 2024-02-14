@@ -25,8 +25,8 @@ namespace PL
         /// </summary>
         private void Button_Engineer_List(object sender, RoutedEventArgs e)
         {
-            Engineer.EngineerListWindow engineerListWindow = new Engineer.EngineerListWindow(); // Create a new instance of EngineerListWindow
-            engineerListWindow.Show(); // Show the window of EngineerListWindow
+         new Engineer.EngineerListWindow().Show(); // Create a new instance of EngineerListWindow
+          // Show the window of EngineerListWindow
         }
 
         /// <summary>
