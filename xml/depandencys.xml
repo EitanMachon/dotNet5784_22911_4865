@@ -12,4 +12,16 @@
     <Depends>0</Depends>
     <IsActive>false</IsActive>
   </Dependency>
+  <Dependency>
+    <Id>2</Id>
+    <DependentTask>0</DependentTask>
+    <Depends>0</Depends>
+    <IsActive>false</IsActive>
+  </Dependency>
+  <Dependency>
+    <Id>3</Id>
+    <DependentTask>0</DependentTask>
+    <Depends>0</Depends>
+    <IsActive>false</IsActive>
+  </Dependency>
 </ArrayOfDependency>
