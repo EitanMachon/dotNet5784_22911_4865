@@ -1,5 +1,4 @@
-﻿using BO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,57 +11,62 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi; // Import the namespace where BlApi is located
 
-namespace PL.Engineer;
-
-/// <summary>
-/// Interaction logic for EngineerListWindow.xaml
-/// </summary>
-public partial class EngineerListWindow : Window
+namespace PL.Engineer
 {
-    static readonly BlApi.IBl s_bl = BlApi.Factory.Get(); // Create a new instance of the BlApi class and store it in a static readonly variable 
     /// <summary>
-    ///  the function that gonna show the EngineerListWindow and the list of the engineers by using the DependencyProperty that is a static member of the EngineerListWindow class
+    /// Interaction logic for EngineerListWindow.xaml
     /// </summary>
-    public IEnumerable<BO.Engineer> EngineerList
+    public partial class EngineerListWindow : Window
     {
-        get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); } // Using GetValue and SetValue to get and set the value of the EngineerList property
-        set { SetValue(EngineerListProperty, value); } // Using GetValue and SetValue to get and set the value of the EngineerList property
-    }
-    /// <summary>
-    ///  the list of the engineers that we gonna show in the window by using the DependencyProperty that is a static member of the EngineerListWindow class
-    /// </summary>
-    public static readonly DependencyProperty EngineerListProperty =
-        DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerWindow), new PropertyMetadata(null)); // Using DependencyProperty as the backing store for EngineerList.  This enables animation, styling, binding, etc...
+        static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
 
+        public IEnumerable<BO.Engineer> EngineerList
+        {
+            get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }
+            set { SetValue(EngineerListProperty, value); }
+        }
 
-    /// <summary>
-    /// this func gonna show the EngineerListWindow
-    /// </summary>
-    public EngineerListWindow() // the constructor of the EngineerListWindow class
-    {
-        InitializeComponent(); // Initialize the EngineerListWindow
-        EngineerList = s_bl?.Engineer.ReadAll()!; // Using the BlApi to get all the engineers and store them in the EngineerList
-    }
-    public BO.EngineerExperience Level { get; set; } = BO.EngineerExperience.All; // Create a new instance of the BO.EngineerExperience class and store it in a property and give it a diffult value of BO.EngineerExperience.Beginner
+        public static readonly DependencyProperty EngineerListProperty =
+            DependencyProperty.Register("EngineerList", typeof(IEnumerable<BO.Engineer>), typeof(EngineerListWindow), new PropertyMetadata(null));
 
-    private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    {
-        if(Level == BO.EngineerExperience.All) // if the Level is equal to BO.EngineerExperience.All
-            EngineerList = s_bl?.Engineer.ReadAll()!; // Using the BlApi to get all the engineers and store them in the EngineerList
-        else
-        EngineerList = s_bl?.Engineer.ReadAll(x => x != null && x.Level == Level)!; // Using the BlApi to get all the engineers and store them in the EngineerList and filter them by the Level
-    }
+        public EngineerListWindow()
+        {
+            InitializeComponent();
+            EngineerList = s_bl?.Engineer.ReadAll()!;
+        }
 
-    private void Button_Add_click(object sender, RoutedEventArgs e)
-    {
-        EngineerWindow engineerWindow = new EngineerWindow(); // Create a new instance of the EngineerWindow class and store it in a variable
-        engineerWindow.ShowDialog(); // Show the EngineerWindow      
-    }
+        public BO.EngineerExperience Level { get; set; } = BO.EngineerExperience.All;
 
-    private void twoclicksbuttom(object sender, MouseButtonEventArgs e)
-    {
-        BO.Engineer? engineerFromList = (sender as ListView)?.SelectedItem as BO.Engineer; // Create a new instance of the BO.Engineer class and store it in a variable and give it the value of the engineer by the id
-        new EngineerWindow(engineerFromList!.Id).ShowDialog(); // Show the EngineerWindow by the id of the engineer
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Update();
+        }
+
+        private void Button_Add_click(object sender, RoutedEventArgs e)
+        {
+            EngineerWindow engineerWindow = new EngineerWindow();
+            engineerWindow.ShowDialog();
+            Update();
+        }
+
+        private void twoclicksbuttom(object sender, MouseButtonEventArgs e)
+        {
+            BO.Engineer? engineerFromList = (sender as ListView)?.SelectedItem as BO.Engineer;
+            if (engineerFromList != null)
+            {
+                new EngineerWindow(engineerFromList!.Id).ShowDialog();
+                Update();
+            }
+        }
+
+        void Update()
+        {
+            if (Level == BO.EngineerExperience.All)
+                EngineerList = s_bl?.Engineer.ReadAll()?.OrderBy(item => item?.Name); // Corrected orderBy usage
+            else
+                EngineerList = s_bl?.Engineer.ReadAll(x => x != null && x.Level == Level)?.OrderBy(item => item?.Name);
+        }
     }
 }

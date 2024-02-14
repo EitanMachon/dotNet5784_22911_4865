@@ -27,27 +27,21 @@
             <Label Content="Label" HorizontalAlignment="Left" Margin="308,16,0,0" VerticalAlignment="Top" Grid.Column="0" />
             <!--<ComboBox Grid.Column="1" SelectedValue="{Binding Path=Semester, Mode=TwoWay}"
                 ItemsSource="{Binding Source={StaticResource SemestersCollectionKey}}"/>-->
-            <ComboBox Grid.Column="1" SelectedValue ="{Binding Path = Level, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectionChanged="ComboBox_SelectionChanged"/>
+            <ComboBox Grid.Column="1" SelectedValue ="{Binding Level}" ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectionChanged="ComboBox_SelectionChanged"/>
 
 
         </Grid>
 
 
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path= EngineerList}" >
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList}" MouseDoubleClick="twoclicksbuttom" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="Button_Click"/>
-        <ListView x:Name="click" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDown="twoclicksbuttom">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="Button_Add_click"/>
+
 
 
     </Grid>

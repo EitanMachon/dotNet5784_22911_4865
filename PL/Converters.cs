@@ -20,66 +20,16 @@ class ConvertIdToContent : IValueConverter
         throw new NotImplementedException();
     }
 }
-class ConvertNameToContent : IValueConverter
+
+class ConverIdToContentKey: IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return (string)value == "" ? "Add" : "Update";
+        return (int)value == 0;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
-}
-class ConvertEmailToContent : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return (string)value == "" ? "Add" : "Update";
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-class ConvertSalaryToContent : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return (double)value == 0 ? "Add" : "Update";
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-class ConvertLevelToContent : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return (BO.EngineerExperience)value == 0 ? "Add" : "Update";
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
-
-class ConvertTaskToContent : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        return (BO.TaskInEngineer)value == null ? "Add" : "Update";
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
+}   

@@ -5,11 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <local:LevelCollection x:Key="LevelCollection"/>
+        <local:ConverIdToContentKey x:Key="ConvertIdToContentKey"/>
         <local:ConvertIdToContent x:Key="ConvertIdToContent"/>
-        <local:ConvertNameToContent x:Key="ConvertNameToContent"/>
-        <local:ConvertEmailToContent x:Key="ConvertEmailToContent"/>
-        <local:ConvertSalaryToContent x:Key="ConvertSalaryToContent"/>
-        <local:ConvertLevelToContent x:Key="ConvertLevelToContent"/>
-        <local:ConvertTaskToContent x:Key="ConvertTaskToContent"/>
     </Application.Resources>
 </Application>

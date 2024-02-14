@@ -22,6 +22,7 @@ namespace PL.Engineer;
 /// </summary>
 public partial class EngineerWindow : Window
 {
+    int id { get; set; }
     public BO.Engineer Engineer // Create a new instance of the BO.Engineer class and store it in a property
     {
         get { return (BO.Engineer)GetValue(EngineerProperty); } // Using GetValue and SetValue to get and set the value of the Engineer property
@@ -34,32 +35,41 @@ public partial class EngineerWindow : Window
     /// </summary>
     public EngineerWindow(int i = 0) // the constructor of the EngineerWindow class that get a parameter with a default value of 0
     {
+        id = i; // Assign the value of the parameter to the id property
         InitializeComponent(); // Initialize the EngineerWindow
-        Engineer = s_bl?.Engineer.Read(i); // create a new instance of the BO.Engineer class and store it in a variable and give it the value of the engineer by the id
-        if (Engineer.Id == 0) // if the id of the engineer is equal to 0
+        if (i == 0) // if the id of the engineer is equal to 0
         {
             Engineer = new BO.Engineer(); // Create a new instance of the BO.Engineer class and store it in a property and give it a diffult value of 0
         }
         else // if the id of the engineer is not equal to 0
         {
-            Engineer = s_bl?.Engineer.Read(i); // Using the BlApi to get the engineer by the id and store it in the Engineer
+            Engineer = s_bl?.Engineer.Read(i)!; // Using the BlApi to get the engineer by the id and store it in the Engineer
         }
     }
-    
-   /// <summary>
-   /// this func gonna close the EngineerWindow and update the engineer by using the BlApi
-   /// </summary>
+
+    /// <summary>
+    /// this func gonna close the EngineerWindow and update the engineer by using the BlApi
+    /// </summary>
     private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
     {
         try // try to update the engineer by using the BlApi
-        {           
-            s_bl?.Engineer.Update(Engineer); // Using the BlApi to update the engineer
-            MessageBox.Show("The engineer has been updated successfully"); // Show a message to the user                
+        {
+            if (id == 0)
+            {
+                s_bl?.Engineer.Create(Engineer); // Using the BlApi to create the engineer
+                MessageBox.Show("The engineer has been created successfully"); // Show a message to the user              
+            }
+            else
+            {
+
+                s_bl?.Engineer.Update(Engineer); // Using the BlApi to update the engineer
+                MessageBox.Show("The engineer has been updated successfully"); // Show a message to the user                
+            }
             Close(); // Close the EngineerWindow
         }
         catch (Exception ex) // if there is an exception
         {
             MessageBox.Show(ex.Message); // Show a message to the user
-        }   
+        }
     }
 }
