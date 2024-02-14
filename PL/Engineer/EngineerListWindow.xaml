@@ -8,41 +8,48 @@
         Title="EngineerListWindow" Height="640" Width="800"
 		DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
-    <!--Extrnal Grid-->
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="40*"/>
-			<RowDefinition Height="500*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
+    <!-- External Grid with Background Image -->
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\ishay\Downloads\workerpic.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
+        <!-- Internal, Upper Grid for Filtering -->
+        <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="Level" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Grid.Column="0" Foreground="Yellow" FontSize="16"/>
+            <ComboBox Grid.Column="1" SelectedValue="{Binding Level}" ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectionChanged="ComboBox_SelectionChanged"/>
+        </Grid>
 
-		<!--Internal, Upper Grid-->
-		<Grid HorizontalAlignment="Stretch" Height="auto" Grid.Row="0" VerticalAlignment="Stretch" Width="auto">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			<Label Content="Label" HorizontalAlignment="Left" Margin="308,16,0,0" VerticalAlignment="Top" Grid.Column="0" />
-			<!--<ComboBox Grid.Column="1" SelectedValue="{Binding Path=Semester, Mode=TwoWay}"
-                ItemsSource="{Binding Source={StaticResource SemestersCollectionKey}}"/>-->
-            <ComboBox Grid.Column="1" SelectedValue ="{Binding Level}" ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectionChanged="ComboBox_SelectionChanged"/>
-
-
-		</Grid>
-
-
-        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding EngineerList}" MouseDoubleClick="twoclicksbuttom" >
+        <!-- ListView for Engineers -->
+        <ListView Grid.Row="1" Margin="5" ItemsSource="{Binding EngineerList}" MouseDoubleClick="twoclicksbuttom" Background="#66000000">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="Foreground" Value="LightPink"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
+                    <GridViewColumn Header="SalaryHour" DisplayMemberBinding="{Binding SalaryHour}"/>
+                    <GridViewColumn Header="Level" DisplayMemberBinding="{Binding Level}"/>
+                    <!-- Add more GridViewColumns for other details -->
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="Button_Add_click"/>
 
-
-
-	</Grid>
-
+        <!-- Add Button for Adding Engineers -->
+        <Button Grid.Row="2" Content="Add" HorizontalAlignment="Center" Height="50" Width="100" Click="Button_Add_click"/>
+    </Grid>
 </Window>
