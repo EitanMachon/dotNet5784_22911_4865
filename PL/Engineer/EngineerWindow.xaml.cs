@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 namespace PL.Engineer;
 
 
+
 /// <summary>
 /// Interaction logic for EngineerWindow.xaml
 /// </summary>
@@ -44,10 +45,10 @@ public partial class EngineerWindow : Window
             Engineer = s_bl?.Engineer.Read(i); // Using the BlApi to get the engineer by the id and store it in the Engineer
         }
     }
+    
    /// <summary>
    /// this func gonna close the EngineerWindow and update the engineer by using the BlApi
    /// </summary>
-   
     private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
     {
         try // try to update the engineer by using the BlApi

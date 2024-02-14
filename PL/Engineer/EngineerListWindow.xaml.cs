@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,4 +56,15 @@ public partial class EngineerListWindow : Window
 
     }
 
+    private void Button_Add_click(object sender, RoutedEventArgs e)
+    {
+        EngineerWindow engineerWindow = new EngineerWindow(); // Create a new instance of the EngineerWindow class and store it in a variable
+        engineerWindow.ShowDialog(); // Show the EngineerWindow      
+    }
+
+    private void twoclicksbuttom(object sender, MouseButtonEventArgs e)
+    {
+        BO.Engineer? engineerFromList = (sender as ListView)?.SelectedItem as BO.Engineer; // Create a new instance of the BO.Engineer class and store it in a variable and give it the value of the engineer by the id
+        new EngineerWindow(engineerFromList!.Id).ShowDialog(); // Show the EngineerWindow by the id of the engineer
+    }
 }

@@ -34,14 +34,21 @@
 		</Grid>
 
 
-		<ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path= EngineerList}" >
-			<ListView.View>
-				<GridView>
-					<GridViewColumn/>
-				</GridView>
-			</ListView.View>
-		</ListView>
-		<Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+        <ListView Margin="5" Grid.Row="1" ItemsSource="{Binding Path= EngineerList}" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" Click="Button_Click"/>
+        <ListView x:Name="click" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" MouseDown="twoclicksbuttom">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
 
 	</Grid>
