@@ -8,7 +8,7 @@
         Title="EngineerWindow" Height="450" Width="800"
         DataContext="{Binding Engineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
 
-    <Grid>
+    <Grid Margin="0,0,0,-16">
 
         <Label Content="ID" HorizontalAlignment="Left" Margin="148,61,0,0" VerticalAlignment="Top" Width="100" IsEnabled="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}"/>
         <TextBox Grid.Row="2" Grid.Column="1"  TextWrapping="Wrap" Margin="611,74,0,0" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  HorizontalAlignment="Left" Height="NaN"   VerticalAlignment="Top" Width="120"/>
@@ -31,9 +31,9 @@
         <Label Content="Task" HorizontalAlignment="Left" Margin="148,372,0,0" VerticalAlignment="Top" Width="100" IsEnabled="{Binding Task, Mode=TwoWay, Converter= {StaticResource ConvertTaskToContent}}"/>
         <TextBox  TextWrapping="Wrap" Margin="611,132,0,0" Text="{Binding Task, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}"  HorizontalAlignment="Left" Height="NaN"   VerticalAlignment="Top" Width="120"/>
 
-        <Button Grid.Column="0"         Content="{Binding Id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}" 
+        <Button Grid.Column="0"         Content="{Binding Id ,Mode=OneTime ,Converter={StaticResource ConverIdToContentKey}}"
         HorizontalAlignment="Left"                                                                             Margin="380,386,0,0"  VerticalAlignment="Top" Padding="5" 
-        Click="btnAddUpdate_Click" RenderTransformOrigin="-0.209,6.749"/>
+        Click="btnAddUpdate_Click" RenderTransformOrigin="-0.209,6.749" Width="51"/>
 
     </Grid>
 </Window>
