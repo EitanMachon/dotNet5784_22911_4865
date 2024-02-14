@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,16 +13,52 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL.Engineer
+namespace PL.Engineer;
+
+
+/// <summary>
+/// Interaction logic for EngineerWindow.xaml
+/// </summary>
+public partial class EngineerWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for EngineerWindow.xaml
-    /// </summary>
-    public partial class EngineerWindow : Window
+    public BO.Engineer Engineer // Create a new instance of the BO.Engineer class and store it in a property
     {
-        public EngineerWindow()
+        get { return (BO.Engineer)GetValue(EngineerProperty); } // Using GetValue and SetValue to get and set the value of the Engineer property
+        set { SetValue(EngineerProperty, value); } // Using GetValue and SetValue to get and set the value of the Engineer property
+    }
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get(); // Create a new instance of the BlApi class and store it in a static readonly variable
+    public static readonly DependencyProperty EngineerProperty = DependencyProperty.Register("Engineer", typeof(BO.Engineer), typeof(EngineerWindow), new PropertyMetadata(null)); // Using DependencyProperty as the backing store for Engineer.  This enables animation, styling, binding, etc...
+    /// <summary>
+    /// This func assign the value of the Engineer property to the value of the parameter
+    /// </summary>
+    public EngineerWindow(int i = 0) // the constructor of the EngineerWindow class that get a parameter with a default value of 0
+    {
+        InitializeComponent(); // Initialize the EngineerWindow
+        Engineer = s_bl?.Engineer.Read(i); // create a new instance of the BO.Engineer class and store it in a variable and give it the value of the engineer by the id
+        if (Engineer.Id == 0) // if the id of the engineer is equal to 0
         {
-            InitializeComponent();
+            Engineer = new BO.Engineer(); // Create a new instance of the BO.Engineer class and store it in a property and give it a diffult value of 0
         }
+        else // if the id of the engineer is not equal to 0
+        {
+            Engineer = s_bl?.Engineer.Read(i); // Using the BlApi to get the engineer by the id and store it in the Engineer
+        }
+    }
+   /// <summary>
+   /// this func gonna close the EngineerWindow and update the engineer by using the BlApi
+   /// </summary>
+   
+    private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
+    {
+        try // try to update the engineer by using the BlApi
+        {           
+            s_bl?.Engineer.Update(Engineer); // Using the BlApi to update the engineer
+            MessageBox.Show("The engineer has been updated successfully"); // Show a message to the user                
+            Close(); // Close the EngineerWindow
+        }
+        catch (Exception ex) // if there is an exception
+        {
+            MessageBox.Show(ex.Message); // Show a message to the user
+        }   
     }
 }
