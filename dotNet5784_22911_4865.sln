@@ -33,6 +33,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BlTest\BlTest.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{04DB032B-CC09-4BC6-9C4A-91BB3EA0BDA4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "photo", "photo", "{B27DF2D8-46A1-4716-A3BF-8D7A43BAE85B}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Downloads\Daf.jpg = ..\..\..\Downloads\Daf.jpg
+		..\..\..\Downloads\red-gray-garage-palm-springs.webp = ..\..\..\Downloads\red-gray-garage-palm-springs.webp
+		..\..\..\Downloads\workerpic.jpg = ..\..\..\Downloads\workerpic.jpg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

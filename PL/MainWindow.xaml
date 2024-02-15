@@ -5,7 +5,7 @@
     <Grid>
         <!-- Background Image -->
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\ishay\Downloads\red-gray-garage-palm-springs.webp" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="\pic\Auto-Repair.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <!-- StackPanel to hold buttons -->
@@ -38,6 +38,6 @@
         </StackPanel>
 
         <!-- TextBlock with the phrase -->
-        <TextBlock Text="Welcom to our garage system!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" FontSize="24" Foreground="Yellow"/>
+        <TextBlock Text="Welcom to our garage system!" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="40" FontWeight="ExtraBold" Foreground="Purple" Background="black" Height="63"/>
     </Grid>
 </Window>

@@ -11,7 +11,7 @@
     <!-- External Grid with Background Image -->
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\ishay\Downloads\workerpic.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="..\pic\workerpic.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
