@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+
+namespace PL
+{
+    /// <summary>
+    /// Interaction logic for LoginScreen.xaml
+    /// </summary>
+    public partial class LoginScreen : Window
+    {
+        public LoginScreen()
+        {
+            InitializeComponent();
+        }
+
+        private void openManagerWindow_click(object sender, RoutedEventArgs e)
+        {
+            new MainWindow().Show(); // Create a new instance of MainWindow
+        }
+
+        private void reset_click(object sender, RoutedEventArgs e)
+        {
+            // Ask the user for confirmation
+            // its gonna show a message box with the question "Are you sure you want to reset the database?"
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to reset the database?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            // If the user confirms, reset the database
+            if (result == MessageBoxResult.Yes)
+            {
+                //BltTest.
+                MessageBox.Show("Database reset successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+        }
+
+        private void Initialization_Click(object sender, RoutedEventArgs e)
+        {
+            // Ask the user for confirmation
+            // its gonna show a message box with the question "Are you sure you want to initialize the database?"
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to initialize the database?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            // If the user confirms, initialize the database
+            if (result == MessageBoxResult.Yes)
+            {
+                // Call the initialization method in DalTest
+                DalTest.Initialization.Do();
+                MessageBox.Show("Database initialized successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void EmployeeEntry_Click(object sender, RoutedEventArgs e)
+        {
+            new EmployeWindow().Show(); // Create a new instance of EmployeWindow
+        }
+    }
+}

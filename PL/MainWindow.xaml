@@ -5,7 +5,7 @@
     <Grid>
         <!-- Background Image -->
         <Grid.Background>
-            <ImageBrush ImageSource="\pic\Auto-Repair.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="\pic\hey1.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
 
         <!-- StackPanel to hold buttons -->
