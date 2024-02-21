@@ -22,6 +22,18 @@
                     <SolidColorBrush Color="White"/>
                 </Button.Foreground>
             </Button>
+            <!-- task List Button -->
+            <Button Content="Handle Tasks" Width="200" Height="50" Margin="0,0,20,0" Click="Button_TaskList" >
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#4CAF50" Offset="0.1"/>
+                        <GradientStop Color="#388E3C" Offset="0.9"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Foreground>
+                    <SolidColorBrush Color="White"/>
+                </Button.Foreground>
+            </Button>
 
             <!-- Initialization Button -->
             <Button Content="Initialization" Width="200" Height="50" Margin="20,0,0,0" Click="intilization_buttom">

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using BlApi;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +17,7 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
+        static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
         public MainWindow()
         {
             InitializeComponent();
@@ -49,6 +51,10 @@ namespace PL
             }
         }
 
-       
+        private void Button_TaskList(object sender, RoutedEventArgs e)
+        {
+            new Task.TaskListWindow().Show(); // Create a new instance of TaskListWindow
+
+        }
     }
 }

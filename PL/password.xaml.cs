@@ -29,23 +29,18 @@ namespace PL
             TextBox textBox = sender as TextBox; // Cast the sender to TextBox
             if (textBox.Text == "1234") // Check the text of the TextBox
             {
-                MessageBox.Show("The password is correct");
-                System.Timers.Timer timer = new System.Timers.Timer();
-                timer.Interval = 1000; // 1 second
-                timer.AutoReset = false; // Only execute once
-                timer.Elapsed += (s, ev) =>
-                {
-                    new MainWindow().Show();
-                    Close(); // Close the password window
-
-                }
-        ;
+                new MainWindow().Show();
+                Close(); // Close the password window
             }
+            
+
         }
 
         private void Button_Back(object sender, RoutedEventArgs e)
         {
-            Close();
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.Show();
+            Close(); // Close the password window
         }
     }
 }

@@ -36,8 +36,8 @@ namespace PL.Task
             TaskWindow taskWindow = new TaskWindow();
             taskWindow.ShowDialog();
             Update();
-
         }
+
         public IEnumerable<BO.Task> TaskList
         {
             get { return (IEnumerable<BO.Task>)GetValue(TaskListProperty); }
@@ -67,12 +67,24 @@ namespace PL.Task
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            BO.Task? taskFromList = (sender as ListView)?.SelectedItem as BO.Task;
+            if (taskFromList != null)
+            {
+                new TaskWindow(taskFromList!.Id).ShowDialog();
+                Update();
+            }
 
         }
 
         private void twoclicksbuttom(object sender, MouseButtonEventArgs e)
         {
-
+            
+            BO.Task? taskFromList = (sender as ListView)?.SelectedItem as BO.Task;
+            if (taskFromList != null)
+            {
+                new TaskWindow(taskFromList!.Id).ShowDialog();
+                Update();
+            }
         }
     }
 }

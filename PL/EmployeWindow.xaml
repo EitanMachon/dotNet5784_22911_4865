@@ -10,7 +10,8 @@
         <Grid.Background>
             <ImageBrush ImageSource="\pic\Auto-Repair.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <Label Content="Still in progress" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20"/>
+   
+        
 
     </Grid>
 </Window>

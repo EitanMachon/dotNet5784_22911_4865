@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace PL
     /// </summary>
     public partial class LoginScreen : Window
     {
+        static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
         public LoginScreen()
         {
             InitializeComponent();
@@ -27,7 +29,8 @@ namespace PL
 
         private void openManagerWindow_click(object sender, RoutedEventArgs e)
         {
-            new MainWindow().Show(); // Create a new instance of MainWindow
+            new password().Show(); // Create a new instance of password
+            Close(); // Close the login window
         }
 
         private void reset_click(object sender, RoutedEventArgs e)
