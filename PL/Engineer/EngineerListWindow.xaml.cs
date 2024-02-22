@@ -81,5 +81,10 @@ namespace PL.Engineer
             else // If the level is not all, we get the engineers with the specified level
                 EngineerList = s_bl?.Engineer.ReadAll(x => x != null && x.Level == Level)?.OrderBy(item => item?.Name);
         }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -30,7 +30,7 @@
         </Grid>
 
         <!-- ListView for Engineers -->
-        <ListView Grid.Row="1" Margin="5" ItemsSource="{Binding EngineerList}" MouseDoubleClick="twoclicksbuttom" Background="#66000000">
+        <ListView Grid.Row="1" Margin="5" ItemsSource="{Binding EngineerList}" MouseDoubleClick="twoclicksbuttom" Background="#66000000" SelectionChanged="ListView_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Height" Value="30"/>
