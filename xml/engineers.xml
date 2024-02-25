@@ -9,14 +9,6 @@
     <IsActive>false</IsActive>
   </Engineer>
   <Engineer>
-    <Id>22041992</Id>
-    <Name>Dina Klein</Name>
-    <Email>dina.klein@gmail.com</Email>
-    <SalaryHour>9540827.759816315</SalaryHour>
-    <Level>Expert</Level>
-    <IsActive>false</IsActive>
-  </Engineer>
-  <Engineer>
     <Id>44634138</Id>
     <Name>Shira Israelof</Name>
     <Email>shira.israelof@gmail.com</Email>
@@ -326,6 +318,22 @@
     <Email>miri.levi@gmail.com</Email>
     <SalaryHour>5120682.06989439</SalaryHour>
     <Level>Intermediate</Level>
+    <IsActive>false</IsActive>
+  </Engineer>
+  <Engineer>
+    <Id>22041992</Id>
+    <Name>Dina Klein</Name>
+    <Email>dina.klein@gmail.com</Email>
+    <SalaryHour>30</SalaryHour>
+    <Level>Expert</Level>
+    <IsActive>false</IsActive>
+  </Engineer>
+  <Engineer>
+    <Id>326034867</Id>
+    <Name>Yishay</Name>
+    <Email>ishay@gmail.com</Email>
+    <SalaryHour>400000000</SalaryHour>
+    <Level>Expert</Level>
     <IsActive>false</IsActive>
   </Engineer>
 </ArrayOfEngineer>
