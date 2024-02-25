@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,5 +24,18 @@ namespace PL
         {
             InitializeComponent();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    if (EngineerId == BO.EngineerExperience.All) // If the level is all, we get all the engineers
+        //        EngineerList = s_bl?.Engineer.ReadAll()?.OrderBy(item => item?.Name); // Corrected orderBy usage
+        //    else // If the level is not all, we get the engineers with the specified level
+        //        EngineerList = s_bl?.Engineer.ReadAll(x => x != null && x.Level == Level)?.OrderBy(item => item?.Name);
+        //}
     }
 }

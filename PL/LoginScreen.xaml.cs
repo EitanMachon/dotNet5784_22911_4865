@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using PL.Engineer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,7 +66,7 @@ namespace PL
 
         private void EmployeeEntry_Click(object sender, RoutedEventArgs e)
         {
-            new EmployeWindow().Show(); // Create a new instance of EmployeWindow
+            new EMPLOEYVIEWENGINEERLIST().Show(); // Create a new instance of EmployeWindow
         }
     }
 }

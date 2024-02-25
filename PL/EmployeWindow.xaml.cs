@@ -19,15 +19,6 @@ namespace PL
     /// </summary>
     public partial class EmployeWindow : Window
     {
-        static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
-        /// <summary>
-        /// this function is used to get the list of engineers
-        /// </summary>
-        public IEnumerable<BO.Engineer> EngineerList
-        {
-            get { return (IEnumerable<BO.Engineer>)GetValue(EngineerListProperty); }
-            set { SetValue(EngineerListProperty, value); }
-        }
 
         private void SetValue(object engineerListProperty, IEnumerable<BO.Engineer> value)
         {
