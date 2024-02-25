@@ -13,8 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi; // Import the namespace where BlApi is located
 
-
-
 namespace PL.Task
 {
     /// <summary>
@@ -29,6 +27,7 @@ namespace PL.Task
         public TaskWindow(int i = 0) // the constructor of the TaskWindow class that get a parameter with a default value of 0
         {
             InitializeComponent(); // Initialize the TaskWindow
+            
             if (i == 0) // if the id of the task is equal to 0
             {
                 Task = new BO.Task(); // Create a new instance of the BO.Task class and store it in a property and give it a diffult value of 0
@@ -61,7 +60,6 @@ namespace PL.Task
             
            
 
-        }
-        
+        }        
     }
 }

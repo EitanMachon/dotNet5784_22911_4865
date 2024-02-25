@@ -28,8 +28,8 @@ namespace PL
         /// </summary>
         private void Button_Engineer_List(object sender, RoutedEventArgs e)
         {
-         new Engineer.EngineerListWindow().Show(); // Create a new instance of EngineerListWindow
-          // Show the window of EngineerListWindow
+            new Engineer.EngineerListWindow().Show(); // Create a new instance of EngineerListWindow
+                                                      // Show the window of EngineerListWindow
         }
 
         /// <summary>
@@ -55,6 +55,13 @@ namespace PL
         {
             new Task.TaskListWindow().Show(); // Create a new instance of TaskListWindow
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.Show();
+            Close(); // Close the password window        
         }
     }
 }

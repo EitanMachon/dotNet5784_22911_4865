@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="EMPLOEYVIEWENGINEERLIST" Height="450" Width="800">
-    <Grid>
+    <Grid Margin="0,0,0,-16">
         <Label Content="Still in progress" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20"/>
+        <TextBox HorizontalAlignment="Left" Margin="642,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
+        <Label Content="put your id:" HorizontalAlignment="Left" Margin="667,52,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
