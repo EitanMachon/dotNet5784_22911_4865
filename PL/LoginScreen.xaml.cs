@@ -27,13 +27,11 @@ namespace PL
         {
             InitializeComponent();
         }
-
         private void openManagerWindow_click(object sender, RoutedEventArgs e)
         {
             new password().Show(); // Create a new instance of password
             Close(); // Close the login window
         }
-
         private void reset_click(object sender, RoutedEventArgs e)
         {
             // Ask the user for confirmation
@@ -67,6 +65,7 @@ namespace PL
         private void EmployeeEntry_Click(object sender, RoutedEventArgs e)
         {
             new EMPLOEYVIEWENGINEERLIST().Show(); // Create a new instance of EmployeWindow
+            Close();
         }
     }
 }

@@ -32,8 +32,6 @@ namespace PL
                 new MainWindow().Show();
                 Close(); // Close the password window
             }
-            
-
         }
 
         private void Button_Back(object sender, RoutedEventArgs e)

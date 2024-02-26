@@ -10,7 +10,7 @@
 
     <Grid Margin="10">
         <!-- Background Image -->
-       
+
 
         <!-- Labels and Input Fields -->
         <StackPanel>
@@ -41,7 +41,7 @@
                     <Setter Property="Padding" Value="10"/>
                 </Style>
             </StackPanel.Resources>
-            
+
             <!-- Task Details -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -61,42 +61,46 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Label Content="ID:" Grid.Row="0"/>
-                <TextBox Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="0" Grid.Column="1"/>
-                
-                <Label Content="Alias:" Grid.Row="1"/>
-                <TextBox Text="{Binding Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1"/>
+                <Label Content="ID:" Grid.Row="0" Foreground="Black"/>
+                <TextBox Text="{Binding Task.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="0" Grid.Column="1"/>
 
-                <Label Content="Description:" Grid.Row="2"/>
-                <TextBox Text="{Binding Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="2" Grid.Column="1"/>
+                <Label Content="Alias:" Grid.Row="1" Foreground="Black"/>
+                <TextBox Text="{Binding Task.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1"/>
 
-                <Label Content="Status:" Grid.Row="3"/>
+                <Label Content="Description:" Grid.Row="2" Foreground="Black"/>
+                <TextBox Text="{Binding Task.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="2" Grid.Column="1"/>
+
+                <Label Content="Status:" Grid.Row="3" Foreground="Black"/>
                 <ComboBox ItemsSource="{Binding Source={StaticResource StatusCollection}}"
                           SelectedValue="{Binding Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Grid.Column="1"/>
 
-                <Label Content="Created At Date:" Grid.Row="4"/>
+                <Label Content="Created At Date:" Grid.Row="4" Foreground="Black"/>
                 <DatePicker SelectedDate="{Binding CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Grid.Column="1"/>
 
-                <Label Content="Deliverables:" Grid.Row="5"/>
-                <TextBox Text="{Binding Deliverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="5" Grid.Column="1"/>
+                <Label Content="Deliverables:" Grid.Row="5" Foreground="Black"/>
+                <TextBox Text="{Binding Task.Dekiverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="5" Grid.Column="1"/>
 
-                <Label Content="Remarks:" Grid.Row="6"/>
-                <TextBox Text="{Binding Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="6" Grid.Column="1"/>
+                <Label Content="Remarks:" Grid.Row="6" Foreground="Black"/>
+                <TextBox Text="{Binding Task.Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="6" Grid.Column="1"/>
 
-                <Label Content="Engineer ID:" Grid.Row="7"/>
-                <TextBox Text="{Binding EngineerId, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="7" Grid.Column="1"/>
-                
+                <Label Content="Engineer ID:" Grid.Row="7" Foreground="Black"/>
+                <TextBox Text="{Binding Task.EngineerId, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="7" Grid.Column="1"/>
 
-                <Label Content="Complexity:" Grid.Row="8"/>
+
+                <Label Content="Complexity:" Grid.Row="8" Foreground="Black"/>
                 <ComboBox ItemsSource="{Binding Source={StaticResource LevelCollection}}" 
                           SelectedValue="{Binding Complexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8" Grid.Column="1"/>
 
-                <Label Content="Required Effort:" Grid.Row="9"/>
+                <Label Content="Required Effort:" Grid.Row="9" Foreground="Black"/>
                 <TextBox Text="{Binding RequiredEffort, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="9" Grid.Column="1"/>
+                <Label Grid.Column="1" Content="Label" HorizontalAlignment="Left" Margin="81,18,0,33" Grid.RowSpan="2" Grid.Row="1"/>
+                <Button Content="Back" HorizontalAlignment="Left" Margin="395,0,0,0" VerticalAlignment="Center" Height="36" Width="78" Grid.Column="1" Foreground="Black" Click="Button_Click"/>
             </Grid>
-            
+
             <!-- Button for Adding/Updating Task -->
-            <Button Content="{Binding Id ,Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" Click="btnAddUpdate_Click"/>
+            <Button Content="{Binding Id ,Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" Click="btnAddUpdate_Click" />
+            <Label Content="Label"/>
+            <Label Content="Label"/>
         </StackPanel>
     </Grid>
 </Window>

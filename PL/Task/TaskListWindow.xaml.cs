@@ -47,7 +47,7 @@ namespace PL.Task
         public static readonly DependencyProperty TaskListProperty =
             DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
 
- 
+
         void Update()
         {
             if (Copmlexity == BO.EngineerExperience.All) // If the level is all, we get all the engineers
@@ -85,6 +85,18 @@ namespace PL.Task
                 new TaskWindow(taskFromList!.Id).ShowDialog();
                 Update();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow loginScreen = new MainWindow();
+            loginScreen.Show();
+            Close(); // Close the password window                    
+        }
+
+        private void MouseDoubleClick_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

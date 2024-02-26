@@ -5,6 +5,7 @@
              StartupUri="LoginScreen.xaml">
     <Application.Resources>
         <local:LevelCollection x:Key="LevelCollection"/>
+        <local:StatusCollection x:Key="StatusCollection"/>
         <local:ConverIdToContentKey x:Key="ConvertIdToContentKey"/>
         <local:ConvertIdToContent x:Key="ConvertIdToContent"/>
         

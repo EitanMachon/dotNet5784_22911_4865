@@ -27,10 +27,11 @@
             </Grid.ColumnDefinitions>
             <Label Content="Engineers: " HorizontalAlignment="Left" Margin="10,0,0,9" Grid.Column="0" Foreground="Yellow" FontSize="16"/>
             <ComboBox Grid.Column="1" SelectedValue="{Binding Level}" ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectionChanged="ComboBox_SelectionChanged"/>
+            <Border BorderBrush="Black" BorderThickness="1"/>
         </Grid>
 
         <!-- ListView for Engineers -->
-        <ListView Grid.Row="1" Margin="5" ItemsSource="{Binding EngineerList}" MouseDoubleClick="twoclicksbuttom" Background="#66000000" SelectionChanged="ListView_SelectionChanged">
+        <ListView Grid.Row="1" Margin="5" MouseDoubleClick="twoclicksbuttom" Background="#66000000" SelectionChanged="ListView_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Height" Value="30"/>
@@ -47,9 +48,12 @@
                     <!-- Add more GridViewColumns for other details -->
                 </GridView>
             </ListView.View>
+            <Button Content="Button"/>
+            <Button Content="Button"/>
         </ListView>
 
         <!-- Add Button for Adding Engineers -->
         <Button Grid.Row="2" Content="Add" HorizontalAlignment="Center" Height="50" Width="100" Click="Button_Add_click"/>
+        <Button Content="close" HorizontalAlignment="Left" Margin="455,0,0,0" Grid.Row="2" VerticalAlignment="Center" Height="50" Width="94" Click="Button_Click"/>
     </Grid>
 </Window>
