@@ -50,13 +50,11 @@ namespace PL
                 MessageBox.Show("Database initialized successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
         private void Button_TaskList(object sender, RoutedEventArgs e)
         {
             new Task.TaskListWindow().Show(); // Create a new instance of TaskListWindow
-
+            Close();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             LoginScreen loginScreen = new LoginScreen();

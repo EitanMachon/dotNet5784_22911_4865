@@ -10,5 +10,7 @@
         <Label Content="Still in progress" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20"/>
         <TextBox HorizontalAlignment="Left" Margin="642,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
         <Label Content="put your id:" HorizontalAlignment="Left" Margin="667,52,0,0" VerticalAlignment="Top"/>
+        <Button Content="ok" HorizontalAlignment="Left" Margin="702,122,0,0" VerticalAlignment="Top" Width="36" RenderTransformOrigin="2.075,0.678"/>
+        
     </Grid>
 </Window>

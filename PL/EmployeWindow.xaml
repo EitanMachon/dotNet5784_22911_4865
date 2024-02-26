@@ -10,9 +10,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="\pic\Auto-Repair.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <TextBox HorizontalAlignment="Left" Margin="628,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Label Content="put your id: " HorizontalAlignment="Left" Margin="648,48,0,0" VerticalAlignment="Top" Background="red" Height="28" Width="80" FontWeight="Bold" IsEnabled="False" />
-
+        
 
 
     </Grid>
