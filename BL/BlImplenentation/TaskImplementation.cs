@@ -155,7 +155,7 @@ internal class TaskImplementation : ITask
             };  // cast the Engineer to the BO layer
             try // try to read the Task
             {
-                boTasks.Add(new BO.Task() // add the Task to the list of Tasks in the BO layer
+                BO.Task task2 = new BO.Task() // add the Task to the list of Tasks in the BO layer
                 {
                     Id = task.Id,
                     Alias = task.Alias,
@@ -166,7 +166,20 @@ internal class TaskImplementation : ITask
                     Engineer = engineerDO,
                     Copmlexity = (EngineerExperience)task.Copmlexity,
                     RequiredEffort = task.RequiredEffort,
-                });
+                    startDate = task.StartDate,
+                    DeadLinetime = task.DeadLinetime,
+                };
+                if (filter == null)
+                {
+                    boTasks.Add(task2);
+                }
+                else
+                {
+                    if (filter(task2))
+                    {
+                        boTasks.Add(task2);
+                    }
+                }
             }
             catch (DO.DalReadException e) // if the Task cannot be read, throw an exception
             {

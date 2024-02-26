@@ -54,10 +54,10 @@ namespace PL.Task
                 TaskList = s_bl?.Task.ReadAll()?.OrderBy(item => item?.Alias); // Corrected orderBy usage
             else // If the level is not all, we get the engineers with the specified level
                 TaskList = s_bl?.Task.ReadAll(x => x != null && x.Copmlexity == Copmlexity)?.OrderBy(item => item?.Alias);
-            if (status == BO.Status.Unscheduled) // If the status is unscheduled, we get all the engineers
-                TaskList = s_bl?.Task.ReadAll()?.OrderBy(item => item?.Alias); // Corrected orderBy usage
-            else // If the status is not unscheduled, we get the engineers with the specified status
-                TaskList = s_bl?.Task.ReadAll(x => x != null && x.status == status)?.OrderBy(item => item?.Alias);
+       //     if (status == BO.Status.Unscheduled) // If the status is unscheduled, we get all the engineers
+       //         TaskList = s_bl?.Task.ReadAll()?.OrderBy(item => item?.Alias); // Corrected orderBy usage
+       //     else // If the status is not unscheduled, we get the engineers with the specified status
+       //         TaskList = s_bl?.Task.ReadAll(x => x != null && x.status == status)?.OrderBy(item => item?.Alias);
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

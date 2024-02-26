@@ -27,7 +27,7 @@ namespace PL
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = sender as TextBox; // Cast the sender to TextBox
-            if (textBox.Text == "1234") // Check the text of the TextBox
+            if (textBox.Text == "123") // Check the text of the TextBox
             {
                 new MainWindow().Show();
                 Close(); // Close the password window
