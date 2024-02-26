@@ -5,12 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="EmployeWindow" Height="450" Width="800">
+        Title="EmployeWindow" Height="350" Width="400"
+        DataContext="{Binding employeTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="\pic\Auto-Repair.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="\pic\hey7.png" Stretch="UniformToFill"/>
         </Grid.Background>
-        
+        <!--Status-->
+        <Label Content="Updated status:" HorizontalAlignment="Left" Margin="93,68,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Margin="213,74,0,0" VerticalAlignment="Top" Width="101" Height="13" ItemsSource="{Binding Source={StaticResource StatusCollection}}"  SelectedValue="{Binding status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+
+
+        <!--ScheduledTime-->
+        <Label Content="Updated Scheduled:" HorizontalAlignment="Left" Margin="93,99,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding ScheduledTime , Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Height="17" Margin="221,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+
+
+        <!-- Dekiverables-->
+        <Label Content="Deliverables:" HorizontalAlignment="Left" Margin="93,130,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Dekiverables , Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Height="17" Margin="221,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+
+        <!--Remarks-->
+        <Label Content="Remarks:" HorizontalAlignment="Left" Margin="93,161,0,0" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding Remarks , Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Height="17" Margin="221,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="148,253,0,0" VerticalAlignment="Top" Width="97"/>
+
+
+
+
+
 
 
     </Grid>
