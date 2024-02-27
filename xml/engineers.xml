@@ -2,9 +2,9 @@
 <ArrayOfEngineer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Engineer>
     <Id>12345678</Id>
-    <Name>ishay tiram</Name>
-    <Email>asd@gg</Email>
-    <SalaryHour>18</SalaryHour>
+    <Name>Yishay tiram</Name>
+    <Email>ishayshlomotiram@gmail.com</Email>
+    <SalaryHour>50</SalaryHour>
     <Level>Intermediate</Level>
     <IsActive>false</IsActive>
   </Engineer>
