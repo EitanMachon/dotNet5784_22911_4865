@@ -31,7 +31,7 @@
         </Grid>
 
         <!-- ListView for Engineers -->
-        <ListView x:Name="MouseDoubleClick" ItemsSource="{Binding  EngineerList}" Grid.Row="1" Margin="5" MouseDoubleClick="twoclicksbuttom" Background="#66000000" >
+        <ListView ItemsSource="{Binding EngineerList}" Grid.Row="1" Margin="0,10,10,0" MouseDoubleClick="twoclicksbuttom" Background="#66000000" SelectionChanged="ListView_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Height" Value="30"/>
@@ -52,6 +52,6 @@
 
         <!-- Add Button for Adding Engineers -->
         <Button Grid.Row="2" Content="Add" HorizontalAlignment="Center" Height="50" Width="100" Click="Button_Add_click"/>
-        <Button Content="close" HorizontalAlignment="Left" Margin="455,534,0,0" Grid.Row="1" VerticalAlignment="Top" Height="50" Width="94" Click="Button_Click" Grid.RowSpan="2"/>
+        <Button Content="close" HorizontalAlignment="Left" Margin="455,534,0,0" Grid.Row="1" Width="94" Click="Button_Click" Grid.RowSpan="2"/>
     </Grid>
 </Window>

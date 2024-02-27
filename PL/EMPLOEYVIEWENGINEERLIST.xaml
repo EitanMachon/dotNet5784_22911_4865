@@ -5,12 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="EMPLOEYVIEWENGINEERLIST" Height="450" Width="800">
-    <Grid Margin="0,0,0,-16">
-        <Label Content="Still in progress" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20"/>
-        <TextBox HorizontalAlignment="Left" Margin="642,83,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged"/>
-        <Label Content="put your id:" HorizontalAlignment="Left" Margin="667,52,0,0" VerticalAlignment="Top"/>
-        <Button Content="ok" HorizontalAlignment="Left" Margin="702,122,0,0" VerticalAlignment="Top" Width="36" RenderTransformOrigin="2.075,0.678"/>
-        
+        Title="EMPLOEYVIEWENGINEERLIST" Height="450" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+        Background="DarkGray"
+        >
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="507*"/>
+            <ColumnDefinition Width="293*"/>
+        </Grid.ColumnDefinitions>
+        <!-- ListView for Engineers -->
+        <ListView Margin="0,0,59,0" MouseDoubleClick="twoclicksbuttom" Background="#66000001" Grid.ColumnSpan="2">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="Foreground" Value="LightPink"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}"/>
+                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Copmlexity" DisplayMemberBinding="{Binding Copmlexity}"/>
+                    <GridViewColumn Header="Required Effort Time" DisplayMemberBinding="{Binding RequiredEffort}"/>
+                    <!-- Add more GridViewColumns for other details -->
+                </GridView>
+            </ListView.View>
+            <Button Content="Back"/>
+
+        </ListView>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="248,10,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.286,0.979" Width="35" Click="Button_Click"/>
     </Grid>
 </Window>

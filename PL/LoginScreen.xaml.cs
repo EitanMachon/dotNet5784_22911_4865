@@ -64,7 +64,7 @@ namespace PL
 
         private void EmployeeEntry_Click(object sender, RoutedEventArgs e)
         {
-            new EMPLOEYVIEWENGINEERLIST().Show(); // Create a new instance of EmployeWindow
+            new GetEngineerIdWindow().Show(); // Create a new instance of EmployeWindow
             Close();
         }
     }
