@@ -30,7 +30,7 @@
                   ItemsSource="{Binding Source={StaticResource LevelCollection}}" 
                   SelectedValue="{Binding Level, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
 
-        <Button Content="{Binding Id ,Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,220,0,0" Padding="5" 
+        <Button Content="Ok" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,220,0,0" Padding="5" 
                 Click="btnAddUpdate_Click" Width="70"/>
     </Grid>
 </Window>

@@ -28,7 +28,7 @@
         <!--Remarks-->
         <Label Content="Remarks:" HorizontalAlignment="Left" Margin="93,161,0,0" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Remarks , Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Height="17" Margin="221,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="148,253,0,0" VerticalAlignment="Top" Width="97"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="148,253,0,0" VerticalAlignment="Top" Width="97" Click="Button_Click"/>
 
 
 

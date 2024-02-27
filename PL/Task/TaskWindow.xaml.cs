@@ -78,6 +78,10 @@ namespace PL.Task
         {
             Close(); // Close the password window        
         }
-    
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BlApi;
+using PL.Task;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
@@ -20,22 +22,39 @@ namespace PL
     /// </summary>
     public partial class EMPLOEYVIEWENGINEERLIST : Window
     {
-        public EMPLOEYVIEWENGINEERLIST()
+        static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
+
+
+        IEnumerable<BO.Task> TasksList
+        {
+            get { return (IEnumerable<BO.Task>)GetValue(TasksListProperty); } // Using GetValue and SetValue to get and set the value of the Task property
+            set { SetValue(TasksListProperty, value); } // Using GetValue and SetValue to get and set the value of the Task property
+        }
+        public static readonly DependencyProperty TasksListProperty = DependencyProperty.Register("TasksList", typeof(IEnumerable<BO.Task>), typeof(EMPLOEYVIEWENGINEERLIST), new PropertyMetadata(null)); // Using DependencyProperty as the backing store for Task.  This enables animation, styling, binding, etc...
+
+        public EMPLOEYVIEWENGINEERLIST(int engId) // get id of engineer
         {
             InitializeComponent();
+
+            // read all engineer's tasks
+            TasksList = s_bl.Task.ReadAll(t => t.Engineer.Id == engId);
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void twoclicksbuttom(object sender, MouseButtonEventArgs e)
         {
-
+            BO.Task? task = (sender as ListView).SelectedItem as BO.Task;
+            if (task != null)
+            {
+                new EmployeWindow(task.Id).Show();
+            }
         }
 
-        //private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    if (EngineerId == BO.EngineerExperience.All) // If the level is all, we get all the engineers
-        //        EngineerList = s_bl?.Engineer.ReadAll()?.OrderBy(item => item?.Name); // Corrected orderBy usage
-        //    else // If the level is not all, we get the engineers with the specified level
-        //        EngineerList = s_bl?.Engineer.ReadAll(x => x != null && x.Level == Level)?.OrderBy(item => item?.Name);
-        //}
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LoginScreen loginScreen = new LoginScreen();
+            loginScreen.Show();
+            Close(); // Close the password window        
+        
+    }
     }
 }

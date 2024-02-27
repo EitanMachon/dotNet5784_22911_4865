@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskWindow" Height="450" Width="600"
+        Title="TaskWindow" Height="539" Width="592"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <Grid Margin="10">
@@ -13,7 +13,7 @@
 
 
         <!-- Labels and Input Fields -->
-        <StackPanel>
+        <StackPanel Margin="0,0,0,51">
             <StackPanel.Resources>
                 <!-- Style for Labels -->
                 <Style TargetType="Label">
@@ -61,11 +61,8 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Label Content="ID:" Grid.Row="0" Foreground="Black"/>
-                <TextBox Text="{Binding Task.Id, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="0" Grid.Column="1"/>
-
                 <Label Content="Alias:" Grid.Row="1" Foreground="Black"/>
-                <TextBox Text="{Binding Task.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1"/>
+                <TextBox Text="{Binding Task.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1" TextChanged="TextBox_TextChanged"/>
 
                 <Label Content="Description:" Grid.Row="2" Foreground="Black"/>
                 <TextBox Text="{Binding Task.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="2" Grid.Column="1"/>
@@ -94,13 +91,11 @@
                 <Label Content="Required Effort:" Grid.Row="9" Foreground="Black"/>
                 <TextBox Text="{Binding RequiredEffort, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="9" Grid.Column="1"/>
                 <Label Grid.Column="1" Content="Label" HorizontalAlignment="Left" Margin="81,18,0,33" Grid.RowSpan="2" Grid.Row="1"/>
-                <Button Content="Back" HorizontalAlignment="Left" Margin="395,0,0,0" VerticalAlignment="Center" Height="36" Width="78" Grid.Column="1" Foreground="Black" Click="Button_Click"/>
+                <Button Content="Back" HorizontalAlignment="Left" Margin="411,0,0,0" VerticalAlignment="Center" Height="54" Width="62" Grid.Column="1" Foreground="Black" Click="Button_Click"/>
             </Grid>
 
             <!-- Button for Adding/Updating Task -->
-            <Button Content="{Binding Id ,Mode=OneTime, Converter={StaticResource ConvertIdToContent}}" Click="btnAddUpdate_Click" />
-            <Label Content="Label"/>
-            <Label Content="Label"/>
+            <Button Content="Ok"  Click="btnAddUpdate_Click" />
         </StackPanel>
     </Grid>
 </Window>

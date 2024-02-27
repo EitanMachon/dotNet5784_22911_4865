@@ -41,7 +41,7 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
         TimeSpan? timeSpan = TimeSpan.TryParse((string?)xml.Element("RequiredEffort"), out var result) ? (TimeSpan?)result : null;
 
         return new DO.Task(
-            (int)(xml.ToIntNullable("Id")!),
+            (int)(xml.ToIntNullable("Id")),
             xml.Element("Alias")!.Value,
             xml.Element("Description")!.Value,
             (DateTime)(xml.ToDateTimeNullable("CreatedAtDate")!),
@@ -52,7 +52,7 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
             xml.ToDateTimeNullable("DeadLinetime"),
             xml.ToDateTimeNullable("ComplateTime"),
             xml.Element("Dekiverables")!.Value,
-            xml.Element("Remarks")!.Value,
+            xml.Element("Remarks")?.Value ?? "",
             (int)(xml.ToIntNullable("EngineerId")!)
             );
     }
@@ -106,7 +106,8 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
             task.Element("DeadLinetime")!.Value = item.DeadLinetime != null ? item.DeadLinetime.ToString() : null;
             task.Element("ComplateTime")!.Value = item.ComplateTime != null ? item.ComplateTime.ToString() : null;
             task.Element("Dekiverables")!.Value = item.Dekiverables != null ? item.Dekiverables : null;
-            task.Element("Remarks")!.Value = item.Remarks != null ? item.Remarks : null;
+            if (item.Remarks != null)
+                task.Element("Remarks")!.Value = item.Remarks;
             task.Element("EngineerId")!.Value = item.EngineerId.ToString();
 
             XMLTools.SaveListToXMLElement(taskList, tasks_xml); // save the list to the file
