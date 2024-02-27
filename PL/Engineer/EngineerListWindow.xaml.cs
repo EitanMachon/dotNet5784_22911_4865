@@ -84,6 +84,12 @@ namespace PL.Engineer
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            BO.Engineer? engineerFromList = (sender as ListView)?.SelectedItem as BO.Engineer;
+            if (engineerFromList != null)
+            {
+                new EngineerWindow(engineerFromList!.Id).ShowDialog();
+                Update();
+            }
 
         }
 

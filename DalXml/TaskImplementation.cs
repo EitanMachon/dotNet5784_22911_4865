@@ -8,6 +8,7 @@ using DO;
 using DalXml;
 using Dal;
 using System.Xml.Linq;
+using System.Data;
 namespace DalXml;
 
 internal class TaskImplementation : ITask // this class implement ITask interface
@@ -55,6 +56,14 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
             xml.Element("Remarks")?.Value ?? "",
             (int)(xml.ToIntNullable("EngineerId")!)
             );
+        }
+        else
+        {
+            throw new InvalidOperationException($"Task with ID {xml.ToIntNullable("Id")!} does not exist.");
+        }
+            
+    
+    
     }
 
     public DO.Task? Read(int id) // this func get an id and return the task with this id

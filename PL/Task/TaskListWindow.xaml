@@ -28,10 +28,10 @@
 
 
         </Grid>
-        <ListView x:Name="MouseDoubleClick" Grid.Row="1" Margin="5" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="twoclicksbuttom" Background="#66000000" SelectionChanged="MouseDoubleClick_SelectionChanged">
+        <ListView x:Name="MouseDoubleClick" Grid.Row="1" Margin="5" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="twoclicksbuttom" Background="#66000000" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                   
                     <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias}"/>
                     <GridViewColumn Header="Status" DisplayMemberBinding="{Binding status}"/>
                     <GridViewColumn Header="Complexity" DisplayMemberBinding="{Binding Copmlexity}"/>

@@ -96,6 +96,12 @@ namespace PL.Task
 
         private void MouseDoubleClick_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            BO.Task? taskFromList = (sender as ListView)?.SelectedItem as BO.Task;
+            if (taskFromList != null)
+            {
+                new TaskWindow(taskFromList!.Id).ShowDialog();
+                Update();
+            }
 
         }
     }
