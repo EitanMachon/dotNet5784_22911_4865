@@ -15,7 +15,7 @@
             <ColumnDefinition Width="293*"/>
         </Grid.ColumnDefinitions>
         <!-- ListView for Engineers -->
-        <ListView Margin="0,0,59,0" MouseDoubleClick="twoclicksbuttom" Background="#66000001" Grid.ColumnSpan="2">
+        <ListView Margin="0,0,59,0" ItemsSource="{Binding TasksList}" MouseDoubleClick="twoclicksbuttom" Background="#66000001" Grid.ColumnSpan="2">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Height" Value="30"/>
@@ -32,8 +32,6 @@
                     <!-- Add more GridViewColumns for other details -->
                 </GridView>
             </ListView.View>
-            <Button Content="Back"/>
-
         </ListView>
         <Button Content="Back" HorizontalAlignment="Left" Margin="248,10,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="-0.286,0.979" Width="35" Click="Button_Click"/>
     </Grid>

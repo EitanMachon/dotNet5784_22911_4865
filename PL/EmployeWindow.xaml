@@ -18,17 +18,17 @@
 
         <!--ScheduledTime-->
         <Label Content="Updated Scheduled:" HorizontalAlignment="Left" Margin="93,99,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding ScheduledTime , Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Height="17" Margin="221,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <DatePicker Text="{Binding ScheduledTime , Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Height="26" Margin="221,103,0,0" VerticalAlignment="Top" Width="108"/>
 
 
         <!-- Dekiverables-->
         <Label Content="Deliverables:" HorizontalAlignment="Left" Margin="93,130,0,0" VerticalAlignment="Top"/>
-        <TextBox Text="{Binding Dekiverables , Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Height="17" Margin="221,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+        <TextBox Text="{Binding Dekiverables , Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Height="17" Margin="224,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90" TextChanged="TextBox_TextChanged"/>
 
         <!--Remarks-->
         <Label Content="Remarks:" HorizontalAlignment="Left" Margin="93,161,0,0" VerticalAlignment="Top"/>
         <TextBox Text="{Binding Remarks , Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" HorizontalAlignment="Left" Height="17" Margin="221,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="148,253,0,0" VerticalAlignment="Top" Width="97" Click="Button_Click"/>
+        <Button Content="Ok" HorizontalAlignment="Left" Margin="148,253,0,0" VerticalAlignment="Top" Width="97" Click="Button_Click"/>
 
 
 

@@ -25,7 +25,7 @@ namespace PL
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
 
 
-        IEnumerable<BO.Task> TasksList
+        public IEnumerable<BO.Task> TasksList
         {
             get { return (IEnumerable<BO.Task>)GetValue(TasksListProperty); } // Using GetValue and SetValue to get and set the value of the Task property
             set { SetValue(TasksListProperty, value); } // Using GetValue and SetValue to get and set the value of the Task property
