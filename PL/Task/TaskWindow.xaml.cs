@@ -48,6 +48,8 @@ namespace PL.Task
         {
             // Ask the user for confirmation
             // its gonna show a message box with the question "Are you sure you want to initialize the database?"
+            TextBox TextBox_TextChanged;//= sender as TextBox; // Cast the sender to TextBox
+           
             MessageBoxResult result = MessageBox.Show("Are you creat a new Task?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             // If the user confirms, initialize the database
