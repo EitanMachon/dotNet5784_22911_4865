@@ -29,7 +29,7 @@ namespace PL
         private void Button_Engineer_List(object sender, RoutedEventArgs e)
         {
             new Engineer.EngineerListWindow().Show(); // Create a new instance of EngineerListWindow
-                                                      // Show the window of EngineerListWindow
+            Close();                                      // Show the window of EngineerListWindow
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace PL
             if (result == MessageBoxResult.Yes)
             {
                 // Call the initialization method in DalTest
-                DalTest.Initialization.Do();
+                deleteXml.Initialization.Do(1);
                 MessageBox.Show("Database initialized successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }

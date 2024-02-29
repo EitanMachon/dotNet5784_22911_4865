@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using deleteXml;
 using PL.Engineer;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,9 @@ namespace PL
             // If the user confirms, reset the database
             if (result == MessageBoxResult.Yes)
             {
+                deleteXml.Initialization.Do();
+                //          C.Initialization.Do();
+
                 //BltTest.
                 MessageBox.Show("Database reset successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -56,8 +60,8 @@ namespace PL
             // If the user confirms, initialize the database
             if (result == MessageBoxResult.Yes)
             {
+                Initialization.Do(1);
                 // Call the initialization method in DalTest
-                DalTest.Initialization.Do();
                 MessageBox.Show("Database initialized successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }

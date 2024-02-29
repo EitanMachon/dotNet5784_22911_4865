@@ -2,7 +2,7 @@
 using BO;
 using BlApi;
 
-using DalTest;
+using deleteXml;
 using DalApi;
 using DalXml;
 using System;

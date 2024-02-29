@@ -24,11 +24,11 @@
             </Grid.ColumnDefinitions>
             <Label Content="Copmlexity: " HorizontalAlignment="Left" Margin="100,0,0,9" Grid.Column="0" Foreground="Yellow" FontSize="16" Height="50"/>
             <ComboBox Grid.Column="2" SelectedValue="{Binding Copmlexity}" ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectionChanged="ComboBox_SelectionChanged"/>
-            <Button Content="Back" HorizontalAlignment="Left" Click="Button_Click" Margin="0,6,0,6"/>
+            <Button Content="Back" HorizontalAlignment="Left" Click="Button_Click" Margin="0,6,0,0" Width="38"/>
 
 
         </Grid>
-        <ListView x:Name="MouseDoubleClick" Grid.Row="1" Margin="5" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="twoclicksbuttom" Background="#66000000" >
+        <ListView x:Name="MouseDoubleClick" Grid.Row="1" Margin="5" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="twoclicksbuttom" Background="#66000000" SelectionChanged="MouseDoubleClick_SelectionChanged_1" >
             <ListView.View>
                 <GridView>
                    
