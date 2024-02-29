@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Dal;
 using DalApi;
-using DalTest;
+using deleteXml;
 using DO;
 using DalXml;
 using System;

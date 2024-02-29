@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerListWindow" Height="640" Width="800"
+        Title="EngineerListWindow" Height="560" Width="712"
 		DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <!-- External Grid with Background Image -->
@@ -25,9 +25,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Content="Engineers: " HorizontalAlignment="Left" Margin="10,0,0,9" Grid.Column="0" Foreground="Yellow" FontSize="16"/>
+            <Label Content="Engineers: " HorizontalAlignment="Left" Margin="149,0,0,9" Grid.Column="0" Foreground="Yellow" FontSize="16"/>
             <ComboBox Grid.Column="1" SelectedValue="{Binding Level}" ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectionChanged="ComboBox_SelectionChanged"/>
-            <Border BorderBrush="Black" BorderThickness="1"/>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="133,-4,45,4"/>
         </Grid>
 
         <!-- ListView for Engineers -->
@@ -53,5 +53,6 @@
         <!-- Add Button for Adding Engineers -->
         <Button Grid.Row="2" Content="Add" HorizontalAlignment="Center" Height="50" Width="100" Click="Button_Add_click"/>
         <Button Content="close" HorizontalAlignment="Left" Margin="455,534,0,0" Grid.Row="1" Width="94" Click="Button_Click" Grid.RowSpan="2"/>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="40" Width="43" Click="Button_Click_1"/>
     </Grid>
 </Window>

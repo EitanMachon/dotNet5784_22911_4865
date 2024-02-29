@@ -36,6 +36,11 @@ namespace PL
 
         private void Button_Back(object sender, RoutedEventArgs e)
         {
+           
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
             LoginScreen loginScreen = new LoginScreen();
             loginScreen.Show();
             Close(); // Close the password window

@@ -13,7 +13,7 @@
         </Grid.Background>
         <!--Status-->
         <Label Content="Updated status:" HorizontalAlignment="Left" Margin="93,68,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="213,74,0,0" VerticalAlignment="Top" Width="101" Height="13" ItemsSource="{Binding Source={StaticResource StatusCollection}}"  SelectedValue="{Binding status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+        <ComboBox HorizontalAlignment="Left" Margin="213,74,0,0" VerticalAlignment="Top" Width="109" Height="20" ItemsSource="{Binding Source={StaticResource StatusCollection}}"  SelectedValue="{Binding status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
 
 
         <!--ScheduledTime-->

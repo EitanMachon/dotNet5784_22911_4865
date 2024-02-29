@@ -81,8 +81,8 @@
                 <TextBox Text="{Binding Task.Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="6" Grid.Column="1"/>
 
                 <Label Content="Engineer ID:" Grid.Row="7" Foreground="Black"/>
-                <TextBox Text="{Binding Task.EngineerId, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="7" Grid.Column="1"/>
-
+                <TextBox Text="{Binding Task.EngineerId, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="7" Grid.Column="1" TextChanged="TextBox_TextChanged_1"/>
+                <TextBox Text="{Binding Task.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1" TextChanged="TextBox_TextChanged"/>
 
                 <Label Content="Complexity:" Grid.Row="8" Foreground="Black"/>
                 <ComboBox ItemsSource="{Binding Source={StaticResource LevelCollection}}" 

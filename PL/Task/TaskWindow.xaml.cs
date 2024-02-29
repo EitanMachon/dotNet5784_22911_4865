@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -49,28 +50,38 @@ namespace PL.Task
             // Ask the user for confirmation
             // its gonna show a message box with the question "Are you sure you want to initialize the database?"
             TextBox TextBox_TextChanged;//= sender as TextBox; // Cast the sender to TextBox
-           
+
             MessageBoxResult result = MessageBox.Show("Are you creat a new Task?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             // If the user confirms, initialize the database
             if (result == MessageBoxResult.Yes)
             {
                 // Call the initialization method in DalTest
-                s_bl?.Task.Create(Task); // Using the BlApi to create the task
-                MessageBox.Show("The task has been created successfully"); // Show a message to the user
+                try {
+                    s_bl?.Task.Create(Task); // Using the BlApi to create the task
+
+                    MessageBox.Show("The task has been created successfully"); // Show a message to the user
+                }
+                catch
+                {
+                    MessageBox.Show("Their is no engineer wit id like that!"); // Show a message to the user
+                }
             }
 
-             //if (Task.Id == 0) // if the id of the task is equal to 0
-             //   {
-             //       s_bl?.Task.Create(Task); // Using the BlApi to create the task
-             //       MessageBox.Show("The task has been created successfully"); // Show a message to the user
-             //   }
-             else      
+            else
+            {
+                try
                 {
                     s_bl?.Task.Update(Task); // Using the BlApi to update the task
                     MessageBox.Show("The task has been updated successfully"); // Show a message to the user
                 }
-             Close(   ); // Close the TaskWindow
+                catch
+                {
+                    MessageBox.Show("Their is no engineer wit id like that!"); // Show a message to the user
+                }
+            }
+
+            Close(); // Close the TaskWindow
             
            
 
@@ -82,6 +93,11 @@ namespace PL.Task
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
         {
 
         }

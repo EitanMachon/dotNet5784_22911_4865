@@ -5,6 +5,7 @@ using BO;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Engineer = BO.Engineer;
 using Task = BO.Task;
 /// <summary>
@@ -34,6 +35,10 @@ internal class TaskImplementation : ITask
             }
         }
         object? engineerId = _dal.iengineer.Read(t => t.Id == boTask.EngineerId); // read the Engineer by his ID in the DAL layer
+        if (engineerId == null) // if the Engineer does not exist, throw an exception because it is not possible to read a Task that does not have an Engineer
+        {/////
+            throw new BO.BLTaskHasNoEngineerException("notfoundengineer"); // throw an exception
+        }
         DO.Task doTask = new DO.Task // create a new Task in the DAL layer by the given Task in the BO layer after checking the Engineer and his qualification
         {
             Id = 0,
@@ -145,7 +150,7 @@ internal class TaskImplementation : ITask
             //DO.Engineer? engineer = _dal.iengineer.Read(e => e.Id == task.EngineerId && e.IsActive == true); // read the Engineer by his ID in the DAL layer
             DO.Engineer? engineer = _dal.iengineer.Read(task.EngineerId); // read the Engineer by his ID in the DAL layer
             if (engineer == null) // if the Engineer does not exist, throw an exception because it is not possible to read a Task that does not have an Engineer
-            {
+            {/////
                 throw new BO.BLTaskHasNoEngineerException($"Task with ID={task.Id} has no Engineer"); // throw an exception
             }
             EngineerInTask engineerDO = new EngineerInTask

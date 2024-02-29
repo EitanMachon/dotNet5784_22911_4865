@@ -1,13 +1,17 @@
-﻿namespace DalTest;
+﻿namespace deleteXml;
 using DalApi;
 using Dal;
 using DO;
 using System.Data.Common;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Xml;
 
 public static class Initialization
 {
+
+
+
     //private static IEngineer? s_dalEngineer;
     //private static ITask? s_dalTask;
     //private static IDependency? s_dalDependency;
@@ -53,6 +57,10 @@ public static class Initialization
         }
 
     }
+    /*
+     the function delete the previous xml content
+     */
+   
 
     public static void createTask()
     {
@@ -184,9 +192,32 @@ public static class Initialization
         //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
         s_dal = DalApi.Factory.Get; //stage 4
 
+        deleteXml("tasks", "ArrayOfTask");
+        deleteXml("Engineers", "ArrayOfEngineer");
+        deleteXml("depandencys", "ArrayOfDependency");
+
         createEngineer(); // create engineers
         createTask(); // create tasks
         createDependency(); // create dependencies
 
+    }
+    public static void Do(int a) //stage 4 
+    {
+        //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
+        s_dal = DalApi.Factory.Get; //stage 4
+
+        deleteXml("tasks", "ArrayOfTask");
+        deleteXml("Engineers", "ArrayOfEngineer");
+        deleteXml("depandencys", "ArrayOfDependency");
+    }
+        public static void deleteXml(string entity, string root)
+    {
+        string filePath = $"{@"..\xml\" + entity}.xml";
+        XmlDocument empty = new XmlDocument();
+        XmlElement rootElement = empty.CreateElement(root);
+        // Set an empty string as the content of the root element
+        rootElement.InnerText = "";
+        empty.AppendChild(rootElement);
+        empty.Save(filePath);
     }
 }
