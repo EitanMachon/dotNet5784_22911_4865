@@ -52,7 +52,7 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
             xml.ToDateTimeNullable("ScheduledTime"),
             xml.ToDateTimeNullable("DeadLinetime"),
             xml.ToDateTimeNullable("ComplateTime"),
-            xml.Element("Dekiverables")!.Value,
+            xml.Element("Dekiverables")?.Value,
             xml.Element("Remarks")?.Value ?? "",
             (int)(xml.ToIntNullable("EngineerId")!)
             );

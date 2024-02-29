@@ -13,13 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi; // Import the namespace where BlApi is located
 
+
 namespace PL.Task
 {
+
     /// <summary>
     /// Interaction logic for TaskWindow.xaml
     /// </summary>
     public partial class TaskWindow : Window
     {
+        int num= 0; // Create a new variable with a default value of 00;
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
         public BO.EngineerExperience Copmlexity { get; set; } = BO.EngineerExperience.All; // Create a new instance of the BO.EngineerExperience class and store it in a property
         public BO.Status Status { get; set; } = BO.Status.Unscheduled; // Create a new instance of the BO.Status class and store it in a property
@@ -81,7 +84,43 @@ namespace PL.Task
             Close(); // Close the password window        
         }
 
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_2(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_3(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_4(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged_5(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
 
         }
