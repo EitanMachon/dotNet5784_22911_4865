@@ -64,7 +64,7 @@ namespace PL.Task
                 }
                 catch
                 {
-                    MessageBox.Show("Their is no engineer wit id like that!"); // Show a message to the user
+                    MessageBox.Show("Their is no engineer with Id like that!"); // Show a message to the user
                 }
             }
 
