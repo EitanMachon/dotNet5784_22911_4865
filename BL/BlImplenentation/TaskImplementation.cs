@@ -1,6 +1,7 @@
 ﻿namespace BlImplenentation;
 
 using BlApi;
+using BlImplementation;
 using BO;
 using DO;
 using System;
@@ -14,7 +15,15 @@ using Task = BO.Task;
 internal class TaskImplementation : ITask
 {
     private IDal _dal = DalApi.Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
-    private Task? finalTask; // create a new Task in the BO layer to use it in the Read function
+    private Task? finalTask; // create a new Task in the BO layer to use it in the Read functioprivate readonly IBl _bl;
+    private readonly IBl _bl;
+    internal TaskImplementation(IBl bl) => _bl = bl;
+
+    public TaskImplementation()
+    {
+    }
+
+
 
     /// <summary>
     /// this function is used to create a new Task by a given Task in the BO layer
@@ -50,10 +59,14 @@ internal class TaskImplementation : ITask
             EngineerId = boTask.EngineerId,
             Copmlexity = (global::EngineerExperience)(EngineerExperience)boTask.Copmlexity, // this is global because the EngineerExperience is in the BO layer and the EngineerExperience is in the DO layer
             RequiredEffort = boTask.RequiredEffort,
+            
+            
         };
 
 
         int taskId = _dal.itask.Create(doTask); // create a new Task in the DAL layer and get his ID 
+       
+        
 
         if (boTask.Dependencys != null)
         {
@@ -65,6 +78,7 @@ internal class TaskImplementation : ITask
                 }
                 _dal.idependancy.Create(new Dependency { DependentTask = taskId, Depends = dependency.Id }); // create a new Dependency in the DAL layer for the Task and the Dependent Task
             }
+            
         }
 
         return taskId; // after creating the Task and his Dependencies, return the Task ID
@@ -123,6 +137,8 @@ internal class TaskImplementation : ITask
             };
         }
 
+        object? tempDependencys = from d in _dal.idependancy.ReadAll() where d.DependentTask == id select d.Depends; // read the Dependencies of the Task in the DAL layer
+
         BO.Task? finalTask = new BO.Task // return the Task in the BO layer
         {
             Id = doTask.Id,
@@ -135,6 +151,7 @@ internal class TaskImplementation : ITask
             Copmlexity = (EngineerExperience)doTask.Copmlexity,
             RequiredEffort = doTask.RequiredEffort,
             EngineerId= doTask.EngineerId,
+            Dependencys = (List<TaskInList>)tempDependencys, 
         };
 
 
@@ -152,6 +169,7 @@ internal class TaskImplementation : ITask
         {
             //DO.Engineer? engineer = _dal.iengineer.Read(e => e.Id == task.EngineerId && e.IsActive == true); // read the Engineer by his ID in the DAL layer
             DO.Engineer? engineer = _dal.iengineer.Read(task.EngineerId); // read the Engineer by his ID in the DAL layer
+
             if (engineer == null) // if the Engineer does not exist, throw an exception because it is not possible to read a Task that does not have an Engineer
             {/////
                 throw new BO.BLTaskHasNoEngineerException($"Task with ID={task.Id} has no Engineer"); // throw an exception
@@ -163,6 +181,8 @@ internal class TaskImplementation : ITask
             };  // cast the Engineer to the BO layer
             try // try to read the Task
             {
+                var tempDependencys = from d in _dal.idependancy.ReadAll() where d.DependentTask == task.Id select d.Depends; // read the Dependencies of the Task in the DAL layer
+                var tempDependencys_taskinlist = from d in tempDependencys select new TaskInList { Id = (int)d }; // read the Dependencies of the Task in the DAL layer
                 BO.Task task2 = new BO.Task() // add the Task to the list of Tasks in the BO layer
                 {
                     Id = task.Id,
@@ -176,6 +196,7 @@ internal class TaskImplementation : ITask
                     RequiredEffort = task.RequiredEffort,
                     startDate = task.StartDate,
                     DeadLinetime = task.DeadLinetime,
+                    Dependencys = tempDependencys_taskinlist.ToList(),
                 };
                 if (filter == null)
                 {

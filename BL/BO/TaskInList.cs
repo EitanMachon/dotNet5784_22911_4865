@@ -26,4 +26,9 @@ public class TaskInList
     /// this is the status of the task in the list and we get the status from the status enum
     /// </summary>
     public BO.Status status { get; set; } // this is the status of the task
+
+    public static implicit operator TaskInList(List<Task?> v)
+    {
+        throw new NotImplementedException();
+    }
 }

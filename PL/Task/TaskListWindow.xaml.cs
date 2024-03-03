@@ -44,8 +44,7 @@ namespace PL.Task
             set { SetValue(TaskListProperty, value); }
         }
         
-        public static readonly DependencyProperty TaskListProperty =
-            DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
+        public static readonly DependencyProperty TaskListProperty = DependencyProperty.Register("TaskList", typeof(IEnumerable<BO.Task>), typeof(TaskListWindow), new PropertyMetadata(null));
 
 
         void Update()
@@ -64,7 +63,7 @@ namespace PL.Task
         {
             Update(); // Call the Update function to update the list of engineers
         }
-
+       
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             BO.Task? taskFromList = (sender as ListView)?.SelectedItem as BO.Task;

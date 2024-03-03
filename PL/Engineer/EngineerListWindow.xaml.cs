@@ -74,7 +74,7 @@ namespace PL.Engineer
         /// <summary>
         /// this function is used to update the list of engineers in the window
         /// </summary>
-        void Update()
+        void Update() 
         {
             if (Level == BO.EngineerExperience.All) // If the level is all, we get all the engineers
                 EngineerList = s_bl?.Engineer.ReadAll()?.OrderBy(item => item?.Name); // Corrected orderBy usage

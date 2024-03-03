@@ -101,5 +101,10 @@ namespace PL.Task
         {
 
         }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

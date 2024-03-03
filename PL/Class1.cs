@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PL
 {
-    internal class Gant
+    internal class Class1
     {
     }
 }
