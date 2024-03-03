@@ -151,7 +151,7 @@ internal class TaskImplementation : ITask
             Copmlexity = (EngineerExperience)doTask.Copmlexity,
             RequiredEffort = doTask.RequiredEffort,
             EngineerId= doTask.EngineerId,
-            Dependencys = (List<TaskInList>)tempDependencys, 
+            //Dependencys = (List<TaskInList>)tempDependencys, 
         };
 
 

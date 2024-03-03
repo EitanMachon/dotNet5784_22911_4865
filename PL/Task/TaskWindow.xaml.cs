@@ -106,5 +106,47 @@ namespace PL.Task
         {
 
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            TextBox TextBox_TextChanged;//= sender as TextBox; // Cast the sender to TextBox
+
+            MessageBoxResult result = MessageBox.Show("Are you creat a new Task?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            // If the user confirms, initialize the database
+            if (result == MessageBoxResult.Yes)
+            {
+                // Call the initialization method in DalTest
+                try
+                {
+                    s_bl?.Task.Create(Task); // Using the BlApi to create the task
+
+                    MessageBox.Show("The task has been created successfully"); // Show a message to the user
+                }
+                catch
+                {
+                    MessageBox.Show("Their is no engineer with Id like that!"); // Show a message to the user
+                }
+            }
+
+            else
+            {
+                try
+                {
+                    s_bl?.Task.Update(Task); // Using the BlApi to update the task
+                    MessageBox.Show("The task has been updated successfully"); // Show a message to the user
+                }
+                catch
+                {
+                    MessageBox.Show("Their is no engineer wit id like that!"); // Show a message to the user
+                }
+            }
+            Close();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

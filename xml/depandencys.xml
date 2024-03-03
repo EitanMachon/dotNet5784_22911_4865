@@ -1,9 +1,2 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfDependency xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Dependency>
-    <Id>12</Id>
-    <DependentTask>490</DependentTask>
-    <Depends>491</Depends>
-    <IsActive>false</IsActive>
-  </Dependency>
+<ArrayOfDependency>
 </ArrayOfDependency>

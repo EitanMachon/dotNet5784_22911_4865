@@ -118,6 +118,8 @@
                         </ListView.View>
                     </ListView>
                 </Border>
+                <Button Grid.Column="1" Content="Ok" HorizontalAlignment="Left" Margin="291,38,0,0" Grid.Row="9" VerticalAlignment="Top" Click="Button_Click_1"/>
+                <Button Grid.Column="1" Content="BACK" HorizontalAlignment="Left" Margin="330,0,0,0" VerticalAlignment="Top" Height="44" Width="71" Click="Button_Click_2"/>
             </Grid>
         </StackPanel>
     </Grid>

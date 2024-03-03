@@ -37,7 +37,7 @@
                     <GridViewColumn Header="Complexity" DisplayMemberBinding="{Binding Copmlexity}"/>
                     <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding StartDate}"/>
                     <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding DeadLinetime}"/>
-                    <GridViewColumn Header="Engineer" DisplayMemberBinding="{Binding EngineerId}"/>
+                    <GridViewColumn Header="Engineer" DisplayMemberBinding="{Binding Engineer.Id}"/>
                     
                 </GridView>
             </ListView.View>
