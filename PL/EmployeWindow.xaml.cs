@@ -49,28 +49,10 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // Ask the user for confirmation
-            // its gonna show a message box with the question "Are you sure you want to initialize the database?"
-            MessageBoxResult result = MessageBox.Show("Are you creat a new Task?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            // If the user confirms, initialize the database
-            if (result == MessageBoxResult.Yes)
-            {
-                // Call the initialization method in DalTest
-                s_bl?.Task.Create(employeTask); // Using the BlApi to create the task
-                MessageBox.Show("The task has been created successfully"); // Show a message to the user
-            }
-
-            //if (Task.Id == 0) // if the id of the task is equal to 0
-            //{
-            //    s_bl?.Task.Create(Task); // Using the BlApi to create the task
-            //    MessageBox.Show("The task has been created successfully"); // Show a message to the user
-            //}
-            else
-            {
                 s_bl?.Task.Update(employeTask); // Using the BlApi to update the task
                 MessageBox.Show("The task has been updated successfully"); // Show a message to the user
-            }
+            
             Close(); // Close the TaskWindow
 
         }

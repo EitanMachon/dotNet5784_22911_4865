@@ -20,6 +20,7 @@ namespace PL
     /// </summary>
     public partial class GetEngineerIdWindow : Window
     {
+
         public int Id // read iud from window
         {
             get { return (int)GetValue(TaskProperty); } // Using GetValue and SetValue to get and set the value of the Task property
@@ -35,13 +36,17 @@ namespace PL
 
         private void ClickOk(object sender, RoutedEventArgs e)
         {
-           // var EngineerIdTask = TaskProperty.Where{}
+            // var EngineerIdTask = TaskProperty.Where{}
 
-          
-           
 
-            new EMPLOEYVIEWENGINEERLIST(Id).Show();
-            this.Close();
+            try
+            {
+                new EMPLOEYVIEWENGINEERLIST(Id).Show();
+                this.Close();
+            }
+            catch {
+                MessageBox.Show("Their is no id like that!"); // Show a message to the user
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

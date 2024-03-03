@@ -85,8 +85,6 @@ namespace PL.Task
 
                 new TaskWindow(taskFromList!.Id).ShowDialog();
                 Update();
-                Close();
-
             }
         }
 

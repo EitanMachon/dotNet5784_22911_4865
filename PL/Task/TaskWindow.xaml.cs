@@ -22,7 +22,7 @@ namespace PL.Task
     public partial class TaskWindow : Window
     {
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
-        public BO.EngineerExperience Copmlexity { get; set; } = BO.EngineerExperience.All; // Create a new instance of the BO.EngineerExperience class and store it in a property
+        public BO.EngineerExperience Complexity { get; set; } = BO.EngineerExperience.All; // Create a new instance of the BO.EngineerExperience class and store it in a property
         public BO.Status Status { get; set; } = BO.Status.Unscheduled; // Create a new instance of the BO.Status class and store it in a property
 
         public TaskWindow(int i = 0) // the constructor of the TaskWindow class that get a parameter with a default value of 0

@@ -36,7 +36,7 @@ internal class TaskImplementation : ITask
         }
         object? engineerId = _dal.iengineer.Read(t => t.Id == boTask.EngineerId); // read the Engineer by his ID in the DAL layer
         if (engineerId == null) // if the Engineer does not exist, throw an exception because it is not possible to read a Task that does not have an Engineer
-        {/////
+        {
             throw new BO.BLTaskHasNoEngineerException("notfoundengineer"); // throw an exception
         }
         DO.Task doTask = new DO.Task // create a new Task in the DAL layer by the given Task in the BO layer after checking the Engineer and his qualification
@@ -107,7 +107,9 @@ internal class TaskImplementation : ITask
         var existingTask = _dal.itask.Read(t => t.Id == id); // read the Task by his ID in the DAL layer
         if (existingTask == null) // if the Task does not exist, throw an exception because it is not possible to read a Task that does not exist
         {
-            return null;
+            //return null;
+            throw new BO.BlDoesNotExistException("Task with ID doesn't exist"); // throw an exception
+
         }
         DO.Task? doTask = _dal.itask.Read(t => t.Id == id); // read the Task by his ID in the DAL layer after checking if the Task exists in the database
         DO.Engineer? engineer = _dal.iengineer.Read(t => t.Id == doTask.EngineerId && t.IsActive == true); // read the Engineer by his ID in the DAL layer
@@ -132,6 +134,7 @@ internal class TaskImplementation : ITask
             Engineer = engineerInTask,
             Copmlexity = (EngineerExperience)doTask.Copmlexity,
             RequiredEffort = doTask.RequiredEffort,
+            EngineerId= doTask.EngineerId,
         };
 
 

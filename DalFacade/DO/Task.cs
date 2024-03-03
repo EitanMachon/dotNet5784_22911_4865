@@ -14,8 +14,8 @@ public record Task
    DateTime? ScheduledTime,
    DateTime? DeadLinetime,
    DateTime? ComplateTime,
-   string? Dekiverables,
-   string? Remarks,
+   string Dekiverables,
+   string Remarks,
    int EngineerId
 )
 {
