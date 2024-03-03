@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BO;
+
 namespace PL
 {
     /// <summary>
@@ -24,24 +25,26 @@ namespace PL
         public DateTime gapTime // Create a new instance of the BO.Engineer class and store it in a property
         {
             get { return (DateTime)GetValue(orech); }
-            set { SetValue(orech, value); } }
+            set { SetValue(orech, value); } 
+        }
 
         public static readonly DependencyProperty orech = DependencyProperty.Register("gapTime", typeof(DateTime), typeof(Gantt), new PropertyMetadata(null));
 
-        public List<BO.Task> TaskList
+        public DateTime withGap // Create a new instance of the BO.Engineer class and store it in a property
         {
-            get { return (List<BO.Task>)GetValue(TaskListProperty); }
-            set { SetValue(TaskListProperty, value); }
+            get { return (DateTime)GetValue(withGapProperty); }
+            set { SetValue(withGapProperty, value); }
         }
-
-        public static readonly DependencyProperty TaskListProperty = DependencyProperty.Register("TaskList", typeof(List<BO.Task>), typeof(Gantt), new PropertyMetadata(null));
-
-        public Gantt()
+        
+        public static readonly DependencyProperty withGapProperty = DependencyProperty.Register("withGap", typeof(DateTime), typeof(Gantt), new PropertyMetadata(null));
+        public Gantt()  // when the Gantt window is opened we want to create a new instance of the BO.TaskInList class and store it in a property
         {
-            TaskList = s_bl.Task.ReadAll().ToList()!;
-                
+            BO.Task task = (BO.Task)s_bl.Task.ReadAll(); // Create a new instance of the BO.TaskInList class and store it in a property 
+            InitializeComponent();
 
+           
         }
+        
 
 
 

@@ -27,4 +27,8 @@ public class TaskInList
     /// </summary>
     public BO.Status status { get; set; } // this is the status of the task
 
+    public static implicit operator TaskInList(List<Task?> v)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -17,4 +17,9 @@ internal class Bl : IBl
     public IEngineer Engineer =>  new EngineerImplenentation();
 
     public ISchedule Schedule => new ScheduleImplementation();
+
+    private static DateTime s_Clock = DateTime.Now.Date;
+    public DateTime Clock { get { return s_Clock; } private set { s_Clock = value; } }
+
+    
 }

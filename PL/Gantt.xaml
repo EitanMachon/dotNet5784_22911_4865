@@ -18,6 +18,7 @@
                 <GridView>
                     <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
                     <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    
 
                     <!-- Add more GridViewColumns for other details -->
                 </GridView>

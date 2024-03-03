@@ -1,6 +1,7 @@
 ﻿namespace BlImplenentation;
 
 using BlApi;
+using BlImplementation;
 using BO;
 using DO;
 using System;
@@ -14,7 +15,15 @@ using Task = BO.Task;
 internal class TaskImplementation : ITask
 {
     private IDal _dal = DalApi.Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
-    private Task? finalTask; // create a new Task in the BO layer to use it in the Read function
+    private Task? finalTask; // create a new Task in the BO layer to use it in the Read functioprivate readonly IBl _bl;
+    private readonly IBl _bl;
+    internal TaskImplementation(IBl bl) => _bl = bl;
+
+    public TaskImplementation()
+    {
+    }
+
+
 
     /// <summary>
     /// this function is used to create a new Task by a given Task in the BO layer
