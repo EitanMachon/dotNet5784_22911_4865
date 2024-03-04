@@ -71,10 +71,5 @@ namespace PL
             new GetEngineerIdWindow().Show(); // Create a new instance of EmployeWindow
             Close();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            new Gantt().Show(); // Create a new instance of Gantt
-        }
     }
 }

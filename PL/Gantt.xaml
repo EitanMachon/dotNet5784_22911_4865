@@ -5,48 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="Gantt" Height="450" Width="800">
     <Grid>
-        <ItemsControl ItemsSource="{Binding data}" Grid.Row="0">
-            <ItemsControl.ItemTemplate>
-                <!-- DataTemplate for each Gantt item -->
+        <ListView ItemsSource="{Binding Gantt}" Grid.Row="1" Margin="0,10,10,0"  Background="#66000000" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="Foreground" Value="LightPink"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                    
+
+                    <!-- Add more GridViewColumns for other details -->
+                </GridView>
+            </ListView.View>
+            <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <!-- Grid for each Gantt item -->
-                        <Grid>
-                            <!-- Columns for Alias, Separator, and Gantt Chart -->
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="150"/>
-                                <ColumnDefinition Width="3"/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!-- TextBlock for Alias -->
-                            <TextBlock Text="{Binding Alias}" FontWeight="SemiBold"
-                                            FontFamily="ariel" Grid.Column="0" 
-                                            TextWrapping="WrapWithOverflow" TextAlignment="Center" Padding="3">
-                                            <!-- Background gradient for Alias -->
-                            </TextBlock>
-
-                            <!-- Separator Border -->
-                            <Border Grid.Column="1" VerticalAlignment="Stretch" Width="3" Background="Black" />
-
-                            <!-- Grid for Gantt Chart -->
-                            <Grid Background="#564d525e" Grid.Column="2" Margin="0,1">
-                                <!-- Rectangle representing task -->
-                                <Grid Width="{Binding RequiredEffort, Converter={StaticResource ConvertEffortTimeToWidthKey}}"
-                                                Margin="{Binding ScheduledTime, Converter={StaticResource ConvertStartDateToMarginKey}}" Height="20"  
-                                                Background="{Binding Id, Converter={StaticResource ConvertTaskStatusToColorKey}}" >
-                                    <!-- Border for Rectangle -->
-                                    <Border BorderBrush="Black" BorderThickness=".7"/>
-
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </StackPanel>
+                    <Grid>
+                        <Rectangle Fill="Red" Width="50" Height="20" Margin="{Binding orech}"/>
+                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>

@@ -36,17 +36,10 @@ namespace PL
             set { SetValue(withGapProperty, value); }
         }
         
-        public IEnumerable<BO.Task> data // Create a new instance of the BO.Engineer class and store it in a property
-        {
-            get { return (IEnumerable<BO.Task>)GetValue(dataProperty); }
-            set { SetValue(dataProperty, value); }
-        }
-        public static readonly DependencyProperty dataProperty = DependencyProperty.Register("data", typeof(IEnumerable<BO.Task>), typeof(Gantt), new PropertyMetadata(null));
-
         public static readonly DependencyProperty withGapProperty = DependencyProperty.Register("withGap", typeof(DateTime), typeof(Gantt), new PropertyMetadata(null));
         public Gantt()  // when the Gantt window is opened we want to create a new instance of the BO.TaskInList class and store it in a property
         {
-            data = s_bl.Task.ReadAll()!; // Create a new instance of the BO.TaskInList class and store it in a property 
+            BO.Task task = (BO.Task)s_bl.Task.ReadAll(); // Create a new instance of the BO.TaskInList class and store it in a property 
             InitializeComponent();
 
            

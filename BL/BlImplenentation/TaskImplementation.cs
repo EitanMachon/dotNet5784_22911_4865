@@ -65,9 +65,7 @@ internal class TaskImplementation : ITask
 
 
         int taskId = _dal.itask.Create(doTask); // create a new Task in the DAL layer and get his ID 
-       
-        
-
+ 
         if (boTask.Dependencys != null)
         {
             foreach (var dependency in boTask.Dependencys) // create a new Dependency for each Dependency in the Task
@@ -123,7 +121,6 @@ internal class TaskImplementation : ITask
         {
             //return null;
             throw new BO.BlDoesNotExistException("Task with ID doesn't exist"); // throw an exception
-
         }
         DO.Task? doTask = _dal.itask.Read(t => t.Id == id); // read the Task by his ID in the DAL layer after checking if the Task exists in the database
         DO.Engineer? engineer = _dal.iengineer.Read(t => t.Id == doTask.EngineerId && t.IsActive == true); // read the Engineer by his ID in the DAL layer

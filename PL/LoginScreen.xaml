@@ -47,7 +47,7 @@
         </Grid.Background>
 
         <!-- Buttons Panel -->
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="320">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Height="195" Width="320">
             <!-- Admin Login Button with Style -->
             <Button Content="Admin Login" Style="{StaticResource CoolButtonStyle}" Click="openManagerWindow_click"/>
 
@@ -59,8 +59,6 @@
 
             <!-- Reset Button with Style -->
             <Button Content="Reset" Style="{StaticResource CoolButtonStyle}" Click="reset_click"/>
-            
-            <Button Content="Gantt" Style="{StaticResource CoolButtonStyle}" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -89,7 +89,7 @@
                           SelectedValue="{Binding Task.Copmlexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8" Grid.Column="1"/>
 
                 <Label Content="Required Effort:" Grid.Row="9" Foreground="Black"/>
-                <TextBox Text="{Binding Task.RequiredEffort, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="9" Grid.Column="1"/>
+                <TextBox Text="{Binding Task.RequiredEffort, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="9" Grid.Column="1" TextChanged="TextBox_TextChanged_2"/>
                 <Label Grid.Column="1" Content="Label" HorizontalAlignment="Left" Margin="81,18,0,33" Grid.RowSpan="2" Grid.Row="1"/>
                 <Button Content="Back" HorizontalAlignment="Left" Margin="411,0,0,0" VerticalAlignment="Center" Height="54" Width="62" Grid.Column="1" Foreground="Black" Click="Button_Click"/>
 
