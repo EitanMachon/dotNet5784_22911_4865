@@ -134,8 +134,10 @@ internal class TaskImplementation : ITask
             };
         }
 
-        object? tempDependencys = from d in _dal.idependancy.ReadAll() where d.DependentTask == id select d.Depends; // read the Dependencies of the Task in the DAL layer
-
+        List<BO.TaskInList> tempDependencys = (from d in _dal.idependancy.ReadAll() 
+                                               where d.DependentTask == id 
+                                               let depends = Read(d.Depends)
+                                               select new TaskInList { Id = d.Depends, Alias = depends.Alias }).ToList();
         BO.Task? finalTask = new BO.Task // return the Task in the BO layer
         {
             Id = doTask.Id,
@@ -148,7 +150,10 @@ internal class TaskImplementation : ITask
             Copmlexity = (EngineerExperience)doTask.Copmlexity,
             RequiredEffort = doTask.RequiredEffort,
             EngineerId= doTask.EngineerId,
-            //Dependencys = (List<TaskInList>)tempDependencys, 
+            Dependencys = tempDependencys, 
+            StartDate = doTask.StartDate,
+            ComplateTime = doTask.ComplateTime,
+            DeadLinetime = doTask.DeadLinetime,
         };
 
 
