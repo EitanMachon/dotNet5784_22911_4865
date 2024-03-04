@@ -8,7 +8,9 @@
         <local:StatusCollection x:Key="StatusCollection"/>
         <local:ConverIdToContentKey x:Key="ConvertIdToContentKey"/>
         <local:ConvertIdToContent x:Key="ConvertIdToContent"/>
-        
-        <!-- <local:ConevrLastInListToInt x:Key="ConevrLastInListToInt"/>-->
+        <local:ConevrLastInListToInt x:Key="ConevrLastInListToInt"/>
+        <local:ConvertEffortTimeToWidth x:Key="ConvertEffortTimeToWidthKey"/>
+        <local:ConvertStartDateToMargin x:Key="ConvertStartDateToMarginKey"/>
+        <local:ConvertTaskStatusToColor x:Key="ConvertTaskStatusToColorKey"/>
     </Application.Resources>
 </Application>
