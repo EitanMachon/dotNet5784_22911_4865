@@ -148,5 +148,10 @@ namespace PL.Task
         {
             Close();
         }
+
+        private void TextBox_TextChanged_2(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
