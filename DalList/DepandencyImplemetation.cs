@@ -13,8 +13,7 @@ namespace Dal
             }
 
             int newDependencyId = DataSource.Config.GetNextDependency(); // generate new ID for the Dependency
-            var newDependency = new Dependency(newDependencyId, item.DependentTask, item.Depends); // Create a new Dependency object with the generated ID
-            DataSource.Dependencies.Add(item); // Add the new Dependency directly into the DataSource
+            DataSource.Dependencies.Add(item with { Id = newDependencyId }); // Add the new Dependency directly into the DataSource
             return newDependencyId; //  return the new Dependency 
         }
 
@@ -27,14 +26,7 @@ namespace Dal
                 throw new InvalidOperationException($"Dependency with ID {id} does not exist.");
             }
 
-            if (existingDependency.IsActive) // if the Dependency is active remove him from the list
-            {
                 DataSource.Dependencies.Remove(existingDependency); // remove the Dependency of the given object from the list
-            }
-            else
-            {
-                existingDependency.IsActive = false; // set the Dependency to inactive
-            }
         }
 
         public Dependency Read(int id) // read a Dependency by his ID and return the Dependency

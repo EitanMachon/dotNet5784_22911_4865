@@ -1,7 +1,9 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -22,7 +24,7 @@ class ConvertIdToContent : IValueConverter
     }
 }
 
-class ConverIdToContentKey: IValueConverter
+class ConverIdToContentKey : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
@@ -33,36 +35,21 @@ class ConverIdToContentKey: IValueConverter
     {
         throw new NotImplementedException();
     }
-
+}
 class ConevrLastInListToInt : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var tempList = (List<BO.Task>)value; // cast the value to a list of tasks
-            DateTime? latest = null; // create a nullable DateTime
-            foreach (var item in tempList) // iterate through the list
-            {
-                var temp = item.StartDate + item.RequiredEffort;   // add the start date and the required effort of the task
-                if (temp > latest) // if the temp is greater than the latest
-                {
-                    latest = temp;
-                }
-            }
+        var tempList = (List<BO.TaskInList>)value; // cast the value to a list of tasks
+var list = from t in tempList
+           select Factory.Get().Task.Read(t.Id); // get all the tasks from the list
+        return list.MaxBy(t => t.StartDate+ t.RequiredEffort)?.Id; // return the id of the task with the latest end time
 
-            // Convert latest DateTime to integer (assuming you want the number of ticks)
-            int latestInt = ((int)(latest?.Ticks ?? 0)); // convert the latest DateTime to an integer
-
-            return latestInt;
-
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
     }
-    
 
-
-}   
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
 
