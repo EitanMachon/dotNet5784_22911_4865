@@ -7,48 +7,50 @@
         mc:Ignorable="d"
         Title="TaskWindow" Height="539" Width="592"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    <Window.Resources>
-         <!--Style for Labels--> 
-        <Style TargetType="Label">
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Margin" Value="0,5"/>
-        </Style>
-         <!--Style for Text Boxes--> 
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="0,5"/>
-            <Setter Property="Width" Value="150"/>
-        </Style>
-         <!--Style for Combo Boxes--> 
-        <Style TargetType="ComboBox">
-            <Setter Property="Margin" Value="0,5"/>
-            <Setter Property="Width" Value="150"/>
-        </Style>
-         <!--Style for Buttons--> 
-        <Style TargetType="Button">
-            <Setter Property="Margin" Value="0,10"/>
-            <Setter Property="Width" Value="100"/>
-            <Setter Property="Background" Value="#4CAF50"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Padding" Value="10"/>
-        </Style>
-    </Window.Resources>
 
     <Grid Margin="10">
-         <!--Background Image--> 
+        <!-- Background Image -->
 
-         <!--Labels and Input Fields--> 
-        <StackPanel>
-             <!--Task Details--> 
-            <Grid Height="390" Width="556">
+
+        <!-- Labels and Input Fields -->
+        <StackPanel Margin="0,0,0,51">
+            <StackPanel.Resources>
+                <!-- Style for Labels -->
+                <Style TargetType="Label">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Margin" Value="0,5"/>
+                </Style>
+                <!-- Style for Text Boxes -->
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="0,5"/>
+                    <Setter Property="Width" Value="150"/>
+                </Style>
+                <!-- Style for Combo Boxes -->
+                <Style TargetType="ComboBox">
+                    <Setter Property="Margin" Value="0,5"/>
+                    <Setter Property="Width" Value="150"/>
+                </Style>
+                <!-- Style for Buttons -->
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="0,10"/>
+                    <Setter Property="Width" Value="100"/>
+                    <Setter Property="Background" Value="#4CAF50"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontFamily" Value="Segoe UI"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Padding" Value="10"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <!-- Task Details -->
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" MinHeight="44"/>
-                    <RowDefinition Height="Auto" MinHeight="35.96"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -59,54 +61,68 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                 <!--Labels and input fields--> 
-                <Label Content="Alias:" Grid.Row="1" Foreground="Black" Margin="0,5,0,5"/>
-                <TextBox Text="{Binding Task.Alias, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1" TextChanged="TextBox_TextChanged" Margin="154,5,154,5"/>
+                <Label Content="Alias:" Grid.Row="1" Foreground="Black"/>
+                <TextBox Text="{Binding Task.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1" TextChanged="TextBox_TextChanged"/>
 
-                <Label Content="Description:" Grid.Row="2" Foreground="Black" Margin="0,5,0,5"/>
-                <TextBox Text="{Binding Task.Description, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2" Grid.Column="1" Margin="154,5,154,5"/>
+                <Label Content="Description:" Grid.Row="2" Foreground="Black"/>
+                <TextBox Text="{Binding Task.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="2" Grid.Column="1"/>
 
-                <Label Content="Status:" Grid.Row="3" Foreground="Black" Margin="0,5,0,5"/>
-                <ComboBox Text="{Binding Task.Description, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                          SelectedValue="{Binding Task.status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Grid.Column="1" Margin="154,5,154,5"/>
+                <Label Content="Status:" Grid.Row="3" Foreground="Black"/>
+                <ComboBox ItemsSource="{Binding Source={StaticResource StatusCollection}}"
+                          SelectedValue="{Binding Task.status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Grid.Column="1"/>
 
-                <Label Content="Created At Date:" Grid.Row="4" Foreground="Black" Margin="0,5,0,5"/>
-                <DatePicker SelectedDate="{Binding Task.CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Grid.Column="1" Margin="118,0,142,4"/>
+                <Label Content="Created At Date:" Grid.Row="4" Foreground="Black"/>
+                <DatePicker SelectedDate="{Binding Task.CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Grid.Column="1"/>
 
-                <Label Content="Deliverables:" Grid.Row="5" Foreground="Black" Margin="0,5,0,5"/>
-                <TextBox Text="{Binding Task.Dekiverables, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5" Grid.Column="1" Margin="154,5,154,5"/>
+                <Label Content="Deliverables:" Grid.Row="5" Foreground="Black"/>
+                <TextBox Text="{Binding Task.Dekiverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="5" Grid.Column="1"/>
 
-                <Label Content="Remarks:" Grid.Row="6" Foreground="Black" Margin="0,5,0,5"/>
-                <TextBox Text="{Binding Task.Remarks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Grid.Column="1" Margin="154,5,154,5"/>
+                <Label Content="Remarks:" Grid.Row="6" Foreground="Black"/>
+                <TextBox Text="{Binding Task.Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="6" Grid.Column="1"/>
 
-                <Label Content="Engineer ID:" Grid.Row="7" Foreground="Black" Margin="0,5,0,5"/>
-                <TextBox Text="{Binding Task.EngineerId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Grid.Column="1" TextChanged="TextBox_TextChanged_1" Margin="154,5,154,5"/>
-                <TextBox Text="{Binding Task.Alias, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1" TextChanged="TextBox_TextChanged" Margin="154,5,154,5"/>
+                <Label Content="Engineer ID:" Grid.Row="7" Foreground="Black"/>
+                <TextBox Text="{Binding Task.EngineerId, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="7" Grid.Column="1" TextChanged="TextBox_TextChanged_1"/>
+                <TextBox Text="{Binding Task.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1" TextChanged="TextBox_TextChanged"/>
 
-                <Label Content="Complexity:" Grid.Row="8" Foreground="Black" Margin="0,5,0,5"/>
+                <Label Content="Complexity:" Grid.Row="8" Foreground="Black"/>
                 <ComboBox ItemsSource="{Binding Source={StaticResource LevelCollection}}" 
-                          SelectedValue="{Binding Task.Copmlexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8" Grid.Column="1" Margin="154,5,154,5"/>
+                          SelectedValue="{Binding Task.Copmlexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8" Grid.Column="1"/>
 
-                <Label Content="Required Effort:" Grid.Row="8" Foreground="Black" Grid.ColumnSpan="2" Margin="3,33,324,14" Grid.RowSpan="2"/>
-                <TextBox Text="{Binding Task.RequiredEffort, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9" Grid.Column="1" TextChanged="TextBox_TextChanged_2" Margin="153,5,155,48"/>
+                <Label Content="Required Effort:" Grid.Row="9" Foreground="Black"/>
+                <TextBox Text="{Binding Task.RequiredEffort, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="9" Grid.Column="1" TextChanged="TextBox_TextChanged_2" Margin="125,5,120,104"/>
+                <Label Grid.Column="1" Content="Label" HorizontalAlignment="Left" Margin="81,18,0,33" Grid.RowSpan="2" Grid.Row="1"/>
+                <Button Content="Back" HorizontalAlignment="Left" Margin="411,0,0,0" VerticalAlignment="Center" Height="54" Width="62" Grid.Column="1" Foreground="Black" Click="Button_Click"/>
 
+                <Label Content="the dependent tasks: " HorizontalAlignment="Left" Grid.Row="13" Margin="45,27,0,20" Width="126" Height="30"/>
+                <Border Grid.Row="13"  Grid.Column="0" BorderThickness="0" Background="black" Height="88" Width="256" HorizontalAlignment="Left" 
+        VerticalAlignment="Top" Grid.ColumnSpan="2"  Margin="49,48,0,0" Grid.RowSpan="2">
 
-                 <!--ListBox--> 
-                <Label Content="The dependent tasks:" Grid.Row="9" Margin="120,63,212,0" Grid.Column="1"/>
+                    <ListView ItemsSource="{Binding Task.Dependencys}" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ListView_SelectionChanged" Margin="0,-10,0,10">
 
+                        <ListView.View>
+                            <GridView>
 
-                <ListBox ItemsSource="{Binding AllTasks}" SelectionMode="Multiple" HorizontalAlignment="Left" Grid.Row="9" Margin="197,150,0,-70" Width="100" Grid.Column="1">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox Content="{Binding Alias}" IsChecked="{Binding IsSelected, Mode=TwoWay}" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+                                <!-- Columns -->
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id }" Width="30" />
+                                <GridViewColumn Header="Alias" DisplayMemberBinding="{Binding Alias }" Width="130" />
+                                <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status }" Width="100" />
+                                <GridViewColumn Header="Delete" Width="60">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <!--<Button Content="Delete" Click="DeleteDep" CommandParameter="{Binding Alias}"/>-->
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
 
-                <Button Grid.Column="1" Content="Ok" HorizontalAlignment="Left" Margin="350,8,0,0" Grid.Row="9" VerticalAlignment="Top" Click="Button_Click_1" Height="41" Width="100"/>
-                <Button Grid.Column="1" Content="BACK" HorizontalAlignment="Left" Margin="350,0,0,0" VerticalAlignment="Center" Height="44" Width="71" Click="Button_Click_2"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Border>
+                <Button Grid.Column="1" Content="Ok" HorizontalAlignment="Left" Margin="291,38,0,0" Grid.Row="9" VerticalAlignment="Top" Click="Button_Click_1"/>
+                <Button Grid.Column="1" Content="BACK" HorizontalAlignment="Left" Margin="320,0,0,0" VerticalAlignment="Top" Height="44" Width="71" Click="Button_Click_2"/>
+                <Button Content="Schudele" HorizontalAlignment="Left" Margin="61,0,0,0" VerticalAlignment="Center"/>
+
             </Grid>
-             <!--Task Details--> 
         </StackPanel>
     </Grid>
 </Window>
