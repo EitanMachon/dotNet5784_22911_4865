@@ -22,21 +22,31 @@ namespace PL.Task
     public partial class TaskWindow : Window
     {
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
+        public IEnumerable<BO.Task>? AllTasks = s_bl?.Task.ReadAll(); // Create a new instance of the IEnumerable<BO.Task> class and store it in a property
+        public bool IsSelected { get; set; } = false; // Create a new instance of the bool class and store it in a property
         public BO.EngineerExperience Complexity { get; set; } = BO.EngineerExperience.All; // Create a new instance of the BO.EngineerExperience class and store it in a property
         public BO.Status Status { get; set; } = BO.Status.Unscheduled; // Create a new instance of the BO.Status class and store it in a property
 
         public TaskWindow(int i = 0) // the constructor of the TaskWindow class that get a parameter with a default value of 0
         {
-            InitializeComponent(); // Initialize the TaskWindow
+            try
+            {
+                InitializeComponent(); // Initialize the TaskWindow
+                if (i == 0) // if the id of the task is equal to 0
+                {
+                    Task = new BO.Task(); // Create a new instance of the BO.Task class and store it in a property and give it a diffult value of 0
+                }
+                else // if the id of the task is not equal to 0
+                {
+                    Task = s_bl?.Task.Read(i)!; // Using the BlApi to get the task by the id and store it in the Task
+                }
+            }
+            catch(Exception ex) // if there is an exception
+            {
+                MessageBox.Show(ex.Message); // Show a message to the user
+            }
             
-            if (i == 0) // if the id of the task is equal to 0
-            {
-                Task = new BO.Task(); // Create a new instance of the BO.Task class and store it in a property and give it a diffult value of 0
-            }
-            else // if the id of the task is not equal to 0
-            {
-                Task = s_bl?.Task.Read(i)!; // Using the BlApi to get the task by the id and store it in the Task
-            }
+            
         }
         public BO.Task Task // Create a new instance of the BO.Task class and store it in a property
         {
