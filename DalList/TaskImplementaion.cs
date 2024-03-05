@@ -49,7 +49,7 @@ internal class TaskImplementaion : ITask
         //    ?? throw new InvalidOperationException($"Task with ID {id} does not exist."); // throw an exception
         if (DataSource.Tasks.Any(t => t.Id == id)) // if the Task with the given ID exists, return the Task
         {
-            return DataSource.Tasks.Where(t => t.Id == id).FirstOrDefault(); // return the Task with the given ID
+            return DataSource.Tasks.Where(t => t.Id == id).FirstOrDefault()!; // return the Task with the given ID
         }
         else
         {

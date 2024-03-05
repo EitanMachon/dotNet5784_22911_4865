@@ -27,6 +27,7 @@ namespace PL.Task
 
         public TaskWindow(int i = 0) // the constructor of the TaskWindow class that get a parameter with a default value of 0
         {
+            
             InitializeComponent(); // Initialize the TaskWindow
             
             if (i == 0) // if the id of the task is equal to 0
@@ -146,12 +147,15 @@ namespace PL.Task
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Close();
+            new Scheduled(Task).Show();
+
         }
 
         private void TextBox_TextChanged_2(object sender, TextChangedEventArgs e)
         {
 
         }
+
+       
     }
 }

@@ -19,7 +19,7 @@ public class Task
     public BO.Status status { get; set; } // this is the status of the task
     public List<BO.TaskInList>? Dependencys { get; set; } // this is the list of dependencies of the task
     public TimeSpan RequiredEffort { get; set; } // this is the required effort of the task
-    public DateTime? StartDate { get; set; }  // this is the start date of the task
+    public DateTime StartDate { get; set; }  // this is the start date of the task
     public DateTime? ScheduledTime { get; set; } // this is the scheduled time of the task
     public BO.EngineerExperience Copmlexity { get; set; } // this is the complexity of the task   
     public DateTime? ForecastDate { get; set; } // this is the forecast date of the task
