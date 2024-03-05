@@ -8,7 +8,7 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="Gantt" Height="450" Width="800">
     <Grid>
-        <ItemsControl ItemsSource="{Binding data}" Grid.Row="0">
+        <ItemsControl ItemsSource="{Binding data}" Grid.Row="0" Margin="39,-36,-39,36">
             <ItemsControl.ItemTemplate>
                 <!-- DataTemplate for each Gantt item -->
                 <DataTemplate>
@@ -34,12 +34,14 @@
 
                             <!-- Grid for Gantt Chart -->
                             <Grid Background="#564d525e" Grid.Column="2" Margin="0,1">
+                                
                                 <!-- Rectangle representing task -->
                                 <Grid Width="{Binding RequiredEffort, Converter={StaticResource ConvertEffortTimeToWidthKey}}"
                                                 Margin="{Binding ScheduledTime, Converter={StaticResource ConvertStartDateToMarginKey}}" Height="20"  
-                                                Background="{Binding Id, Converter={StaticResource ConvertTaskStatusToColorKey}}" >
+                                                Background="Blue" >
+                                    
                                     <!-- Border for Rectangle -->
-                                    <Border BorderBrush="Black" BorderThickness=".7"/>
+                                    <Border BorderBrush="Black" BorderThickness="9.7"/>
 
                                 </Grid>
                             </Grid>

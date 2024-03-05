@@ -41,9 +41,9 @@ class ConevrLastInListToInt : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         var tempList = (List<BO.TaskInList>)value; // cast the value to a list of tasks
-var list = from t in tempList
-           select Factory.Get().Task.Read(t.Id); // get all the tasks from the list
-        return list.MaxBy(t => t.StartDate+ t.RequiredEffort)?.Id; // return the id of the task with the latest end time
+        var list = from t in tempList
+                   select Factory.Get().Task.Read(t.Id); // get all the tasks from the list
+        return list.MaxBy(t => t.StartDate + t.RequiredEffort)?.Id!; // return the id of the task with the latest end time
 
     }
 
@@ -53,3 +53,33 @@ var list = from t in tempList
     }
 }
 
+class ConvertEffortTimeToWidthKey : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+       TimeSpan requiredEffortTime = (TimeSpan)value ;
+        return requiredEffortTime.TotalDays*20;
+       
+    }
+
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+class ConvertStartDateToMarginKey : IValueConverter
+{
+     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+
+        DateTime ScheduledTime = (DateTime)value;
+        return (ScheduledTime - DateTime.Now).TotalDays.ToString() + "0,0,0";
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}

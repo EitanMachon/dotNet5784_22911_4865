@@ -39,13 +39,14 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
 
     static DO.Task xmlToTask(XElement xml)
     {
-        TimeSpan? timeSpan = TimeSpan.TryParse((string?)xml.Element("RequiredEffort"), out var result) ? (TimeSpan?)result : null;
+        TimeSpan? timeSpan = xml.ToTimeSpanNullable("RequiredEffort");
 
         return new DO.Task(
             (int)(xml.ToIntNullable("Id")),
             xml.Element("Alias")!.Value,
             xml.Element("Description")!.Value,
             (DateTime)(xml.ToDateTimeNullable("CreatedAtDate")!),
+
             timeSpan == null ? new TimeSpan() : (TimeSpan)(timeSpan!),
             xml.ToEnumNullable<EngineerExperience>("Copmlexity"),
             xml.ToDateTimeNullable("StartDate"),
@@ -58,25 +59,45 @@ internal class TaskImplementation : ITask // this class implement ITask interfac
             );
     }
 
-    public DO.Task? Read(int id) // this func get an id and return the task with this id
+    public DO.Task? Read(int id)
     {
-        XElement xElement = XMLTools.LoadListFromXMLElement(tasks_xml); // load the list from the file
-        XElement task = xElement.Elements().Where(e => int.Parse(e.Element("Id").Value) == id).FirstOrDefault(); // find the task with the given id
-        if (task != null) // if the task exist
-            return xmlToTask(task); // return the task
-        else // if the task does not exist throw an exception
-            throw new InvalidOperationException($"Task with ID {id} does not exist."); // if the task does not exist throw an exception
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>("tasks");
+        DO.Task? t = tasks.FirstOrDefault((item => item != null && item.Id == id), null);
+        //if there is a task with that id in the list - return it using linq expansion methode.
+        return t;
+
     }
 
-    public DO.Task? Read(Func<DO.Task, bool> filter)
+    /// <summary>
+    /// This function search for Task in the Tasks list from the XML file according to a filter function. 
+    /// then, return the Task.
+    /// </summary>
+    public DO.Task? Read(Func<DO.Task?, bool> filter)
     {
-        XElement xElement = XMLTools.LoadListFromXMLElement(tasks_xml); // load the list from the file
-        XElement? task = xElement.Elements().Where(e => filter(xmlToTask(e))).FirstOrDefault(); // find the task with the given id
-        if (task != null) // if the task exist
-            return xmlToTask(task); // return the task
-        else // if the task does not exist throw an exception
-            return null;
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>("tasks");
+        DO.Task? t = tasks.FirstOrDefault(filter, null);
+        return t;
     }
+
+    //public DO.Task? Read(int id) // this func get an id and return the task with this id
+    //{
+    //    XElement xElement = XMLTools.LoadListFromXMLElement(tasks_xml); // load the list from the file
+    //    XElement task = xElement.Elements().Where(e => int.Parse(e.Element("Id").Value) == id).FirstOrDefault(); // find the task with the given id
+    //    if (task != null) // if the task exist
+    //        return xmlToTask(task); // return the task
+    //    else // if the task does not exist throw an exception
+    //        throw new InvalidOperationException($"Task with ID {id} does not exist."); // if the task does not exist throw an exception
+    //}
+
+    //public DO.Task? Read(Func<DO.Task, bool> filter)
+    //{
+    //    XElement xElement = XMLTools.LoadListFromXMLElement(tasks_xml); // load the list from the file
+    //    XElement? task = xElement.Elements().Where(e => filter(xmlToTask(e))).FirstOrDefault(); // find the task with the given id
+    //    if (task != null) // if the task exist
+    //        return xmlToTask(task); // return the task
+    //    else // if the task does not exist throw an exception
+    //        return null;
+    //}
 
     public IEnumerable<DO.Task?> ReadAll(Func<DO.Task, bool>? filter = null) // this func return all the tasks
     {
