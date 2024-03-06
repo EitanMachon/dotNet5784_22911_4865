@@ -22,7 +22,13 @@ namespace PL.Task
     public partial class TaskWindow : Window
     {
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
-        public IEnumerable<BO.Task>? AllTasks = s_bl?.Task.ReadAll(); // Create a new instance of the IEnumerable<BO.Task> class and store it in a property
+        public IEnumerable<BO.Task>? AllTasks = s_bl?.Task.ReadAll();
+
+        private void PopulateAllTasksListBox()
+        {
+            allTasksListBox.ItemsSource = AllTasks;
+        }
+
         public bool IsSelected { get; set; } = false; // Create a new instance of the bool class and store it in a property
         public BO.EngineerExperience Complexity { get; set; } = BO.EngineerExperience.All; // Create a new instance of the BO.EngineerExperience class and store it in a property
         public BO.Status Status { get; set; } = BO.Status.Unscheduled; // Create a new instance of the BO.Status class and store it in a property
@@ -163,5 +169,29 @@ namespace PL.Task
         {
 
         }
+        private void AddDependencies_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var selectedTask in allTasksListBox.SelectedItems)
+            {
+                if (selectedTask is DO.Task taskToAdd)
+                {
+                    // Check if the task is not already a dependency
+                    if (!Task.Dependencys.Any(dep => dep == taskToAdd.Id))
+                    {
+                        // Add the task as a dependency
+                        Task.Dependencys.Add(new Dependency
+                        {
+                            Id = GenerateNewDependencyId(), // Implement this method to generate a new unique ID for the dependency
+                            DependentTask = taskToAdd.Id,
+                            Depends = Task.Id // Assuming the current task is the one being depended on
+                        });
+                    }
+                }
+            }
+
+            // Update the dependency list UI
+            UpdateDependencyList();
+        }
+
     }
 }

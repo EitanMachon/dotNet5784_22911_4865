@@ -2,6 +2,7 @@
 using BlApi;
 using BLApi;
 using BlImplenentation;
+
 /// <summary>
 /// this class is the implementation of IBl interface and it is the main class of the BL layer 
 /// </summary>
@@ -20,6 +21,8 @@ internal class Bl : IBl
 
     private static DateTime s_Clock = DateTime.Now.Date;
     public DateTime Clock { get { return s_Clock; } private set { s_Clock = value; } }
+
+    //public IDependency Dependency => new DependencyImplemation();
 
     
 }

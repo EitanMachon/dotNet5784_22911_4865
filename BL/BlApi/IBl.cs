@@ -16,7 +16,7 @@ namespace BlApi
         /// </summary>
         public IEngineer Engineer { get; } // this is the interface of the BL layer that is used to implement the BL layer  functions of the Engineer
 
-        // public BO.IDependency dependency { get; }
+        public BO.IDependency Dependency { get; }
 
         public ISchedule Schedule { get; } // this is the interface of the BL layer that is used to implement the BL layer  functions of the Schedule
         
