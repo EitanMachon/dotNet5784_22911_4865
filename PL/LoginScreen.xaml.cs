@@ -3,6 +3,7 @@ using deleteXml;
 using PL.Engineer;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using System.Windows.Threading;
 
 namespace PL
 {
@@ -24,14 +25,66 @@ namespace PL
     public partial class LoginScreen : Window
     {
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
+        private DispatcherTimer timer;
+
         public LoginScreen()
         {
             InitializeComponent();
+            //Activated += MainWindow_Activated;
+            //Deactivated += MainWindow_Deactivated;
+            StartClock();
+            StopClock();
         }
-        private void openManagerWindow_click(object sender, RoutedEventArgs e)
+            
+        private void MainWindow_Activated(object sender, EventArgs e)
+        {
+            StartClock();
+            StopClock();
+        }
+
+        private void MainWindow_Deactivated(object sender, EventArgs e)
+        {
+            StopClock();
+        }
+
+        private void StartClock()
+        {
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+            UpdateTime();
+        }
+
+        private void StopClock()
+        {
+            if (timer != null)
+            {
+                timer.Stop();
+                timer = null;
+            }
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            UpdateTime();
+        }
+
+        private void UpdateTime()
+        {
+            txtTime.Text = DateTime.Now.ToString("hh:mm:ss tt");
+        }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+
+    private void openManagerWindow_click(object sender, RoutedEventArgs e)
         {
             new password().Show(); // Create a new instance of password
-            Close(); // Close the login window
+           // Close(); // Close the login window
         }
         private void reset_click(object sender, RoutedEventArgs e)
         {
@@ -69,7 +122,7 @@ namespace PL
         private void EmployeeEntry_Click(object sender, RoutedEventArgs e)
         {
             new GetEngineerIdWindow().Show(); // Create a new instance of EmployeWindow
-            Close();
+           // Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

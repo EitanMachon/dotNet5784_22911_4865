@@ -5,7 +5,9 @@ using System.Globalization;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Dal;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 
@@ -40,11 +42,14 @@ class ConevrLastInListToInt : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        var tempList = (List<BO.TaskInList>)value; // cast the value to a list of tasks
-        var list = from t in tempList
-                   select Factory.Get().Task.Read(t.Id); // get all the tasks from the list
-        return list.MaxBy(t => t.StartDate + t.RequiredEffort)?.Id!; // return the id of the task with the latest end time
+        var tempList = (List<BO.TaskInList>)value; // Cast the value to a list of tasks
+        var list = tempList.Select(t => Factory.Get().Task.Read(t.Id)); // Get all the tasks from the list
 
+        // Find the task with the latest end time using MaxBy extension method
+        var latestTask = list.MaxBy(t => t.StartDate + t.RequiredEffort);
+
+        // Return the ID of the task with the latest end time
+        return latestTask?.Id ?? -1; // Return -1 if latestTask is null
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -58,24 +63,36 @@ class ConvertEffortTimeToWidthKey : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
        TimeSpan requiredEffortTime = (TimeSpan)value ;
-        return requiredEffortTime.TotalDays*20;
-       
+        return requiredEffortTime.TotalDays*20;       
     }
-
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
 }
-
 class ConvertStartDateToMarginKey : IValueConverter
 {
-     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
+    private IDal _dal = DalApi.Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
 
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
         DateTime ScheduledTime = (DateTime)value;
-        return (ScheduledTime - DateTime.Now).TotalDays.ToString() + "0,0,0";
+        DateTime? currentDate = _dal.ischedule.GetProjectStartDateTime();
+
+        if (currentDate.HasValue)
+        {
+            // Calculate the difference between ScheduledTime and currentDate in days
+            double daysDifference = (ScheduledTime - currentDate.Value).TotalDays;
+
+            // Create a Thickness object based on the difference
+            return new Thickness(daysDifference * 30, 0, 0, 0);
+        }
+        else
+        {
+            // If currentDate is null, return a default Thickness object
+            return new Thickness(0, 0, 0, 0);
+        }
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

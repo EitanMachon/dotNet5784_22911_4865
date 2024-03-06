@@ -14,15 +14,24 @@ public class ScheduleImplementation : ISchedule
 
         if (tasks.Count > 0) // save only if there are tasks
         {
-            DateTime? startDate = tasks.First().StartDate; // read the first task start date
-            DateTime? endDate = tasks.Last().DeadLinetime; // read the first task end date
-
+            DateTime? startDate = tasks.Min(task => task.StartDate); // Find the minimum StartDate
             XElement config = XMLTools.LoadListFromXMLElement(s_data_config_xml); // load the configuration from the file 
-
-            config.Element("ProjectStartDateTime").Value = startDate == null ? "" : startDate.ToString(); // update the start date
-            config.Element("ProjectEndDateTime").Value = endDate == null ? "" : endDate.ToString(); // update the end date
-
+            config.Element("ProjectStartDateTime")!.Value = startDate.HasValue ? startDate.Value.ToString() : ""; // update the start date
             XMLTools.SaveListToXMLElement(config, s_data_config_xml); // save the configuration to the file
+        }
+    }
+    public DateTime? GetProjectStartDateTime()
+    {
+        XElement config = XMLTools.LoadListFromXMLElement(s_data_config_xml); // load the configuration from the file 
+        string projectStartDateTimeString = config.Element("ProjectStartDateTime")?.Value;
+
+        if (DateTime.TryParse(projectStartDateTimeString, out DateTime projectStartDateTime))
+        {
+            return projectStartDateTime;
+        }
+        else
+        {
+            return null; // Return null if the parsing fails
         }
     }
 }

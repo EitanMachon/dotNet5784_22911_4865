@@ -51,7 +51,7 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new LoginScreen().Show();
+            //new LoginScreen().Show();
             this.Close();
         }
     }

@@ -14,6 +14,12 @@ internal class ScheduleImplementation : ISchedule
     /// </summary>
     public void SaveSchedule()
     {
+        
         _dal.ischedule.SaveSchedule(); // this is a call to the SaveSchedule method of the dal
     }
+    public DateTime? GetProjectStartDateTime()
+    {
+        return _dal.ischedule.GetProjectStartDateTime(); // this is a call to the SaveSchedule method of the dal
+    }
+
 }

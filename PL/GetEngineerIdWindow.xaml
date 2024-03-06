@@ -11,6 +11,6 @@
         <Label Content="put your id:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
         <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Id}" VerticalAlignment="Top" Width="120"/>
         <Button Content="ok" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="2.075,0.678"  Width="120" Click="ClickOk"/>
-        <Button Content="Back" Click="Button_Click"/>
+        <Button Content="close" Click="Button_Click"/>
     </StackPanel>
 </Window>
