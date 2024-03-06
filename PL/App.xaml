@@ -8,8 +8,8 @@
         <local:StatusCollection x:Key="StatusCollection"/>
         <local:ConverIdToContentKey x:Key="ConvertIdToContentKey"/>
         <local:ConvertIdToContent x:Key="ConvertIdToContent"/>
-        
-         <local:ConevrLastInListToInt x:Key="ConevrLastInListToInt"/>
+
+        <local:ConevrLastInListToInt x:Key="ConevrLastInListToInt"/>
         <local:ConvertEffortTimeToWidthKey x:Key="ConvertEffortTimeToWidthKey"/>
         <local:ConvertStartDateToMarginKey x:Key="ConvertStartDateToMarginKey"/>
     </Application.Resources>

@@ -3,4 +3,5 @@
 public interface ISchedule
 {
     void SaveSchedule();
+    DateTime? GetProjectStartDateTime();
 }

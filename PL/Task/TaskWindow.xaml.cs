@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,37 +23,23 @@ namespace PL.Task
     public partial class TaskWindow : Window
     {
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
-        public IEnumerable<BO.Task>? AllTasks = s_bl?.Task.ReadAll();
-
-        private void PopulateAllTasksListBox()
-        {
-            allTasksListBox.ItemsSource = AllTasks;
-        }
-
-        public bool IsSelected { get; set; } = false; // Create a new instance of the bool class and store it in a property
         public BO.EngineerExperience Complexity { get; set; } = BO.EngineerExperience.All; // Create a new instance of the BO.EngineerExperience class and store it in a property
         public BO.Status Status { get; set; } = BO.Status.Unscheduled; // Create a new instance of the BO.Status class and store it in a property
+        private int num;
 
         public TaskWindow(int i = 0) // the constructor of the TaskWindow class that get a parameter with a default value of 0
         {
-            try
-            {
-                InitializeComponent(); // Initialize the TaskWindow
-                if (i == 0) // if the id of the task is equal to 0
-                {
-                    Task = new BO.Task(); // Create a new instance of the BO.Task class and store it in a property and give it a diffult value of 0
-                }
-                else // if the id of the task is not equal to 0
-                {
-                    Task = s_bl?.Task.Read(i)!; // Using the BlApi to get the task by the id and store it in the Task
-                }
-            }
-            catch(Exception ex) // if there is an exception
-            {
-                MessageBox.Show(ex.Message); // Show a message to the user
-            }
+            num= i;
+            InitializeComponent(); // Initialize the TaskWindow
             
-            
+            if (i == 0) // if the id of the task is equal to 0
+            {
+                Task = new BO.Task(); // Create a new instance of the BO.Task class and store it in a property and give it a diffult value of 0
+            }
+            else // if the id of the task is not equal to 0
+            {
+                Task = s_bl?.Task.Read(i)!; // Using the BlApi to get the task by the id and store it in the Task
+            }
         }
         public BO.Task Task // Create a new instance of the BO.Task class and store it in a property
         {
@@ -65,42 +52,15 @@ namespace PL.Task
         {
             // Ask the user for confirmation
             // its gonna show a message box with the question "Are you sure you want to initialize the database?"
-            TextBox TextBox_TextChanged;//= sender as TextBox; // Cast the sender to TextBox
+            //TextBox TextBox_TextChanged;//= sender as TextBox; // Cast the sender to TextBox
 
-            MessageBoxResult result = MessageBox.Show("Are you creat a new Task?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            // MessageBoxResult result = MessageBox.Show("Are you creat a new Task?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             // If the user confirms, initialize the database
-            if (result == MessageBoxResult.Yes)
-            {
-                // Call the initialization method in DalTest
-                try {
-                    s_bl?.Task.Create(Task); // Using the BlApi to create the task
-
-                    MessageBox.Show("The task has been created successfully"); // Show a message to the user
-                }
-                catch
-                {
-                    MessageBox.Show("Their is no engineer with Id like that!"); // Show a message to the user
-                }
-            }
-
-            else
-            {
-                try
-                {
-                    s_bl?.Task.Update(Task); // Using the BlApi to update the task
-                    MessageBox.Show("The task has been updated successfully"); // Show a message to the user
-                }
-                catch
-                {
-                    MessageBox.Show("Their is no engineer wit id like that!"); // Show a message to the user
-                }
-            }
-
-            Close(); // Close the TaskWindow
+            // if (result == MessageBoxResult.Yes)
             
+            // Call the initialization method in DalTest
            
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -125,14 +85,8 @@ namespace PL.Task
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            TextBox TextBox_TextChanged;//= sender as TextBox; // Cast the sender to TextBox
-
-            MessageBoxResult result = MessageBox.Show("Are you creat a new Task?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
-
-            // If the user confirms, initialize the database
-            if (result == MessageBoxResult.Yes)
+            if (num == 0)
             {
-                // Call the initialization method in DalTest
                 try
                 {
                     s_bl?.Task.Create(Task); // Using the BlApi to create the task
@@ -154,10 +108,12 @@ namespace PL.Task
                 }
                 catch
                 {
-                    MessageBox.Show("Their is no engineer wit id like that!"); // Show a message to the user
+                    MessageBox.Show("Their is no engineer with id like that!"); // Show a message to the user
                 }
             }
-            Close();
+
+            Close(); // Close the TaskWindow
+
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -169,29 +125,11 @@ namespace PL.Task
         {
 
         }
-        private void AddDependencies_Click(object sender, RoutedEventArgs e)
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            foreach (var selectedTask in allTasksListBox.SelectedItems)
-            {
-                if (selectedTask is DO.Task taskToAdd)
-                {
-                    // Check if the task is not already a dependency
-                    if (!Task.Dependencys.Any(dep => dep == taskToAdd.Id))
-                    {
-                        // Add the task as a dependency
-                        Task.Dependencys.Add(new Dependency
-                        {
-                            Id = GenerateNewDependencyId(), // Implement this method to generate a new unique ID for the dependency
-                            DependentTask = taskToAdd.Id,
-                            Depends = Task.Id // Assuming the current task is the one being depended on
-                        });
-                    }
-                }
-            }
+            new Scheduled(Task).Show();
 
-            // Update the dependency list UI
-            UpdateDependencyList();
         }
-
     }
 }

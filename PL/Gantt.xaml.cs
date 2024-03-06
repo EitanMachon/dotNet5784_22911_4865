@@ -27,7 +27,6 @@ namespace PL
             get { return (DateTime)GetValue(orech); }
             set { SetValue(orech, value); } 
         }
-
         public static readonly DependencyProperty orech = DependencyProperty.Register("gapTime", typeof(DateTime), typeof(Gantt), new PropertyMetadata(null));
 
         public DateTime withGap // Create a new instance of the BO.Engineer class and store it in a property
@@ -51,9 +50,10 @@ namespace PL
 
            
         }
-        
 
-
-
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

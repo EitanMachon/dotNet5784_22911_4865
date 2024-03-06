@@ -51,8 +51,8 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            LoginScreen loginScreen = new LoginScreen();
-            loginScreen.Show();
+            //LoginScreen loginScreen = new LoginScreen();
+            //loginScreen.Show();
             Close(); // Close the password window        
         
     }

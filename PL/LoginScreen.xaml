@@ -62,5 +62,11 @@
             
             <Button Content="Gantt" Style="{StaticResource CoolButtonStyle}" Click="Button_Click"/>
         </StackPanel>
+
+
+        <Grid>
+            <TextBlock x:Name="txtTime" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Foreground="Black"/>
+        </Grid>
+
     </Grid>
 </Window>
