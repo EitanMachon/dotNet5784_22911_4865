@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BO;
 
-internal class Dependcys
+public class Dependcys
 {
-    int Id;
-    int DependentTask;
-    int Depends;
+    public int Id { get; set; }
+    public int DependentTask { get; set; }
+    public int Depends { get; set; }
 }

@@ -17,6 +17,7 @@ namespace Dal;
         List<Dependency> DepandencyList = XMLTools.LoadListFromXMLSerializer<Dependency>(Depandency_xml); // load the list from the file
         //get the new id into the item and only then add him SING CONFIG..///////////////////////////////////////////////////////////////
         int nextId = Config.DependencyId;
+        
         DepandencyList.Add(item with { Id = nextId }); // add the Depandency to the list
         XMLTools.SaveListToXMLSerializer(DepandencyList, Depandency_xml); // save the list to the file
         return nextId; // return the id of the Depandency

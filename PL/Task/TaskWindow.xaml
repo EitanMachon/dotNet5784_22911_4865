@@ -93,7 +93,7 @@
                 <Label Grid.Column="1" Content="Label" HorizontalAlignment="Left" Margin="81,18,0,33" Grid.RowSpan="2" Grid.Row="1"/>
                 <Button Content="Back" HorizontalAlignment="Left" Margin="411,0,0,0" VerticalAlignment="Center" Height="54" Width="62" Grid.Column="1" Foreground="Black" Click="Button_Click"/>
 
-                <Label Content="the dependent tasks: " HorizontalAlignment="Left" Grid.Row="13" Margin="45,27,0,20" Width="126" Height="30"/>
+                <!--<Label Content="the dependent tasks: " HorizontalAlignment="Left" Grid.Row="13" Margin="45,27,0,20" Width="126" Height="30"/>
                 <Border Grid.Row="13"  Grid.Column="0" BorderThickness="0" Background="black" Height="88" Width="256" HorizontalAlignment="Left" 
         VerticalAlignment="Top" Grid.ColumnSpan="2"  Margin="49,48,0,0" Grid.RowSpan="2">
 
@@ -107,7 +107,7 @@
                             </ListBox.ItemTemplate>
                         </ListBox>
 
-                </Border>
+                </Border>-->
                 <Button Grid.Column="1" Content="Ok" HorizontalAlignment="Left" Margin="291,38,0,0" Grid.Row="9" VerticalAlignment="Top" Click="Button_Click_1"/>
                 <Button Grid.Column="1" Content="BACK" HorizontalAlignment="Left" Margin="320,0,0,0" VerticalAlignment="Top" Height="44" Width="71" Click="Button_Click_2"/>
                 <Button Content="Schudele" HorizontalAlignment="Left" Margin="61,0,0,0" VerticalAlignment="Center" Click="Button_Click_3"/>

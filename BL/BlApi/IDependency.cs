@@ -2,7 +2,7 @@
 
 namespace BlApi;
 
-internal interface IDependency
+public interface IDependency
 {
     public int Create(BO.Dependcys Dependcys);
 
