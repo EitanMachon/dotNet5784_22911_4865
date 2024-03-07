@@ -336,51 +336,131 @@ public class Program
         }
     }
 
+    public static void DepandencyRun() // the function run the depandency 
+    {
+        Console.WriteLine("choose a Item to check:0 for exit ,1 for Creat, 2 for Read, 3 for ReadAll, 4 for Update, 5 for Delete");
+        int a = int.Parse(Console.ReadLine());
+        int _id1;
+        int _taskId;
+        int _dependOn;
+        try
+        {
+            switch (a)
+            {
+                case 1://Creat 
+                    Console.WriteLine("put a new id:");// get id for the depandency
+                    _id1 = int.Parse(Console.ReadLine()); // get the id
+                    Console.WriteLine("put a taskId:");// ask for the taskId
+                    _taskId = int.Parse(Console.ReadLine()); // get the taskId
+                    Console.WriteLine("put a dependOn:");// ask for the dependOn
+                    _dependOn = int.Parse(Console.ReadLine()); // get the dependOn
+                    BO.Dependcys n2 = new BO.Dependcys
+                    {
+                        Id = _id1,
+                        DependentTask = _taskId,
+                        Depends = _dependOn
+                    };
+                    s_bl.Dependency.Create(n2);// send to creat function of BL
+                    break;
+
+
+                case 2:// Read 
+                    Console.WriteLine("put a id for read:");// get id for the depandency
+                    _id1 = int.Parse(Console.ReadLine()); // get the id
+                    Console.WriteLine(s_bl!.Dependency.Read(_id1));// send to read
+                    break;
+
+                case 3: // ReadAll
+                    //s_bl!.Dependency.ReadAll();// send to readall
+                    foreach (var t in s_bl!.Dependency.ReadAll())
+                    {
+                        Console.WriteLine(t);
+                    }
+                    break;
+
+                case 4: // Update
+                    Console.WriteLine("put a id to update:");// get id for the depandency
+                    int _id3 = int.Parse(Console.ReadLine()); // get the id
+                    Console.WriteLine("put a taskId:");// ask for the taskId
+                    int _taskId1 = int.Parse(Console.ReadLine()); // get the taskId
+                    Console.WriteLine("put a dependOn:");// ask for the dependOn
+                    int _dependOn1 = int.Parse(Console.ReadLine()); // get the dependOn
+                    BO.Dependcys nt = new BO.Dependcys 
+                    { 
+                        Id = _id3,
+                        DependentTask = _taskId1,
+                        Depends = _dependOn1 
+                    }; // create a new depandency
+
+                    s_bl!.Dependency.Update(nt);
+                    break;
+
+                case 5: // Delete 
+                    Console.WriteLine("put a id for");
+                    int _id2 = int.Parse(Console.ReadLine()); // get the id
+                    s_bl!.Dependency.Delete(_id2);// send to Delete
+                    break;
+            }
+
+
+        }
+        catch (Exception e)// get if thier is exaption 
+        {
+            Console.WriteLine("Error: " + e.Message);
+        }
+    }
+
     //////////////////////////////////////////////////////////////////////////
     static void Main(string[] args)
     {
-        // Initialization.Do(s_dal);
-        Console.WriteLine("We build a garage system"); // print the first line to the user
-        Console.WriteLine("Welcome to our garage system"); // print the first line to the user
-        Console.WriteLine("Hello, what we can do for you today?");
-        Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
-        string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
-        if (ans == "Y" || ans == "y") //stage 3
-            Initialization.Do(); //stage 4
+            // Initialization.Do(s_dal);
+            Console.WriteLine("We build a garage system"); // print the first line to the user
+            Console.WriteLine("Welcome to our garage system"); // print the first line to the user
+            Console.WriteLine("Hello, what we can do for you today?");
+            Console.Write("Would you like to create Initial data? (Y/N)"); //stage 3
+            string? ans = Console.ReadLine() ?? throw new FormatException("Wrong input"); //stage 3
+            if (ans == "Y" || ans == "y") //stage 3
+                Initialization.Do(); //stage 4
 
-        Console.WriteLine("choose a Item to check:0 for exit ,1 for Engineer, 2 for Task");
-        int a = int.Parse(Console.ReadLine());
-
-        while (a != 0)// while he dont chooce 0 he will continue to run
-        {
-            // Console.WriteLine("Ok, let's start");
-            try
-            {
-                switch (a)
-                {
-                    case 1:// Engineer class
-                        EngineerRun();
-                        break;
-                    case 2:// Task class
-                        TaskRun();
-                        break;
-                    default:
-                        break;
-                }
-            }
-            catch (Exception e)// get if thier is exaption 
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            // read the next choise
             Console.WriteLine("choose a Item to check:0 for exit ,1 for Engineer, 2 for Task, 3 for Depandency");
-            a = int.Parse(Console.ReadLine());
-        }
+            int a = int.Parse(Console.ReadLine());
 
-        // save the schedule to the file
-        Console.WriteLine("save the schedule to the file...");
-        s_bl.Schedule.SaveSchedule();
+            while (a != 0)// while he dont chooce 0 he will continue to run
+            {
+                // Console.WriteLine("Ok, let's start");
+                try
+                {
+                    switch (a)
+                    {
+                        case 1:// Engineer class
+                            EngineerRun();
+                            break;
+                        case 2:// Task class
+                            TaskRun();
+                            break;
+                        case 3:// Depandency class
+                            DepandencyRun();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                catch (Exception e)// get if thier is exaption 
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                // read the next choise
+                Console.WriteLine("choose a Item to check:0 for exit ,1 for Engineer, 2 for Task, 3 for Depandency");
+                a = int.Parse(Console.ReadLine());
+            }
+
+            // save the schedule to the file
+            Console.WriteLine("save the schedule to the file...");
+            s_bl.Schedule.SaveSchedule();
+        }
     }
-}
+
+
+
 

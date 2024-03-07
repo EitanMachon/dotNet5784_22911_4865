@@ -3,7 +3,7 @@ namespace DO;
 
 public record Dependency
 (
-     int Id,
+     int Id, // the id of the dependency
      int DependentTask,// befor task
      int Depends// the task
 )
