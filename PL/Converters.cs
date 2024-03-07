@@ -63,7 +63,7 @@ class ConvertEffortTimeToWidthKey : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
        TimeSpan requiredEffortTime = (TimeSpan)value ;
-        return requiredEffortTime.TotalDays*20;       
+        return requiredEffortTime.TotalDays*2;       
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -78,15 +78,15 @@ class ConvertStartDateToMarginKey : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         DateTime ScheduledTime = (DateTime)value;
-        DateTime? currentDate = _dal.ischedule.GetProjectStartDateTime();
+        DateTime? startTimeDateOfProject = _dal.ischedule.GetProjectStartDateTime();
 
-        if (currentDate.HasValue)
+        if (startTimeDateOfProject.HasValue)
         {
             // Calculate the difference between ScheduledTime and currentDate in days
-            double daysDifference = (ScheduledTime - currentDate.Value).TotalDays;
+            double daysDifference = (ScheduledTime - startTimeDateOfProject.Value).TotalDays;
 
             // Create a Thickness object based on the difference
-            return new Thickness(daysDifference * 30, 0, 0, 0);
+            return new Thickness(daysDifference * 20, 0, 0, 0);
         }
         else
         {

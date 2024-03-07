@@ -15,6 +15,8 @@ using Task = BO.Task;
 /// <summary>
 /// this class is the implementation of ITask interface and contains the implementation of the Task functions in the BL layer
 /// </summary>
+
+
 internal class TaskImplementation : BlApi.ITask
 {
     private IDal _dal = DalApi.Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
@@ -22,13 +24,10 @@ internal class TaskImplementation : BlApi.ITask
     private readonly IBl _bl;
     internal TaskImplementation(IBl bl) => _bl = bl;
 
-    public TaskImplementation()
-    {
-    }
+    
 
 
-
-    /// <summary>
+   // <summary>
     /// this function is used to create a new Task by a given Task in the BO layer
     /// </summary>
 
@@ -58,8 +57,8 @@ internal class TaskImplementation : BlApi.ITask
             Description = boTask.Description,
             CreatedAtDate = boTask.CreatedAtDate,
             Dekiverables = boTask.Dekiverables,
-            ScheduledTime= DateTime.Now,
-            StartDate =DateTime.Now,
+            ScheduledTime= boTask.ScheduledTime,
+            StartDate =boTask.StartDate,
             Remarks = boTask.Remarks,
             EngineerId = boTask.EngineerId,
             Copmlexity = (global::EngineerExperience)(EngineerExperience)boTask.Copmlexity, // this is global because the EngineerExperience is in the BO layer and the EngineerExperience is in the DO layer
@@ -154,6 +153,7 @@ internal class TaskImplementation : BlApi.ITask
             StartDate = DateTime.Now,
             ComplateTime = doTask.ComplateTime,
             DeadLinetime = doTask.DeadLinetime,
+            ScheduledTime= doTask.ScheduledTime,
         };
 
 
@@ -250,19 +250,11 @@ internal class TaskImplementation : BlApi.ITask
             EngineerId = boTask.EngineerId,
             Copmlexity = (global::EngineerExperience)boTask.Copmlexity,
             RequiredEffort = boTask.RequiredEffort,
+            ScheduledTime=boTask.ScheduledTime,
         };
         _dal.itask.Update(doTask); // update the Task in the DAL layer
               
     }
-    public void schuale(DateTime time,int id) // update a Task by a given Task in the BO layer
-    {
-        BO.Task? task = Read(id);
-        if (task != null)
-        {
-            task.ScheduledTime = time;
-
-            Update(task); // update the Task
-        }
-    }
+   
 
 }

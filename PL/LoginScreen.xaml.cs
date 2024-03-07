@@ -34,6 +34,7 @@ namespace PL
             //Deactivated += MainWindow_Deactivated;
             StartClock();
             StopClock();
+            
         }
             
         private void MainWindow_Activated(object sender, EventArgs e)
@@ -101,7 +102,6 @@ namespace PL
                 //BltTest.
                 MessageBox.Show("Database reset successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
         }
 
         private void Initialization_Click(object sender, RoutedEventArgs e)
@@ -127,7 +127,17 @@ namespace PL
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            new Gantt().Show(); // Create a new instance of Gantt
+            if(s_bl.Schedule.getGantt())
+                 new Gantt().Show(); // Create a new instance of Gantt
+            else
+            {
+                MessageBox.Show("their is tasks without StartTime!");
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

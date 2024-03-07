@@ -22,6 +22,12 @@ namespace PL
     public partial class Scheduled : Window
     {
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
+        public DateTime chosenSch // Create a new instance of the BO.Task class and store it in a property
+        {
+            get { return (DateTime)GetValue(chosenSchProperty); } // Using GetValue and SetValue to get and set the value of the Task property
+            set { SetValue(chosenSchProperty, value); } // Using GetValue and SetValue to get and set the value of the Task property
+        }
+        public static readonly DependencyProperty chosenSchProperty = DependencyProperty.Register("chosenSch", typeof(DateTime), typeof(Scheduled), new PropertyMetadata(null)); // Using DependencyProperty as the backing store for Task.  This enables animation, styling, bind
 
         public BO.Task Task // Create a new instance of the BO.Task class and store it in a property
         {
@@ -43,6 +49,7 @@ namespace PL
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            Task.ScheduledTime = chosenSch;
             s_bl.Task.Update(Task);
             Close();
         }

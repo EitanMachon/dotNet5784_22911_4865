@@ -1,5 +1,4 @@
-﻿
-namespace Dal;
+﻿namespace Dal;
 using DalApi;
 using DO;
 using System.Collections.Generic;
@@ -19,7 +18,6 @@ internal class TaskImplementaion : ITask
 
         DataSource.Tasks.Add(newTask); // Add the new task directly into the DataSource
         return newTaskId; // return the new ID of the task
-
     }
 
 
