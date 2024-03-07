@@ -3,6 +3,7 @@ using deleteXml;
 using PL.Engineer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace PL
     /// <summary>
     /// Interaction logic for LoginScreen.xaml
     /// </summary>
-    public partial class LoginScreen : Window
+    public partial class LoginScreen : Window,INotifyPropertyChanged
     {
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
         private DispatcherTimer timer;
@@ -30,62 +31,56 @@ namespace PL
         public LoginScreen()
         {
             InitializeComponent();
-            //Activated += MainWindow_Activated;
-            //Deactivated += MainWindow_Deactivated;
-            StartClock();
-            StopClock();
-            
-        }
-            
-        private void MainWindow_Activated(object sender, EventArgs e)
-        {
-            StartClock();
-            StopClock();
-        }
+            CurrentTime = DateTime.Now; // Set initial time
+            DataContext = this; // Set DataContext to the instance of WatchWindow
+            StartTimer(); // Start timer to update time
 
-        private void MainWindow_Deactivated(object sender, EventArgs e)
-        {
-            StopClock();
         }
+       
+        private DateTime currentTime;
 
-        private void StartClock()
-        {
-            timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += Timer_Tick;
-            timer.Start();
-            UpdateTime();
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        private void StopClock()
+
+
+        public DateTime CurrentTime
         {
-            if (timer != null)
+            get { return currentTime; }
+            set
             {
-                timer.Stop();
-                timer = null;
+                if (currentTime != value)
+                {
+                    currentTime = value;
+                    OnPropertyChanged("CurrentTime");
+                }
             }
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+      
+        private void StartTimer()
+            {
+                DispatcherTimer timer = new DispatcherTimer();
+                timer.Interval = TimeSpan.FromSeconds(1);
+               // timer.Tick += Timer_Tick;
+                timer.Start();
+            }
+
+            private void Timer_Tick(object sender, EventArgs e)
+           
+            {
+            CurrentTime = CurrentTime.AddHours(1);
+            }
+       
+
+        private void OnPropertyChanged(string propertyName)
         {
-            UpdateTime();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void UpdateTime()
-        {
-            txtTime.Text = DateTime.Now.ToString("hh:mm:ss tt");
-        }
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-
-    private void openManagerWindow_click(object sender, RoutedEventArgs e)
+        private void openManagerWindow_click(object sender, RoutedEventArgs e)
         {
             new password().Show(); // Create a new instance of password
-           // Close(); // Close the login window
+                                   // Close(); // Close the login window
         }
         private void reset_click(object sender, RoutedEventArgs e)
         {
@@ -122,13 +117,12 @@ namespace PL
         private void EmployeeEntry_Click(object sender, RoutedEventArgs e)
         {
             new GetEngineerIdWindow().Show(); // Create a new instance of EmployeWindow
-           // Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(s_bl.Schedule.getGantt())
-                 new Gantt().Show(); // Create a new instance of Gantt
+            if (s_bl.Schedule.getGantt())
+                new Gantt().Show(); // Create a new instance of Gantt
             else
             {
                 MessageBox.Show("their is tasks without StartTime!");
@@ -137,6 +131,12 @@ namespace PL
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            CurrentTime = CurrentTime.AddHours(1);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            CurrentTime = CurrentTime.AddHours(0.25);
 
         }
     }

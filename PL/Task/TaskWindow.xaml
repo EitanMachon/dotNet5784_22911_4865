@@ -108,9 +108,9 @@
                         </ListBox>
 
                 </Border>-->
-                <Button Grid.Column="1" Content="Ok" HorizontalAlignment="Left" Margin="291,38,0,0" Grid.Row="9" VerticalAlignment="Top" Click="Button_Click_1"/>
+                <Button Grid.Column="1" Content="Ok" Margin="291,38,0,0" Grid.Row="9" VerticalAlignment="Top" Click="Button_Click_1" HorizontalAlignment="Left" Width="100"/>
                 <Button Grid.Column="1" Content="BACK" HorizontalAlignment="Left" Margin="320,0,0,0" VerticalAlignment="Top" Height="44" Width="71" Click="Button_Click_2"/>
-                <Button Content="Schudele" HorizontalAlignment="Left" Margin="61,0,0,0" VerticalAlignment="Center" Click="Button_Click_3"/>
+                <Button Content="Schudele" HorizontalAlignment="Left" Margin="61,0,0,7" VerticalAlignment="Bottom" Click="Button_Click_3"/>
 
             </Grid>
         </StackPanel>
