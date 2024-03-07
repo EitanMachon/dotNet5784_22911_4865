@@ -38,25 +38,25 @@ class ConverIdToContentKey : IValueConverter
         throw new NotImplementedException();
     }
 }
-class ConevrLastInListToInt : IValueConverter
-{
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        var tempList = (List<BO.TaskInList>)value; // Cast the value to a list of tasks
-        var list = tempList.Select(t => Factory.Get().Task.Read(t.Id)); // Get all the tasks from the list
+//class ConevrLastInListToInt : IValueConverter
+//{
+//    //public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+//    //{
+//    //    var tempList = ()value; // Cast the value to a List of BO.Task
+//    //    var list = tempList.Select(t => Factory.Get().Task.Read(t.Id)); // Get all the tasks from the list
 
-        // Find the task with the latest end time using MaxBy extension method
-        var latestTask = list.MaxBy(t => t.StartDate + t.RequiredEffort);
+//    //    // Find the task with the latest end time using MaxBy extension method
+//    //    var latestTask = list.MaxBy(t => t.StartDate + t.RequiredEffort);
 
-        // Return the ID of the task with the latest end time
-        return latestTask?.Id ?? -1; // Return -1 if latestTask is null
-    }
+//    //    // Return the ID of the task with the latest end time
+//    //    return latestTask?.Id ?? -1; // Return -1 if latestTask is null
+//    //}
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-}
+//    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+//    {
+//        throw new NotImplementedException();
+//    }
+//}
 
 class ConvertEffortTimeToWidthKey : IValueConverter
 {

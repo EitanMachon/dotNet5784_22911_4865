@@ -131,5 +131,10 @@ namespace PL.Task
             new Scheduled(Task).Show();
 
         }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
