@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -47,11 +48,11 @@ namespace PL
         {
             data = s_bl.Task.ReadAll()!; // Create a new instance of the BO.TaskInList class and store it in a property 
             InitializeComponent();
-
-           
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+       
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Close();
         }

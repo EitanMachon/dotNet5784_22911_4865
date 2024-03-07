@@ -1,5 +1,6 @@
 ﻿namespace Dal;
 using DalApi;
+using System.Diagnostics;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -14,9 +15,9 @@ public class ScheduleImplementation : ISchedule
 
         if (tasks.Count > 0) // save only if there are tasks
         {
-            DateTime? startDate = tasks.Min(task => task.StartDate); // Find the minimum StartDate
+            DateTime? scheduleDate = tasks.Min(task => task.ScheduledTime); // Find the minimum StartDate
             XElement config = XMLTools.LoadListFromXMLElement(s_data_config_xml); // load the configuration from the file 
-            config.Element("ProjectStartDateTime")!.Value = startDate.HasValue ? startDate.Value.ToString() : ""; // update the start date
+            config.Element("ProjectStartDateTime")!.Value = scheduleDate.HasValue ? scheduleDate.Value.ToString() : ""; // update the start date
             XMLTools.SaveListToXMLElement(config, s_data_config_xml); // save the configuration to the file
         }
     }
@@ -33,5 +34,16 @@ public class ScheduleImplementation : ISchedule
         {
             return null; // Return null if the parsing fails
         }
+    }
+
+    public bool getTasks()
+    {
+        List<DO.Task> tasks = XMLTools.LoadListFromXMLSerializer<DO.Task>(tasks_xml);
+        if(tasks.All(task => task.ScheduledTime != null))
+        {
+            SaveSchedule();
+            return true;
+        }
+        return false;
     }
 }

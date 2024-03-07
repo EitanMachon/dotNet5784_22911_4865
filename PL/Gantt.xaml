@@ -8,19 +8,13 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="Gantt" Height="450" Width="800">
     <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Margin="0,78,715,298" RenderTransformOrigin="0.748,0.244">
-            <ScrollViewer.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.314"/>
-                    <TranslateTransform X="-0.082" Y="-0.115"/>
-                </TransformGroup>
-            </ScrollViewer.RenderTransform>
-        </ScrollViewer>
-        <Button Content="close" HorizontalAlignment="Left" Margin="10,0,0,392" VerticalAlignment="Bottom" Click="Button_Click" Height="32" Width="56"/>
-        <Label Content="Gantt" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" FontFamily="Bodoni MT Condensed" Width="50"/>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="731*"/>
+            <ColumnDefinition Width="69*"/>
+        </Grid.ColumnDefinitions>
+        <ItemsControl Grid.Row="0" Margin="39,41,34,36" Grid.ColumnSpan="2">
+            <Label Content="GANTT" Width="70" Height="58"/>
+        </ItemsControl>
+        <Button Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="52" Click="Button_Click_1"/>
     </Grid>
-
 </Window>

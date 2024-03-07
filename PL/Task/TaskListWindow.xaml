@@ -28,7 +28,7 @@
 
 
         </Grid>
-        <ListView x:Name="MouseDoubleClick" Grid.Row="1" Margin="5" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="twoclicksbuttom" Background="#66000000" SelectionChanged="MouseDoubleClick_SelectionChanged_1" >
+        <ListView  Grid.Row="1" Margin="5" ItemsSource="{Binding Path=TaskList}" MouseDoubleClick="twoclicksbuttom" Background="#66000000" SelectionChanged="MouseDoubleClick_SelectionChanged_1" >
             <ListView.View>
                 <GridView>
                    

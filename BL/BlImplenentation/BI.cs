@@ -10,7 +10,7 @@ internal class Bl : IBl
     /// <summary>
     /// return new instance of ITask
     /// </summary>
-    public ITask Task => new TaskImplementation();
+    public ITask Task => new TaskImplementation(this);
     /// <summary>
     /// return new instance of IEngineer
     /// </summary>
@@ -20,6 +20,4 @@ internal class Bl : IBl
 
     private static DateTime s_Clock = DateTime.Now.Date;
     public DateTime Clock { get { return s_Clock; } private set { s_Clock = value; } }
-
-    
 }

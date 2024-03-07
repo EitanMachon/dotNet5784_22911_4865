@@ -1,2 +1,7 @@
 <ArrayOfDependency>
+	<dependency>
+		<Id>1</Id>
+		<DependentTask>916</DependentTask>
+		<Depends>917</Depends>
+	</dependency>
 </ArrayOfDependency>

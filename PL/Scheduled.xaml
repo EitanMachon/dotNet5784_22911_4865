@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="Scheduled" Height="124" Width="351">
+        Title="Scheduled" Height="124" Width="351"
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+
     <Grid RenderTransformOrigin="0.508,0.79" Height="175" VerticalAlignment="Top">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -13,7 +15,7 @@
         </Grid.RowDefinitions>
         <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Width="138" 
         
-        SelectedDate="{Binding Task.ScheduledTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="26" Margin="126,54,0,0"/>
+        SelectedDate="{Binding chosenSch, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Height="26" Margin="126,54,0,0"/>
         <Label Content="select a date:" HorizontalAlignment="Left" Margin="41,54,0,0" VerticalAlignment="Top" Height="34" Grid.RowSpan="2" Width="85"/>
         <Border BorderBrush="Black" BorderThickness="1" Margin="-6,0,-5,70" Grid.RowSpan="2">
             <Button Content="Ok" Margin="281,52,33,27" Click="Button_Click_1"/>
