@@ -138,7 +138,7 @@ class ConvertStartDateToMargin : IValueConverter
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        // Assuming value is the DateTime of the ForecastDate
+        // Assuming value is the DateTime of the ForecastDate 
         DateTime forecastDate = (DateTime)value;
 
         // Check if the task is late
