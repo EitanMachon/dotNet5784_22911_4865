@@ -69,7 +69,6 @@
 
             <Button Content="Gantt" Style="{StaticResource CoolButtonStyle}" Click="Button_Click"/>
         </StackPanel>
-
       
 
         <Grid>
@@ -78,7 +77,7 @@
         </Grid>
 
                 <Button Content="Add an Hour" HorizontalAlignment="Left" Margin="433,48,0,0" VerticalAlignment="Top" Click="Button_Click_1" Width="84" Background="GreenYellow"/>
-        <Button Content="Add quarter of an Hour" HorizontalAlignment="Left" Margin="267,48,0,0" VerticalAlignment="Top" Width="133" Background="GreenYellow" Click="Button_Click_2"/>
+        <Button Content="Add a Day" HorizontalAlignment="Left" Margin="267,48,0,0" VerticalAlignment="Top" Width="99" Background="GreenYellow" Click="Button_Click_2"/>
 
     </Grid>
 </Window>

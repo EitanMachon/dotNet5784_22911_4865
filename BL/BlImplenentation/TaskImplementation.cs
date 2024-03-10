@@ -22,10 +22,15 @@ internal class TaskImplementation : BlApi.ITask
     private IDal _dal = DalApi.Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
     private Task? finalTask; // create a new Task in the BO layer to use it in the Read functioprivate readonly IBl _bl;
     private readonly IBl _bl;
-    internal TaskImplementation(IBl bl) => _bl = bl;
+     internal TaskImplementation(IBl bl) => _bl = bl;
 
-    
+  
 
+
+    private DateTime time;
+
+    public void setT (DateTime a)
+    { time =a; }
 
    // <summary>
     /// this function is used to create a new Task by a given Task in the BO layer
@@ -143,7 +148,7 @@ internal class TaskImplementation : BlApi.ITask
             Id = doTask.Id,
             Alias = doTask.Alias,
             Description = doTask.Description,
-            CreatedAtDate = doTask.CreatedAtDate,
+            CreatedAtDate = doTask.CreatedAtDate, 
             Dekiverables = doTask.Dekiverables,
             Remarks = doTask.Remarks,
             Engineer = engineerInTask,
@@ -151,7 +156,8 @@ internal class TaskImplementation : BlApi.ITask
             RequiredEffort = doTask.RequiredEffort,
             EngineerId= doTask.EngineerId,
             Dependencys = dep,
-            StartDate = DateTime.Now,
+          
+            StartDate = (DateTime)doTask.StartDate,
             ComplateTime = doTask.ComplateTime,
             DeadLinetime = doTask.DeadLinetime,
             ScheduledTime= doTask.ScheduledTime,
@@ -248,7 +254,7 @@ internal class TaskImplementation : BlApi.ITask
             Id = boTask.Id,
             Alias = boTask.Alias,
             Description = boTask.Description,
-            CreatedAtDate = boTask.CreatedAtDate,
+            CreatedAtDate = boTask.CreatedAtDate, 
             Dekiverables = boTask.Dekiverables,
             Remarks = boTask.Remarks,
             EngineerId = boTask.EngineerId,

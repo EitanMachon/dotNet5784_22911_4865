@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        Background="CadetBlue"
         Title="GetEngineerIdWindow" Height="235" Width="299"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
-    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Background="BlanchedAlmond">
         <Label Content="put your id:" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
         <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Id}" VerticalAlignment="Top" Width="120"/>
         <Button Content="ok" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="2.075,0.678"  Width="120" Click="ClickOk"/>

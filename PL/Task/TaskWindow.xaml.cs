@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
@@ -13,16 +14,57 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BlApi;
-using BO; // Import the namespace where BlApi is located
+using System.Windows.Threading;
+using BlApi; // Import the namespace where BlApi is located
 
 namespace PL.Task
 {
     /// <summary>
     /// Interaction logic for TaskWindow.xaml
     /// </summary>
-    public partial class TaskWindow : Window
+    public partial class TaskWindow : Window, INotifyPropertyChanged
     {
+
+
+        private DateTime currentTime;
+
+
+        public DateTime CurrentTime
+        {
+            get { return currentTime; }
+            set
+            {
+                if (currentTime != value)
+                {
+                    currentTime = value;
+                    OnPropertyChanged("CurrentTime");
+                }
+            }
+        }
+
+
+        private void StartTimer()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            // timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+
+        {
+            CurrentTime = CurrentTime.AddHours(1);
+        }
+
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
         public BO.EngineerExperience Complexity { get; set; } = BO.EngineerExperience.All; // Create a new instance of the BO.EngineerExperience class and store it in a property
         public BO.Status Status { get; set; } = BO.Status.Unscheduled; // Create a new instance of the BO.Status class and store it in a property
@@ -34,7 +76,7 @@ namespace PL.Task
         {
             num= i;
             InitializeComponent(); // Initialize the TaskWindow
-            TaskListIdAlias = s_bl?.Task.ReadAll().Select(t => new TaskInList { Id = t.Id, Description = t.Description, Alias = t.Alias, status = t.status });  // Using the BlApi to get all the tasks and store them in the TaskListIdAlias
+            TaskListIdAlias = s_bl?.Task.ReadAll().Select(t => new BO.TaskInList { Id = t.Id, Description = t.Description, Alias = t.Alias, status = t.status });  // Using the BlApi to get all the tasks and store them in the TaskListIdAlias
 
 
             if (i == 0) // if the id of the task is equal to 0
@@ -46,13 +88,20 @@ namespace PL.Task
                 Task = s_bl?.Task.Read(i)!; // Using the BlApi to get the task by the id and store it in the Task
                 SelectedDep = Task.Dependencys; // Store the dependencies of the task in the SelectedDep
             }
+            DataContext = this; // Set DataContext to this window instance
+            CurrentTime = DateTime.Now; // Set initial time
         }
+
+
+
         public BO.Task Task // Create a new instance of the BO.Task class and store it in a property
         {
             get { return (BO.Task)GetValue(TaskProperty); } // Using GetValue and SetValue to get and set the value of the Task property
             set { SetValue(TaskProperty, value); } // Using GetValue and SetValue to get and set the value of the Task property
         }
         public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(BO.Task), typeof(TaskWindow), new PropertyMetadata(null)); // Using DependencyProperty as the backing store for Task.  This enables animation, styling, binding, etc...
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void btnAddUpdate_Click(object sender, RoutedEventArgs e)
         {
@@ -70,12 +119,12 @@ namespace PL.Task
         }
         public IEnumerable<BO.TaskInList> TaskListIdAlias
         {
-            get { return (IEnumerable<TaskInList>)GetValue(TaskListIdAliasProperty); }
+            get { return (IEnumerable<BO.TaskInList>)GetValue(TaskListIdAliasProperty); }
             set { SetValue(TaskListIdAliasProperty, value); }
         }
 
         public static readonly DependencyProperty TaskListIdAliasProperty =
-            DependencyProperty.Register("TaskListIdAlias", typeof(IEnumerable<TaskInList>), typeof(TaskWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("TaskListIdAlias", typeof(IEnumerable<BO.TaskInList>), typeof(TaskWindow), new PropertyMetadata(null));
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close(); // Close the password window        
@@ -166,10 +215,10 @@ namespace PL.Task
         private void TaskListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             SelectedDep.Clear();
-            foreach (TaskInList task in TaskListBox.SelectedItems)
+            foreach (BO.TaskInList task in TaskListBox.SelectedItems)
             {
                 var temp = s_bl.Task.Read(task.Id);
-                SelectedDep.Add(new TaskInList
+                SelectedDep.Add(new BO.TaskInList
                 {
                     Id = temp.Id,
                     Alias = temp.Alias,
@@ -182,6 +231,17 @@ namespace PL.Task
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void TextBox_TextChanged_3(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox; // Cast the sender to TextBox
+           
         }
     }
 }

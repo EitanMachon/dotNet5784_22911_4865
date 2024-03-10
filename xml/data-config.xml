@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <config>
-  <DependencyId>28</DependencyId>
-  <TaskId>966</TaskId>
-  <ProjectStartDateTime>01/01/0001 00:00:00</ProjectStartDateTime>
+  <DependencyId>26</DependencyId>
+  <TaskId>923</TaskId>
+  <ProjectStartDateTime>24/01/0001 0:00:00</ProjectStartDateTime>
   <ProjectEndDateTime></ProjectEndDateTime>
+  <NowDate>10/03/2024 20:13:37</NowDate>
 </config>

@@ -24,6 +24,7 @@ namespace Dal
 
             internal static DateTime? ProjectEndDate { get; set; }
             internal static DateTime? ProjectStartDate { get; set; }
+            internal static DateTime? NowDate { get; set; }
         }
     }
 }

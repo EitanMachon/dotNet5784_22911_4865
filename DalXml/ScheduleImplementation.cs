@@ -46,4 +46,21 @@ public class ScheduleImplementation : ISchedule
         }
         return false;
     }
+
+    public DateTime? GetNowDate()
+    {
+        XElement root = XMLTools.LoadListFromXMLElement("data-config");
+        XElement loozElement = root.Element("NowDate")!;
+        if (loozElement.Value == "")
+            return null;
+
+        return DateTime.Parse(loozElement.Value);
+    }
+
+    public void SetNowDate(DateTime? nowDate)
+    {
+        XElement root = XMLTools.LoadListFromXMLElement("data-config");
+        root.Element("NowDate")!.Value = nowDate.ToString()!;
+        XMLTools.SaveListToXMLElement(root, "data-config");
+    }
 }
