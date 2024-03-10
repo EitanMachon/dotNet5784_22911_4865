@@ -17,7 +17,7 @@ public class Task
     public string Alias { get; set; } // this is the alias of the task
     public DateTime CreatedAtDate { get; set; } // this is the date the task was created
     public BO.Status status { get; set; } // this is the status of the task
-    public List<BO.Dependcys>? Dependencys { get; set; } // this is the list of dependencies of the task
+    public List<BO.TaskInList>? Dependencys { get; set; } // this is the list of dependencies of the task
     public TimeSpan RequiredEffort { get; set; } // this is the required effort of the task
     public DateTime StartDate { get; set; }  // this is the start date of the task
     public DateTime? ScheduledTime { get; set; } // this is the scheduled time of the task

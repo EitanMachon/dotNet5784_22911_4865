@@ -13,7 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BlApi; // Import the namespace where BlApi is located
+using BlApi;
+using BO; // Import the namespace where BlApi is located
 
 namespace PL.Task
 {
@@ -25,13 +26,17 @@ namespace PL.Task
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
         public BO.EngineerExperience Complexity { get; set; } = BO.EngineerExperience.All; // Create a new instance of the BO.EngineerExperience class and store it in a property
         public BO.Status Status { get; set; } = BO.Status.Unscheduled; // Create a new instance of the BO.Status class and store it in a property
+
+        public static List<BO.TaskInList> SelectedDep = new List<BO.TaskInList>(); // Create a new instance of the List<BO.TaskInList> class and store it in a property
         private int num;
 
         public TaskWindow(int i = 0) // the constructor of the TaskWindow class that get a parameter with a default value of 0
         {
             num= i;
             InitializeComponent(); // Initialize the TaskWindow
-            
+            TaskListIdAlias = s_bl?.Task.ReadAll().Select(t => new TaskInList { Id = t.Id, Description = t.Description, Alias = t.Alias, status = t.status });  // Using the BlApi to get all the tasks and store them in the TaskListIdAlias
+
+
             if (i == 0) // if the id of the task is equal to 0
             {
                 Task = new BO.Task(); // Create a new instance of the BO.Task class and store it in a property and give it a diffult value of 0
@@ -39,6 +44,7 @@ namespace PL.Task
             else // if the id of the task is not equal to 0
             {
                 Task = s_bl?.Task.Read(i)!; // Using the BlApi to get the task by the id and store it in the Task
+                SelectedDep = Task.Dependencys; // Store the dependencies of the task in the SelectedDep
             }
         }
         public BO.Task Task // Create a new instance of the BO.Task class and store it in a property
@@ -62,7 +68,14 @@ namespace PL.Task
             // Call the initialization method in DalTest
            
         }
+        public IEnumerable<BO.TaskInList> TaskListIdAlias
+        {
+            get { return (IEnumerable<TaskInList>)GetValue(TaskListIdAliasProperty); }
+            set { SetValue(TaskListIdAliasProperty, value); }
+        }
 
+        public static readonly DependencyProperty TaskListIdAliasProperty =
+            DependencyProperty.Register("TaskListIdAlias", typeof(IEnumerable<TaskInList>), typeof(TaskWindow), new PropertyMetadata(null));
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close(); // Close the password window        
@@ -89,7 +102,9 @@ namespace PL.Task
             {
                 try
                 {
+                    Task.Dependencys = SelectedDep; // Store the dependencies of the task in the SelectedDep
                     s_bl?.Task.Create(Task); // Using the BlApi to create the task
+
 
                     MessageBox.Show("The task has been created successfully"); // Show a message to the user
                 }
@@ -103,7 +118,10 @@ namespace PL.Task
             {
                 try
                 {
+                    Task.Dependencys = SelectedDep; // Store the dependencies of the task in the SelectedDep
+
                     s_bl?.Task.Update(Task); // Using the BlApi to update the task
+          
                     MessageBox.Show("The task has been updated successfully"); // Show a message to the user
                 }
                 catch
@@ -120,7 +138,15 @@ namespace PL.Task
         {
             Close();
         }
+        private void ResetDependencysExpander_Expanded(object sender, RoutedEventArgs e)
+        {
+            SelectedDep.Clear();
 
+        }
+
+        private void Expander_Collapsed(object sender, RoutedEventArgs e)
+        {
+        }
         private void TextBox_TextChanged_2(object sender, TextChangedEventArgs e)
         {
 
@@ -131,7 +157,22 @@ namespace PL.Task
             new Scheduled(Task).Show();
 
         }
-
+        private void TaskListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            SelectedDep.Clear();
+            foreach (TaskInList task in TaskListBox.SelectedItems)
+            {
+                var temp = s_bl.Task.Read(task.Id);
+                SelectedDep.Add(new TaskInList
+                {
+                    Id = temp.Id,
+                    Alias = temp.Alias,
+                    Description = temp.Description,
+                    status = temp.status
+                }
+                    );
+            }
+        }
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
