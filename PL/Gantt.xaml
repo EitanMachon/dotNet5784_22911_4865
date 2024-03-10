@@ -8,13 +8,57 @@
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="Gantt" Height="450" Width="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="731*"/>
-            <ColumnDefinition Width="69*"/>
-        </Grid.ColumnDefinitions>
-        <ItemsControl Grid.Row="0" Margin="39,41,34,36" Grid.ColumnSpan="2">
-            <Label Content="GANTT" Width="70" Height="58"/>
+        <Grid.Background>
+            <SolidColorBrush Color="DarkGoldenrod"/>
+        </Grid.Background>
+        <ItemsControl ItemsSource="{Binding data}" Grid.Row="0" Margin="10,60,10,10">
+            <ItemsControl.ItemTemplate>
+                <!-- DataTemplate for each Gantt item -->
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Grid for each Gantt item -->
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="Transparent"/>
+
+                            </Grid.Background>
+
+                            <!-- Columns for Alias, Separator, and Gantt Chart -->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="3"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- TextBlock for Alias -->
+                            <TextBlock Text="{Binding Alias}" FontWeight="SemiBold"
+                                            FontFamily="ariel" Grid.Column="0" 
+                                            TextWrapping="WrapWithOverflow" TextAlignment="Center" Padding="3">
+                                            <!-- Background gradient for Alias -->
+                            </TextBlock>
+
+                            <!-- Separator Border -->
+                            <Border Grid.Column="1" VerticalAlignment="Stretch" Width="3" Background="Black" />
+
+                            <!-- Grid for Gantt Chart -->
+                            <Grid Background="#564d525e" Grid.Column="2" Margin="0,1">
+
+                                <!-- Rectangle representing task -->
+                                <Grid Width="{Binding RequiredEffort, Converter={StaticResource ConvertEffortTimeToWidthKey}}"
+                                                Margin="{Binding ScheduledTime, Converter={StaticResource ConvertStartDateToMarginKey}}" Height="20"  
+                                                Background="Blue" >
+
+                                    <!-- Border for Rectangle -->
+                                    <Border BorderBrush="Black" BorderThickness="9.7"/>
+
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Button Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="52" Click="Button_Click_1"/>
+        <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="49" Click="Button_Click_1"/>
+        <Label Content="Gantt" HorizontalAlignment="Center" VerticalAlignment="Top" Width="92" FontSize="25" Height="51" FontFamily="Blackadder ITC"/>
     </Grid>
 </Window>

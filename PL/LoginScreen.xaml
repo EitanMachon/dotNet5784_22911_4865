@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="LoginScreen" Height="450" Width="800">
+
     <Window.Resources>
+
         <!-- Style for buttons -->
         <Style x:Key="CoolButtonStyle" TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
@@ -59,15 +61,22 @@
 
             <!-- Reset Button with Style -->
             <Button Content="Reset" Style="{StaticResource CoolButtonStyle}" Click="reset_click"/>
-            
+
+            <!-- Calendar -->
+
+
             <Button Content="Gantt" Style="{StaticResource CoolButtonStyle}" Click="Button_Click"/>
         </StackPanel>
 
+      
 
         <Grid>
-            <TextBlock x:Name="txtTime" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" Foreground="Black"/>
+            <TextBlock Text="{Binding CurrentTime}" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="Black" />
+
         </Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="426,30,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
+
+                <Button Content="Add an Hour" HorizontalAlignment="Left" Margin="433,48,0,0" VerticalAlignment="Top" Click="Button_Click_1" Width="84" Background="GreenYellow"/>
+        <Button Content="Add quarter of an Hour" HorizontalAlignment="Left" Margin="267,48,0,0" VerticalAlignment="Top" Width="133" Background="GreenYellow" Click="Button_Click_2"/>
 
     </Grid>
 </Window>

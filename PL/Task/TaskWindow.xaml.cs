@@ -154,8 +154,14 @@ namespace PL.Task
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            new Scheduled(Task).Show();
-
+            if (num == 0)
+            {
+                MessageBox.Show("You need to create the task before the Scheduled select!!"); // Show a message to the user
+            }
+            else
+            {
+                new Scheduled(Task).Show();
+            }
         }
         private void TaskListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
