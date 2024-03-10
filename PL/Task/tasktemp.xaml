@@ -24,7 +24,7 @@
 
         <!-- Status -->
         <Label Content="Status:" HorizontalAlignment="Left" Margin="78,110,0,0" VerticalAlignment="Top" Height="26" Width="53"/>
-        <ComboBox SelectedValue="{Binding Task.Status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="337,110,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox SelectedValue="{Binding Task.status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="337,110,0,0" VerticalAlignment="Top" Width="120"/>
 
         <!-- Start At Date -->
         <Label Content="Start At Date:" HorizontalAlignment="Left" Margin="78,150,0,0" VerticalAlignment="Top" Height="26" Width="85"/>
@@ -32,7 +32,7 @@
 
         <!-- Deliverables -->
         <Label Content="Deliverables:" HorizontalAlignment="Left" Margin="78,190,0,0" VerticalAlignment="Top" Height="26" Width="81"/>
-        <TextBox Text="{Binding Task.Deliverables, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="337,190,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Task.Dekiverables, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="337,190,0,0" VerticalAlignment="Top" Width="120"/>
 
         <!-- Remarks -->
         <Label Content="Remarks:" HorizontalAlignment="Left" Margin="78,230,0,0" VerticalAlignment="Top" Height="26" Width="68"/>
@@ -44,7 +44,7 @@
 
         <!-- Complexity -->
         <Label Content="Complexity:" HorizontalAlignment="Left" Margin="78,310,0,0" VerticalAlignment="Top" Height="26" Width="87"/>
-        <ComboBox ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectedValue="{Binding Task.Complexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="337,310,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectedValue="{Binding Task.Copmlexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="337,310,0,0" VerticalAlignment="Top" Width="120"/>
 
         <!-- Required Effort -->
         <Label Content="Required Effort:" HorizontalAlignment="Left" Margin="78,350,0,0" VerticalAlignment="Top" Width="99"/>

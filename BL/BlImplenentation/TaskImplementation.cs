@@ -55,7 +55,7 @@ internal class TaskImplementation : BlApi.ITask
             Id = 0,
             Alias = boTask.Alias,
             Description = boTask.Description,
-            CreatedAtDate = boTask.CreatedAtDate,
+            CreatedAtDate = _bl.Clock,
             Dekiverables = boTask.Dekiverables,
             ScheduledTime= boTask.ScheduledTime,
             StartDate =boTask.StartDate,

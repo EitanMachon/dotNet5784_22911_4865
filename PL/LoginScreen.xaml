@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="LoginScreen" Height="450" Width="800">
+    <!-- Assuming the icon file is named ICON.ico and located in the 'pic' folder -->
 
     <Window.Resources>
-
+       
         <!-- Style for buttons -->
         <Style x:Key="CoolButtonStyle" TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
@@ -42,6 +43,7 @@
         </Style>
     </Window.Resources>
 
+    
     <Grid>
         <!-- Background Image -->
         <Grid.Background>

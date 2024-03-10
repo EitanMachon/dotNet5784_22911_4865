@@ -30,6 +30,45 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
 
+                            <ToolTipService.ToolTip>
+                                <StackPanel>
+                                    <TextBlock Text="Task Id: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Id}"/>
+                                    <TextBlock Text="Task Alias: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Alias}"/>
+                                    <TextBlock Text="Task Description: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Description}"/>
+                                    <TextBlock Text="Task Complexity: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Complexity}"/>
+                                    <TextBlock Text="Task Deliverables: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Dekiverables}"/>
+                                    <TextBlock Text="ScheduledDate: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding ScheduledTime}"/>
+                                    <TextBlock Text="Task ForecastDate: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding ForecastDate}"/>
+                                    <TextBlock Text="Task RequiredEffortTime: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding RequiredEffort}"/>
+                                    <TextBlock Text="Task Status: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding status}"/>
+                                    <TextBlock Text="Task Remarks: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Remarks}"/>
+                                    <TextBlock Text="This Task belong to: " FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding Engineer.Name}"/>
+                                    <TextBlock Text="Dependencies:" FontWeight="Bold"/>
+                                    <ItemsControl ItemsSource="{Binding Dependencys}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Id }" FontWeight="Bold"/>
+                                                    <TextBlock Text="{Binding Description}"/>
+
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                </StackPanel>
+                            </ToolTipService.ToolTip>
                             <!-- TextBlock for Alias -->
                             <TextBlock Text="{Binding Alias}" FontWeight="SemiBold"
                                             FontFamily="ariel" Grid.Column="0" 
@@ -46,7 +85,8 @@
                                 <!-- Rectangle representing task -->
                                 <Grid Width="{Binding RequiredEffort, Converter={StaticResource ConvertEffortTimeToWidthKey}}"
                                                 Margin="{Binding ScheduledTime, Converter={StaticResource ConvertStartDateToMarginKey}}" Height="20"  
-                                                Background="Blue" >
+                                                Background="{Binding DeadLinetime, Converter={StaticResource LateTaskToColorConverter}}" Grid.Column="2">
+
 
                                     <!-- Border for Rectangle -->
                                     <Border BorderBrush="Black" BorderThickness="9.7"/>
