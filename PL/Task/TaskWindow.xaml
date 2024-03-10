@@ -101,12 +101,18 @@
             </Expander>
 
             <!-- Buttons -->
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,5">
-                <Button Content="Back" Width="100" Margin="0,0,10,0" Foreground="White" Background="#4CAF50" Click="Button_Click"/>
-                <Button Content="Ok" Width="100" Margin="0,0,10,0" Foreground="White" Background="#4CAF50" Click="Button_Click_1"/>
-                <Button Content="BACK" Width="100" Margin="0,0,10,0" Foreground="White" Background="#4CAF50" Click="Button_Click_2"/>
-                <Button Content="Schedule" Width="100" Foreground="White" Background="#4CAF50" Click="Button_Click_3"/>
-            </StackPanel>
+            <Button Content="BACK" Foreground="White" Background="#4CAF50" Click="Button_Click_2" RenderTransformOrigin="0.275,1.868" Grid.Column="1" Margin="209,-45,6,413">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0.106"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+            <Button Content="Ok" Foreground="White" Background="#4CAF50" Click="Button_Click_1" Margin="10,236,174,133" RenderTransformOrigin="-0.182,1.237" Grid.Column="1"/>
+            <Button Content="task time" Foreground="White" Background="#4CAF50" Click="Button_Click_3" Margin="267,-36,184,413" Grid.ColumnSpan="2"/>
         </Grid>
     </Grid>
 </Window>

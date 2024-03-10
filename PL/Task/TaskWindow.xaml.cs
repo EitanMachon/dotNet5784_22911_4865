@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using BlApi; // Import the namespace where BlApi is located
 
 namespace PL.Task
@@ -75,7 +76,7 @@ namespace PL.Task
         {
             num= i;
             InitializeComponent(); // Initialize the TaskWindow
-            TaskListIdAlias = s_bl?.Task.ReadAll().Select(t => new TaskInList { Id = t.Id, Description = t.Description, Alias = t.Alias, status = t.status });  // Using the BlApi to get all the tasks and store them in the TaskListIdAlias
+            TaskListIdAlias = s_bl?.Task.ReadAll().Select(t => new BO.TaskInList { Id = t.Id, Description = t.Description, Alias = t.Alias, status = t.status });  // Using the BlApi to get all the tasks and store them in the TaskListIdAlias
 
 
             if (i == 0) // if the id of the task is equal to 0
@@ -118,12 +119,12 @@ namespace PL.Task
         }
         public IEnumerable<BO.TaskInList> TaskListIdAlias
         {
-            get { return (IEnumerable<TaskInList>)GetValue(TaskListIdAliasProperty); }
+            get { return (IEnumerable<BO.TaskInList>)GetValue(TaskListIdAliasProperty); }
             set { SetValue(TaskListIdAliasProperty, value); }
         }
 
         public static readonly DependencyProperty TaskListIdAliasProperty =
-            DependencyProperty.Register("TaskListIdAlias", typeof(IEnumerable<TaskInList>), typeof(TaskWindow), new PropertyMetadata(null));
+            DependencyProperty.Register("TaskListIdAlias", typeof(IEnumerable<BO.TaskInList>), typeof(TaskWindow), new PropertyMetadata(null));
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close(); // Close the password window        
@@ -214,10 +215,10 @@ namespace PL.Task
         private void TaskListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             SelectedDep.Clear();
-            foreach (TaskInList task in TaskListBox.SelectedItems)
+            foreach (BO.TaskInList task in TaskListBox.SelectedItems)
             {
                 var temp = s_bl.Task.Read(task.Id);
-                SelectedDep.Add(new TaskInList
+                SelectedDep.Add(new BO.TaskInList
                 {
                     Id = temp.Id,
                     Alias = temp.Alias,
