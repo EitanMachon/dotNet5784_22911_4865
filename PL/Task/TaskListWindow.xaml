@@ -38,7 +38,7 @@
                     <GridViewColumn Header="Start Date" DisplayMemberBinding="{Binding StartDate}"/>
                     <GridViewColumn Header="End Date" DisplayMemberBinding="{Binding DeadLinetime}"/>
                     <GridViewColumn Header="Engineer" DisplayMemberBinding="{Binding Engineer.Id}"/>
-                    <GridViewColumn Header="Depends" DisplayMemberBinding="{Binding Dependencys, Converter={StaticResource ConevrLastInListToInt}}"/>
+                    <!--<GridViewColumn Header="Depends" DisplayMemberBinding="{Binding Dependencys, Converter={StaticResource ConevrLastInListToInt}}"/>-->
                 </GridView>
             </ListView.View>
         </ListView>

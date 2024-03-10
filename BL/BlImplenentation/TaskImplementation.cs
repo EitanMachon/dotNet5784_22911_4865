@@ -2,6 +2,7 @@
 
 using BlApi;
 using BlImplementation;
+using System.Linq;
 using BO;
 using DalApi;
 using DO;
@@ -140,11 +141,8 @@ internal class TaskImplementation : BlApi.ITask
                 Name = engineer.Name
             };
         }
-
-        List<BO.TaskInList> tempDependencys = (from d in _dal.idependancy.ReadAll() 
-                                               where d.DependentTask == id 
-                                               let depends = Read(d.Depends)
-                                               select new TaskInList { Id = d.Depends, Alias = depends.Alias }).ToList();
+        List<BO.TaskInList> dep = (from d in _dal.idependancy.ReadAll() where d.DependentTask == id
+                                   select new BO.TaskInList { Id = d.Depends, Alias = _dal.itask.Read(d.Depends).Alias, Description = _dal.itask.Read(d.Depends).Description, status = _bl.Task.Read(d.Depends).status }).ToList();
         BO.Task? finalTask = new BO.Task // return the Task in the BO layer
         {
             Id = doTask.Id,
@@ -157,7 +155,8 @@ internal class TaskImplementation : BlApi.ITask
             Copmlexity = (EngineerExperience)doTask.Copmlexity,
             RequiredEffort = doTask.RequiredEffort,
             EngineerId= doTask.EngineerId,
-            Dependencys = tempDependencys, 
+            Dependencys = dep,
+          
             StartDate = (DateTime)doTask.StartDate,
             ComplateTime = doTask.ComplateTime,
             DeadLinetime = doTask.DeadLinetime,
@@ -192,8 +191,11 @@ internal class TaskImplementation : BlApi.ITask
             try // try to read the Task
             {
                 var tempDependencys = from d in _dal.idependancy.ReadAll() where d.DependentTask == task.Id select d.Depends; // read the Dependencies of the Task in the DAL layer
-                var tempDependencys_taskinlist = from d in tempDependencys select new TaskInList { Id = (int)d }; // read the Dependencies of the Task in the DAL layer
-                BO.Task task2 = new BO.Task() // add the Task to the list of Tasks in the BO layer
+                                                                                                                              //var tempDependencys_taskinlist = from d in tempDependencys select new TaskInList { Id = (int)d }; // read the Dependencies of the Task in the DAL layer
+
+                List<BO.TaskInList> dep = (from d in _dal.idependancy.ReadAll()
+                                           where d.DependentTask ==  task.Id
+                                           select new BO.TaskInList { Id = d.Depends, Alias = _dal.itask.Read(d.Depends).Alias, Description = _dal.itask.Read(d.Depends).Description, status = _bl.Task.Read(d.Depends).status }).ToList(); BO.Task task2 = new BO.Task() // add the Task to the list of Tasks in the BO layer
                 {
                     Id = task.Id,
                     Alias = task.Alias,
@@ -207,7 +209,8 @@ internal class TaskImplementation : BlApi.ITask
                     startDate = task.StartDate,
                     ScheduledTime = task.ScheduledTime,
                     DeadLinetime = task.DeadLinetime,
-                    Dependencys = tempDependencys_taskinlist.ToList(),
+                    Dependencys = dep.ToList(),
+                    //Dependencys = tempDependencys_taskinlist.ToList(),
                 };
                 if (filter == null)
                 {
@@ -245,6 +248,7 @@ internal class TaskImplementation : BlApi.ITask
                 throw new BO.BlInvalidAlias("Task with Alias=null is invalid"); // throw an exception
             }
         }
+        
         DO.Task doTask = new DO.Task // create a new Task in the DAL layer by the given Task in the BO layer after checking the Engineer and his qualification
         {
             Id = boTask.Id,
@@ -258,6 +262,22 @@ internal class TaskImplementation : BlApi.ITask
             RequiredEffort = boTask.RequiredEffort,
             ScheduledTime=boTask.ScheduledTime,
         };
+        if (boTask.Dependencys != null)
+        {
+            foreach (Dependency d in _dal.idependancy.ReadAll())
+            {
+                if (d.DependentTask == boTask.Id)
+                    _dal.idependancy.Delete(d.Id);
+
+            }
+
+            foreach (var t in boTask.Dependencys)
+            {
+                if (_dal.itask.Read(x => x.Id == t.Id) == null)
+                    throw new BO.BLDependentTaskDoesntExist($"Dependent task with ID={t.Id} doesnt exist");
+                        _dal.idependancy.Create(new Dependency { DependentTask = boTask.Id, Depends = t.Id });
+            }
+        }
         _dal.itask.Update(doTask); // update the Task in the DAL layer
               
     }

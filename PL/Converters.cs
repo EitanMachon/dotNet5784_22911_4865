@@ -42,14 +42,45 @@ class ConevrLastInListToInt : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        var tempList = (List<BO.TaskInList>)value; // Cast the value to a list of tasks
+        var tempList = (List<BO.Dependcys>)value;
         var list = tempList.Select(t => Factory.Get().Task.Read(t.Id)); // Get all the tasks from the list
 
         // Find the task with the latest end time using MaxBy extension method
         var latestTask = list.MaxBy(t => t.StartDate + t.RequiredEffort);
 
         // Return the ID of the task with the latest end time
-        return latestTask?.Id ?? -1; // Return -1 if latestTask is null
+        return latestTask?.Id ; // Return -1 if latestTask is null
+    }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+
+
+class ConerterReq : IValueConverter
+{
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        if (value is List<DO.Task> tasks)
+        {
+           var temp = tasks.Select(t => Factory.Get().Task.Read(t.Id));
+            var latestTask = temp.MaxBy(t => t.StartDate + t.RequiredEffort);
+            return latestTask?.StartDate + latestTask?.RequiredEffort;
+        }
+        else if (value is List<BO.Dependcys> dependencies)
+        {
+            var temp = dependencies.Select(t => Factory.Get().Task.Read(t.Id));
+            var latestTask = temp.MaxBy(t => t.StartDate + t.RequiredEffort);
+            return latestTask?.StartDate + latestTask?.RequiredEffort;
+            
+        }
+        else
+        {
+            throw new InvalidOperationException("Unsupported type");
+        }
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -71,7 +102,7 @@ class ConvertEffortTimeToWidthKey : IValueConverter
         throw new NotImplementedException();
     }
 }
-class ConvertStartDateToMarginKey : IValueConverter
+class ConvertStartDateToMargin : IValueConverter
 {
     private IDal _dal = DalApi.Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
 
