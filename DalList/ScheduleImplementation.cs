@@ -17,4 +17,13 @@ internal class ScheduleImplementation : DalApi.ISchedule
     {
         // we do not have something to save here...
     }
+    public DateTime? GetNowDate()
+    {
+        return DataSource.Config.NowDate;
+    }
+
+    public void SetNowDate(DateTime? nowDate)
+    {
+        DataSource.Config.NowDate = nowDate;
+    }
 }

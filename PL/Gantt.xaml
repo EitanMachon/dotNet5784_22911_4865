@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Title="Gantt" Height="450" Width="800">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="DarkGoldenrod"/>
@@ -20,7 +21,6 @@
                         <Grid>
                             <Grid.Background>
                                 <SolidColorBrush Color="Transparent"/>
-
                             </Grid.Background>
 
                             <!-- Columns for Alias, Separator, and Gantt Chart -->
@@ -46,10 +46,10 @@
                                 <!-- Rectangle representing task -->
                                 <Grid Width="{Binding RequiredEffort, Converter={StaticResource ConvertEffortTimeToWidthKey}}"
                                                 Margin="{Binding ScheduledTime, Converter={StaticResource ConvertStartDateToMarginKey}}" Height="20"  
-                                                Background="Blue" >
+                                                Background="White" >
 
                                     <!-- Border for Rectangle -->
-                                    <Border BorderBrush="Black" BorderThickness="9.7"/>
+                                    <Border BorderBrush="White" BorderThickness="9.7"/>
 
                                 </Grid>
                             </Grid>
@@ -58,7 +58,8 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="49" Click="Button_Click_1"/>
+        <Button Content="Back" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Width="49" Click="Button_Click_1" Background="Brown"/>
         <Label Content="Gantt" HorizontalAlignment="Center" VerticalAlignment="Top" Width="92" FontSize="25" Height="51" FontFamily="Blackadder ITC"/>
     </Grid>
+        </ScrollViewer>
 </Window>

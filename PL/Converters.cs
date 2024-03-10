@@ -63,8 +63,8 @@ class ConvertEffortTimeToWidthKey : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
        TimeSpan requiredEffortTime = (TimeSpan)value ;
-        return requiredEffortTime.TotalDays*2;       
-    }
+        return requiredEffortTime.TotalDays*300;       
+    }//
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {

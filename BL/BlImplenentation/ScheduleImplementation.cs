@@ -25,4 +25,7 @@ internal class ScheduleImplementation : ISchedule
     {
         return _dal.ischedule.getTasks(); // this is a call to the SaveSchedule method of the dal
     }
+    public DateTime? GetNowDate() => _dal.ischedule.GetNowDate();
+
+    public void SetNowDate(DateTime? nowDate) => _dal.ischedule.SetNowDate(nowDate);
 }

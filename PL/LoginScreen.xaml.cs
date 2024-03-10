@@ -23,8 +23,11 @@ namespace PL
     /// <summary>
     /// Interaction logic for LoginScreen.xaml
     /// </summary>
-    public partial class LoginScreen : Window,INotifyPropertyChanged
+    public partial class LoginScreen : Window, INotifyPropertyChanged
     {
+        private const int V = 24;
+        static readonly BlApi.IBl s_bl2 = BlApi.Factory.Get();
+
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
         private DispatcherTimer timer;
 
@@ -32,11 +35,12 @@ namespace PL
         {
             InitializeComponent();
             CurrentTime = DateTime.Now; // Set initial time
+            s_bl.ResteClock();
             DataContext = this; // Set DataContext to the instance of WatchWindow
             StartTimer(); // Start timer to update time
 
         }
-       
+
         private DateTime currentTime;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -56,21 +60,21 @@ namespace PL
             }
         }
 
-      
-        private void StartTimer()
-            {
-                DispatcherTimer timer = new DispatcherTimer();
-                timer.Interval = TimeSpan.FromSeconds(1);
-               // timer.Tick += Timer_Tick;
-                timer.Start();
-            }
 
-            private void Timer_Tick(object sender, EventArgs e)
-           
-            {
+        private void StartTimer()
+        {
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            // timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+
+        {
             CurrentTime = CurrentTime.AddHours(1);
-            }
-       
+        }
+
 
         private void OnPropertyChanged(string propertyName)
         {
@@ -128,16 +132,22 @@ namespace PL
                 MessageBox.Show("their is tasks without StartTime!");
             }
         }
-
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            CurrentTime = CurrentTime.AddDays(1);
+          //  s_bl.Clock.AddHour(1);
+            s_bl.AddDay(1);
+            // s_bl.setT(CurrentTime);
+        }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             CurrentTime = CurrentTime.AddHours(1);
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            CurrentTime = CurrentTime.AddHours(0.25);
-
+            s_bl.AddHour(1);
         }
     }
+
+
+
 }
+ 
+

@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Task"
         mc:Ignorable="d"
-        Title="TaskWindow" Height="539" Width="592"
+        Title="TaskWindow" Height="522" Width="581"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
-    <Grid Margin="10">
+    <Grid Margin="10,10,10,8">
         <!-- Background Image -->
 
 
@@ -41,9 +41,8 @@
                     <Setter Property="Padding" Value="10"/>
                 </Style>
             </StackPanel.Resources>
-
             <!-- Task Details -->
-            <Grid>
+            <Grid Height="474" Width="567">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
@@ -62,34 +61,32 @@
                 </Grid.RowDefinitions>
 
                 <Label Content="Alias:" Grid.Row="1" Foreground="Black"/>
-                <TextBox Text="{Binding Task.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1" TextChanged="TextBox_TextChanged"/>
+                <TextBox Text="{Binding Task.Alias, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1" TextChanged="TextBox_TextChanged"/>
 
                 <Label Content="Description:" Grid.Row="2" Foreground="Black"/>
-                <TextBox Text="{Binding Task.Description, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="2" Grid.Column="1"/>
+                <TextBox Text="{Binding Task.Description, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="2" Grid.Column="1"/>
 
                 <Label Content="Status:" Grid.Row="3" Foreground="Black"/>
                 <ComboBox ItemsSource="{Binding Source={StaticResource StatusCollection}}"
                           SelectedValue="{Binding Task.status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Grid.Column="1"/>
 
-                <Label Content="Created At Date:" Grid.Row="4" Foreground="Black"/>
-                <DatePicker SelectedDate="{Binding Task.CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="4" Grid.Column="1"/>
 
                 <Label Content="Deliverables:" Grid.Row="5" Foreground="Black"/>
-                <TextBox Text="{Binding Task.Dekiverables, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="5" Grid.Column="1"/>
+                <TextBox Text="{Binding Task.Dekiverables, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="5" Grid.Column="1" TextChanged="TextBox_TextChanged_3"/>
 
                 <Label Content="Remarks:" Grid.Row="6" Foreground="Black"/>
-                <TextBox Text="{Binding Task.Remarks, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="6" Grid.Column="1"/>
+                <TextBox Text="{Binding Task.Remarks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Grid.Column="1"/>
 
                 <Label Content="Engineer ID:" Grid.Row="7" Foreground="Black"/>
-                <TextBox Text="{Binding Task.EngineerId, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="7" Grid.Column="1" TextChanged="TextBox_TextChanged_1"/>
-                <TextBox Text="{Binding Task.Alias, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1" TextChanged="TextBox_TextChanged"/>
+                <TextBox Text="{Binding Task.EngineerId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Grid.Column="1" TextChanged="TextBox_TextChanged_1"/>
+                <TextBox Text="{Binding Task.Alias, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Grid.Column="1" TextChanged="TextBox_TextChanged"/>
 
                 <Label Content="Complexity:" Grid.Row="8" Foreground="Black"/>
                 <ComboBox ItemsSource="{Binding Source={StaticResource LevelCollection}}" 
-                          SelectedValue="{Binding Task.Copmlexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8" Grid.Column="1"/>
+                          SelectedValue="{Binding Task.Copmlexity, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="8" Grid.Column="1" SelectionChanged="ComboBox_SelectionChanged"/>
 
                 <Label Content="Required Effort:" Grid.Row="9" Foreground="Black"/>
-                <TextBox Text="{Binding Task.RequiredEffort, Mode=TwoWay, NotifyOnValidationError=true,  ValidatesOnExceptions=true}" Grid.Row="9" Grid.Column="1" TextChanged="TextBox_TextChanged_2" Margin="125,5,120,104"/>
+                <TextBox Text="{Binding Task.RequiredEffort, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="9" Grid.Column="1" TextChanged="TextBox_TextChanged_2"   />
                 <Label Grid.Column="1" Content="Label" HorizontalAlignment="Left" Margin="81,18,0,33" Grid.RowSpan="2" Grid.Row="1"/>
                 <Button Content="Back" HorizontalAlignment="Left" Margin="411,0,0,0" VerticalAlignment="Center" Height="54" Width="62" Grid.Column="1" Foreground="Black" Click="Button_Click"/>
 
@@ -108,11 +105,15 @@
                         </ListBox>
 
                 </Border>-->
-                <Button Grid.Column="1" Content="Ok" Margin="291,38,0,0" Grid.Row="9" VerticalAlignment="Top" Click="Button_Click_1" HorizontalAlignment="Left" Width="100"/>
-                <Button Grid.Column="1" Content="BACK" HorizontalAlignment="Left" Margin="320,0,0,0" VerticalAlignment="Top" Height="44" Width="71" Click="Button_Click_2"/>
-                <Button Content="Schudele" HorizontalAlignment="Left" Margin="61,0,0,7" VerticalAlignment="Bottom" Click="Button_Click_3"/>
-
+                <Button Grid.Column="1" Content="Ok" Margin="222,59,0,0" Grid.Row="9" VerticalAlignment="Top" Click="Button_Click_1" HorizontalAlignment="Left" Width="100"/>
+                <Button Grid.Column="1" Content="BACK" HorizontalAlignment="Left" Margin="232,0,0,0" VerticalAlignment="Top" Height="44" Width="80" Click="Button_Click_2"/>
+                <Button Content="Start time" HorizontalAlignment="Left" Margin="10,59,0,0" VerticalAlignment="Top" Click="Button_Click_3" Grid.Row="9" Grid.Column="1"/>
+                <TextBlock Text="{Binding CurrentTime}" 
+                   HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                   FontSize="24"/>
             </Grid>
+
+            <!-- Task Details -->
         </StackPanel>
     </Grid>
 </Window>
