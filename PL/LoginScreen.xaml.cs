@@ -25,67 +25,71 @@ namespace PL
     /// </summary>
     public partial class LoginScreen : Window, INotifyPropertyChanged
     {
-        private const int V = 24;
-        static readonly BlApi.IBl s_bl2 = BlApi.Factory.Get();
+
+        private const int V = 24; // 24 hours in a day
+        static readonly BlApi.IBl s_bl2 = BlApi.Factory.Get(); // Use IBl interface instead of BlApi class
 
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
-        private DispatcherTimer timer;
+        private DispatcherTimer timer; // Timer to update time
 
+        // Constructor 
         public LoginScreen()
         {
             InitializeComponent();
             CurrentTime = DateTime.Now; // Set initial time
-            s_bl.ResteClock();
+            s_bl.ResteClock(); // Reset clock
             DataContext = this; // Set DataContext to the instance of WatchWindow
             StartTimer(); // Start timer to update time
 
         }
 
-        private DateTime currentTime;
+        private DateTime currentTime; // Current time property
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged; // Event handler for property change
 
 
-
-        public DateTime CurrentTime
+        // Current time property with OnPropertyChanged event
+        public DateTime CurrentTime 
         {
-            get { return currentTime; }
+            get { return currentTime; } // Get current time value
             set
             {
-                if (currentTime != value)
+                if (currentTime != value) // If current time is not equal to new value
                 {
-                    currentTime = value;
-                    OnPropertyChanged("CurrentTime");
+                    currentTime = value; // Set current time to new value
+                    OnPropertyChanged("CurrentTime"); // Call OnPropertyChanged event
                 }
             }
         }
 
-
+          // Start timer method that updates time every second
         private void StartTimer()
         {
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
+            DispatcherTimer timer = new DispatcherTimer(); // Create a new instance of DispatcherTimer
+            timer.Interval = TimeSpan.FromSeconds(1); // Set timer interval to 1 second
             // timer.Tick += Timer_Tick;
-            timer.Start();
+            timer.Start(); // Start timer
         }
-
+        // Timer tick event that adds 1 hour to the current time
         private void Timer_Tick(object sender, EventArgs e)
 
         {
-            CurrentTime = CurrentTime.AddHours(1);
+            CurrentTime = CurrentTime.AddHours(1); // Add 1 hour to the current time
         }
 
-
+        // OnPropertyChanged event handler that updates the property
         private void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); // Invoke the PropertyChanged event with the property name
         }
 
+        // Login button click event handler
         private void openManagerWindow_click(object sender, RoutedEventArgs e)
         {
-            new password().Show(); // Create a new instance of password
-                                   // Close(); // Close the login window
+            new password().Show(); // Create a new instance of password                           
         }
+
+        // Reset button click event handler
         private void reset_click(object sender, RoutedEventArgs e)
         {
             // Ask the user for confirmation
@@ -103,6 +107,7 @@ namespace PL
             }
         }
 
+        // Initialize button click event handler
         private void Initialization_Click(object sender, RoutedEventArgs e)
         {
             // Ask the user for confirmation
@@ -118,31 +123,37 @@ namespace PL
             }
         }
 
+        // Exit button click event handler
         private void EmployeeEntry_Click(object sender, RoutedEventArgs e)
         {
             new GetEngineerIdWindow().Show(); // Create a new instance of EmployeWindow
         }
 
+        // OnPropertyChanged event handler that updates the property
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            // if is the first time that the user click on the button
             if (s_bl.Schedule.getGantt())
                 new Gantt().Show(); // Create a new instance of Gantt
+            // if is not the first time that the user click on the button
             else
-            {
                 MessageBox.Show("their is tasks without StartTime!");
-            }
         }
+
+        // OnPropertyChanged event handler that updates the property
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            CurrentTime = CurrentTime.AddDays(1);
+            CurrentTime = CurrentTime.AddDays(1); // Add 1 day to the current time
           //  s_bl.Clock.AddHour(1);
-            s_bl.AddDay(1);
-            // s_bl.setT(CurrentTime);
+            s_bl.AddDay(1); // Add 1 day to the clock
+           
         }
+
+        // OnPropertyChanged event handler that updates the property
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            CurrentTime = CurrentTime.AddHours(1);
-            s_bl.AddHour(1);
+            CurrentTime = CurrentTime.AddHours(1); // Add 1 hour to the current time
+            s_bl.AddHour(1); // Add 1 hour to the clock
         }
     }
 

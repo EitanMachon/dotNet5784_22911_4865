@@ -34,19 +34,22 @@ namespace PL
             get { return (BO.Task)GetValue(TaskProperty); } // Using GetValue and SetValue to get and set the value of the Task property
             set { SetValue(TaskProperty, value); } // Using GetValue and SetValue to get and set the value of the Task property
         }
+
         public static readonly DependencyProperty TaskProperty = DependencyProperty.Register("Task", typeof(BO.Task), typeof(Scheduled), new PropertyMetadata(null)); // Using DependencyProperty as the backing store for Task.  This enables animation, styling, binding, etc...
         
+        // Constructor for the Scheduled class
         public Scheduled(BO.Task task)
         {
-            Task = task;
-            InitializeComponent();
+            Task = task; // Set the Task property to the task parameter
+            InitializeComponent(); // Initialize the component
         }
-
+        // Event handler for the button click event that closes the window
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
+        // Event handler for the button click event that updates the scheduled time of the task
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Task.ScheduledTime = chosenSch;

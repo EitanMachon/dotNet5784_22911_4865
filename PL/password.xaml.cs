@@ -17,13 +17,16 @@ namespace PL
     /// <summary>
     /// Interaction logic for password.xaml
     /// </summary>
-    public partial class password : Window
+    public partial class password : Window 
     {
+        // Constructor for the password class
         public password()
         {
             InitializeComponent();
         }
 
+
+        // Event handler for the text changed event that checks the text of the TextBox
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox textBox = sender as TextBox; // Cast the sender to TextBox
@@ -34,10 +37,13 @@ namespace PL
             }
         }
 
+        // Event handler for the button click event that closes the window
         private void Button_Back(object sender, RoutedEventArgs e)
         {
            
         }
+
+        // Event handler for the button click event that closes the window
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
