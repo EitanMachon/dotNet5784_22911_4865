@@ -15,10 +15,10 @@ internal class Bl : IBl
     /// <summary>
     /// return new instance of IEngineer
     /// </summary>
-  // public void (DateTime a);
+    // public void (DateTime a);
 
     public IEngineer Engineer =>  new EngineerImplenentation();
-
+    
     public ISchedule Schedule => new ScheduleImplementation();
     public IDependency Dependency => new DependencyImplemation();
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
@@ -28,8 +28,7 @@ internal class Bl : IBl
     
     private set { s_Clock = value; } } 
 
-   
-    
+      
     //public IDependency Dependency => new DependencyImplemation();
     public DateTime AddYear( int year)
     {

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="LoginScreen" Height="450" Width="800">
-
+        Title="LoginScreen" Height="450" Width="800"
+        Icon="/pic/Daf.jpg"> 
     <Window.Resources>
 
         <!-- Style for buttons -->

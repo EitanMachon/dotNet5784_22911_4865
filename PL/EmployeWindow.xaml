@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="EmployeWindow" Height="350" Width="400"
-        DataContext="{Binding employeTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+        DataContext="{Binding employeTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}"
+         Icon="/pic/Daf.jpg">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="\pic\hey7.png" Stretch="UniformToFill"/>

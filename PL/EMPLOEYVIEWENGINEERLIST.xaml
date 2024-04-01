@@ -8,7 +8,7 @@
         Title="EMPLOEYVIEWENGINEERLIST" Height="450" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
         Background="DarkGray"
-        >
+         Icon="/pic/Daf.jpg">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="507*"/>

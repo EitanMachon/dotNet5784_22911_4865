@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="Scheduled" Height="124" Width="351"
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+         Icon="/pic/Daf.jpg">
 
     <Grid RenderTransformOrigin="0.508,0.79" Height="175" VerticalAlignment="Top">
         <Grid.RowDefinitions>
