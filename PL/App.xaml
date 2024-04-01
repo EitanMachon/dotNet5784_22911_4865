@@ -12,5 +12,7 @@
         <local:ConevrLastInListToInt x:Key="ConevrLastInListToInt"/>
         <local:ConvertEffortTimeToWidthKey x:Key="ConvertEffortTimeToWidthKey"/>
         <local:ConvertStartDateToMargin x:Key="ConvertStartDateToMarginKey"/>
+        <local:LateTaskToColorConverter x:Key="LateTaskToColorConverter"/>
+
     </Application.Resources>
 </Application>

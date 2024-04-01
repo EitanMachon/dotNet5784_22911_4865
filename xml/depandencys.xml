@@ -1,18 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfDependency xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Dependency>
-    <Id>23</Id>
-    <DependentTask>922</DependentTask>
-    <Depends>916</Depends>
-  </Dependency>
-  <Dependency>
-    <Id>24</Id>
-    <DependentTask>922</DependentTask>
-    <Depends>918</Depends>
-  </Dependency>
-  <Dependency>
-    <Id>25</Id>
-    <DependentTask>922</DependentTask>
-    <Depends>920</Depends>
-  </Dependency>
-</ArrayOfDependency>
+<ArrayOfDependency xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />

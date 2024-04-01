@@ -131,3 +131,30 @@ class ConvertStartDateToMargin : IValueConverter
         throw new NotImplementedException();
     }
 }
+
+    public class LateTaskToColorConverter : IValueConverter
+    {
+    static readonly BlApi.IBl s_bl = BlApi.Factory.Get(); // Create a new instance of the BlApi class and store it in a static readonly variable
+
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    {
+        // Assuming value is the DateTime of the ForecastDate 
+        DateTime forecastDate = (DateTime)value;
+
+        // Check if the task is late
+        if (forecastDate < DateTime.Now)
+        {
+            return "Red";
+        }
+        else
+        {
+            return "Black";
+        }
+        
+    }
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+

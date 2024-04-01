@@ -18,9 +18,12 @@ namespace PL
     public partial class MainWindow : Window
     {
         static readonly IBl s_bl = Factory.Get(); // Use IBl interface instead of BlApi class
+
+
+        // this is the constructor of the MainWindow
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent(); // Initialize the MainWindow
 
         }
         /// <summary>
@@ -50,11 +53,15 @@ namespace PL
                 MessageBox.Show("Database initialized successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
+        // event that gonna show the TaskListWindow when the user click on the button
         private void Button_TaskList(object sender, RoutedEventArgs e)
         {
             new Task.TaskListWindow().Show(); // Create a new instance of TaskListWindow
             Close();
         }
+
+        // event that gonna show the ProjectListWindow when the user click on the button
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //LoginScreen loginScreen = new LoginScreen();

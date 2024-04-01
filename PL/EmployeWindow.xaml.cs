@@ -30,7 +30,7 @@ namespace PL
         public BO.Task employeTask // Create a new instance of the BO.Task class and store it in a property
         {
             get { return (BO.Task)GetValue(EmployeProperty); }
-            set { SetValue(EmployeProperty, value); }
+            set { SetValue(EmployeProperty, value); } 
         }
         public static readonly DependencyProperty EmployeProperty = DependencyProperty.Register("employeTask", typeof(BO.Task), typeof(EmployeWindow), new PropertyMetadata(null)); // Using DependencyProperty as the backing store for Employe.  This enables animation, styling, binding, etc...
         
@@ -47,6 +47,7 @@ namespace PL
             }
         }
 
+        // event handler for clicking the OK button
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 

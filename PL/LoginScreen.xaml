@@ -8,7 +8,7 @@
         Title="LoginScreen" Height="450" Width="800"
         Icon="/pic/Daf.jpg"> 
     <Window.Resources>
-
+       
         <!-- Style for buttons -->
         <Style x:Key="CoolButtonStyle" TargetType="Button">
             <Setter Property="Foreground" Value="White"/>
@@ -42,6 +42,7 @@
         </Style>
     </Window.Resources>
 
+    
     <Grid>
         <!-- Background Image -->
         <Grid.Background>
