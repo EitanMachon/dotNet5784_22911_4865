@@ -243,5 +243,10 @@ namespace PL.Task
             TextBox textBox = sender as TextBox; // Cast the sender to TextBox
            
         }
+
+        private void TextBox_TextChanged_4(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

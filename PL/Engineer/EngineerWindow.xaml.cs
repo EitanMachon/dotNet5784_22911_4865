@@ -72,4 +72,15 @@ public partial class EngineerWindow : Window
             MessageBox.Show(ex.Message); // Show a message to the user
         }
     }
+
+    private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        TextBox textBox = sender as TextBox; // Cast the sender to TextBox
+        if (textBox.Text == "-") // Check the text of the TextBox
+        {
+            MessageBox.Show(@"The singe ""-"" is not valid "); // Show a message to the user                
+            textBox.Text = "";
+        }
+
+    }
 }

@@ -79,7 +79,7 @@
                 <!-- Required Effort -->
                 <StackPanel Orientation="Horizontal" Margin="0,5">
                     <Label Content="Required Effort:" Foreground="Black"/>
-                    <TextBox Text="{Binding Task.RequiredEffort, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="150" Margin="5,0"/>
+                    <TextBox Text="{Binding Task.RequiredEffort, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="150" Margin="5,0" TextChanged="TextBox_TextChanged_4"/>
                 </StackPanel>
             </StackPanel>
 
