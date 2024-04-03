@@ -39,7 +39,7 @@
                                     <TextBlock Text="Task Description: " FontWeight="Bold"/>
                                     <TextBlock Text="{Binding Description}"/>
                                     <TextBlock Text="Task Complexity: " FontWeight="Bold"/>
-                                    <TextBlock Text="{Binding Complexity}"/>
+                                    <TextBlock Text="{Binding Copmlexity}"/>
                                     <TextBlock Text="Task Deliverables: " FontWeight="Bold"/>
                                     <TextBlock Text="{Binding Dekiverables}"/>
                                     <TextBlock Text="ScheduledDate: " FontWeight="Bold"/>
@@ -80,11 +80,11 @@
                             <Border Grid.Column="1" VerticalAlignment="Stretch" Width="3" Background="Black" />
 
                             <!-- Grid for Gantt Chart -->
-                            <Grid Background="#564d525e" Grid.Column="2" Margin="0,1">
+                            <Grid  Grid.Column="2" Margin="0,1">
 
                                 <!-- Rectangle representing task -->
                                 <Grid Width="{Binding RequiredEffort, Converter={StaticResource ConvertEffortTimeToWidthKey}}"
-                                                Margin="{Binding ScheduledTime, Converter={StaticResource ConvertStartDateToMarginKey}}" Height="20"  
+                                                Margin="{Binding Id, Converter={StaticResource ConvertStartDateToMarginKey}}" Height="20"  
                                                 Background="{Binding DeadLinetime, Converter={StaticResource LateTaskToColorConverter}}" Grid.Column="2">
 
 

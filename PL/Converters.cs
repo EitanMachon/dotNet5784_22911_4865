@@ -94,7 +94,7 @@ class ConvertEffortTimeToWidthKey : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
        TimeSpan requiredEffortTime = (TimeSpan)value ;
-        return requiredEffortTime.TotalDays*300;       
+        return requiredEffortTime.TotalDays*50;       
     }//
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -105,14 +105,24 @@ class ConvertEffortTimeToWidthKey : IValueConverter
 class ConvertStartDateToMargin : IValueConverter
 {
     private IDal _dal = DalApi.Factory.Get; // create a new instance of the DAL layer to use its functions to implement the BL layer functions like Create, Delete, Read, ReadAll, and Update
+    private IBl _bl = BlApi.Factory.Get();
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        DateTime ScheduledTime = (DateTime)value;
+        BO.Task t = _bl.Task.Read((int)value)!;
+
         DateTime? startTimeDateOfProject = _dal.ischedule.GetProjectStartDateTime();
 
         if (startTimeDateOfProject.HasValue)
         {
+            if (t.Dependencys != null && t.Dependencys.Count() > 0)
+            {
+                BO.Task FirstDeps = _bl.Task.Read(t.Dependencys.First().Id)!;
+                t.ScheduledTime = (DateTime)FirstDeps.ScheduledTime! + FirstDeps.RequiredEffort*2.5;
+                _bl.Task.Update(t);
+            }
+
+            DateTime ScheduledTime = (DateTime)t.ScheduledTime!;
             // Calculate the difference between ScheduledTime and currentDate in days
             double daysDifference = (ScheduledTime - startTimeDateOfProject.Value).TotalDays;
 
@@ -125,14 +135,15 @@ class ConvertStartDateToMargin : IValueConverter
             return new Thickness(0, 0, 0, 0);
         }
     }
-
+   
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
 }
 
-    public class LateTaskToColorConverter : IValueConverter
+
+public class LateTaskToColorConverter : IValueConverter
     {
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get(); // Create a new instance of the BlApi class and store it in a static readonly variable
 

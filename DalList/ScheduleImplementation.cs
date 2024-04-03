@@ -1,4 +1,6 @@
 ﻿
+using System.Xml.Linq;
+
 namespace Dal;
 
 internal class ScheduleImplementation : DalApi.ISchedule
@@ -10,11 +12,24 @@ internal class ScheduleImplementation : DalApi.ISchedule
 
     public bool getTasks()
     {
-        throw new NotImplementedException();
+        List<DO.Task> tasks = DataSource.Tasks;
+        if (tasks.All(task => task.ScheduledTime != null))
+        {
+            SaveSchedule();
+            return true;
+        }
+        return false;
     }
 
     public void SaveSchedule()
     {
+        List<DO.Task> tasks = DataSource.Tasks;
+
+        if (tasks.Count > 0) // save only if there are tasks
+        {
+            DateTime? scheduleDate = tasks.Min(task => task.ScheduledTime); // Find the minimum StartDate
+           DataSource.Config.ProjectStartDate= scheduleDate;
+        }
         // we do not have something to save here...
     }
     public DateTime? GetNowDate()
