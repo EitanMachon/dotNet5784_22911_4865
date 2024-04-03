@@ -23,7 +23,7 @@ internal class Bl : IBl
     public IDependency Dependency => new DependencyImplemation();
     static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
 
-    private static DateTime s_Clock = (DateTime)(s_bl.Schedule.GetNowDate());
+    private static DateTime s_Clock = s_bl.Schedule.GetNowDate() ?? DateTime.Now;
     public DateTime Clock { get { return s_Clock; }
     
     private set { s_Clock = value; } } 
@@ -61,6 +61,7 @@ internal class Bl : IBl
     }
     public void ResteClock()
     {
+        
         s_Clock = DateTime.Now;
         s_bl.Schedule.SetNowDate(s_Clock);
     }

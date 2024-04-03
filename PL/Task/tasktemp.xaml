@@ -28,8 +28,6 @@
         <ComboBox SelectedValue="{Binding Task.status, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="337,110,0,0" VerticalAlignment="Top" Width="120"/>
 
         <!-- Start At Date -->
-        <Label Content="Start At Date:" HorizontalAlignment="Left" Margin="78,150,0,0" VerticalAlignment="Top" Height="26" Width="85"/>
-        <DatePicker SelectedDate="{Binding Task.CreatedAtDate, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Margin="337,150,0,0" VerticalAlignment="Top"/>
 
         <!-- Deliverables -->
         <Label Content="Deliverables:" HorizontalAlignment="Left" Margin="78,190,0,0" VerticalAlignment="Top" Height="26" Width="81"/>

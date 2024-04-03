@@ -189,6 +189,7 @@ public static class Initialization
     {
         //s_dal = dal ?? throw new NullReferenceException("DAL object can not be null!"); //stage 2
         s_dal = DalApi.Factory.Get; //stage 4
+        
 
         deleteXml("tasks", "ArrayOfTask");
         deleteXml("Engineers", "ArrayOfEngineer");
