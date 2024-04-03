@@ -84,7 +84,7 @@
 
                                 <!-- Rectangle representing task -->
                                 <Grid Width="{Binding RequiredEffort, Converter={StaticResource ConvertEffortTimeToWidthKey}}"
-                                                Margin="{Binding ScheduledTime, Converter={StaticResource ConvertStartDateToMarginKey}}" Height="20"  
+                                                Margin="{Binding Id, Converter={StaticResource ConvertStartDateToMarginKey}}" Height="20"  
                                                 Background="{Binding DeadLinetime, Converter={StaticResource LateTaskToColorConverter}}" Grid.Column="2">
 
 
