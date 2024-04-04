@@ -30,7 +30,6 @@ internal class ScheduleImplementation : DalApi.ISchedule
             DateTime? scheduleDate = tasks.Min(task => task.ScheduledTime); // Find the minimum StartDate
            DataSource.Config.ProjectStartDate= scheduleDate;
         }
-        // we do not have something to save here...
     }
     public DateTime? GetNowDate()
     {
