@@ -21,13 +21,14 @@ We believe that the project can be further developed to incorporate additional f
 - Support for mobile platforms to enable access from anywhere, anytime.
 
 ## Contributors
+- Eitan Lattes
+  - Email: [eitanlattes@gmail.com](mailto:eitanlattes@gmail.com)
+  - GitHub: [EitanMchon](https://github.com/EitanMchon)
+    
 - Yishay Shlomo Tiram
   - Email: [ishayshlomotiram@gmail.com](mailto:ishayshlomotiram@gmail.com)
   - GitHub: [yishayt2004](https://github.com/yishayt2004)
 
-- Eitan Lattes
-  - Email: [eitanlattes@gmail.com](mailto:eitanlattes@gmail.com)
-  - GitHub: [EitanMchon](https://github.com/EitanMchon)
 
 ## Usage
 1. Clone the repository.
